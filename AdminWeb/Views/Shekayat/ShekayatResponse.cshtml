@@ -1,0 +1,5 @@
+﻿<div id="basic-preview" class="preview active" style="width: 50%;float: right;height: 30px; margin-top: -10px;">
+    <div style="padding: 10px;" class="alert alert-@(ViewBag.Notification?"success":"danger") media fade in">
+        <p><strong>@(ViewBag.Notification ? "تبریک !" : "خطا !") </strong> @(ViewBag.Notification ? "پاسخ شما به درخواست مورد نظر با موفقیت ثبت شد" : "متاسفانه خطایی در فرآیند ثبت درخواست پیش آمده، لطفا مجددا تلاش کنید")</p>
+    </div>
+</div>

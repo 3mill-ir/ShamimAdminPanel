@@ -1,0 +1,213 @@
+﻿@model AdminWeb.Models.DataModels.Shekayat
+@using AdminWeb.Models.BLL;
+<link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+@{
+    bool isFirst = true;
+    string NotFirstShekayat = "";
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+        @if (Model.ShekayatInboxOutBox.FirstOrDefault() != null)
+        {
+            <a class="btn btn-primary" data-toggle="modal" data-target="#modal-topfull2">@Resource.Resource.Ticket_Reply</a>
+        }
+        @if (Model.ShekayatInboxOutBox.FirstOrDefault() != null)
+        {
+            <a class="btn btn-warning" data-toggle="modal" data-target="#modal-topfull">@Resource.Resource.Ticket_ChangeStatus</a>
+            <div style="float: left;margin-left: 50px;background-color: @(ViewBag.Status=="پاسخ داده شده"?"#b7ff99":ViewBag.Status=="در حال بررسی"?"#ffc899":"#ffffad");padding: 5px 50px;">وضعیت : @ViewBag.Status</div>
+        }
+    </div>
+    <div class="modal-body">
+        <section>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="email-details-inner withScroll mCustomScrollbar _mCS_20" data-height="window" data-padding="155" style="height: 450px;">
+                        <div class="mCustomScrollBox mCS-light" id="mCSB_20" style="position:relative; height:100%; overflow-y:scroll; max-width:100%;padding-left:50px;">
+                            <div class="mCSB_container" style="position:relative; top:0;">
+                                <div class="email-content">
+                                    @foreach (var q in Model.ShekayatInboxOutBox.OrderByDescending(u => u.CreatedDateOnUtc))
+                                    {
+                                        if (q.Type == "OutBox")
+                                        {
+                                            <div style="background-color: #c8cbcc;padding: 15px;border-radius: 15px;margin-bottom: 10px;margin-right: 100px;padding-bottom: 1px;">
+                                                <blockquote class="blue">
+                                                    <p><strong>@q.Text</strong></p>
+                                                    <div class="email-subject">
+                                                        <div class="clearfix">
+                                                            <p style="float: left;font-size: 14px;">پاسخ سرور<strong><span class="sender"></span></strong><span class="date" style="float: right;direction: ltr;margin-left: 15px;">@Tools.GetDateTimeReturnJalaliDate(q.CreatedDateOnUtc ?? default(DateTime))</span></p>
+                                                        </div>
+                                                    </div>
+                                                </blockquote>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div style="background-color: #c5f4ff;padding: 15px;border-radius: 15px;margin-bottom: 10px;">
+                                                <p>@q.Text</p>
+                                                <div class="email-subject">
+                                                    <div class="clearfix">
+                                                        <p>ارسال شده از <strong><span class="sender">@(Model.ShakiFirstName + " " + Model.ShakiLastName)</span></strong><span class="date" style="float: right;direction: ltr;margin-left: 15px;">@Tools.GetDateTimeReturnJalaliDate(q.CreatedDateOnUtc ?? default(DateTime))</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>مشخصات شکایت کنند</th>
+                                <th>مشخصات متشاکی</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>نام : @Model.ShakiFirstName</td>
+                                <td>نام : @Model.MotashakiFirstName</td>
+                            </tr>
+                            <tr>
+                                <td>نام خانوادگی : @Model.ShakiLastName</td>
+                                <td>نام خانوادگی : @Model.MotashakiLastName</td>
+                            </tr>
+                            <tr>
+                                <td>سمت : @Model.ShakiSemat</td>
+                                <td>سمت : @Model.MotashakiSemat</td>
+                            </tr>
+                            <tr>
+                                <td>کد ملی : @Model.ShakiCodeMelli</td>
+                                <td>استان : @Model.MotashakiOstan</td>
+                            </tr>
+                            <tr>
+                                <td>نوع ارتباط : @Model.NoeErtebat</td>
+                                <td>حوزه خدمت متشاکی : @Model.MotashakiHozeKhedmat</td>
+                            </tr>
+                            <tr>
+                                <td>شماره تماس ثابت : @Model.ShakiTell</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>شماره تماس همراه : @Model.ShakiMobile</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">آدرس : @Model.ShakiAddress</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">تاریخ نامه ارسال شده : <span style="direction:ltr;">@AdminWeb.Models.BLL.Tools.GetDateTimeReturnJalaliDate(Model.TarikheName ?? default(DateTime))</span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">شماره نامه ارسال شده : @Model.ShomareNaame</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">نام مرکز / سازمان مراجعه شده : @Model.NaameMahaleMorajee</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">نتیجه اقدام قبلی : @Model.NatijeEghdameGhabli</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+}
+<div class="modal fade topfull" id="modal-topfull" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-topfull">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>تغییر وضعیت درخواست</strong></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    @using (Ajax.BeginForm("ShekayatChangeStatus", "Shekayat", new { F_ShekayatId = Model.ID }, new AjaxOptions
+                    {
+                        UpdateTargetId = "PipoShekayatChangeStatus",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "ShekayatReader_Loading2",
+                        HttpMethod = "Post"
+                    }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @*@Html.Hidden("ID", Model.FirstOrDefault().F_Shekayat_Id)*@
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DropDownList("Status", ViewData["ShekayatStatus"] as List<SelectListItem>, new { @class = "form-control form-white", value = ViewBag.Status, data_style = "white" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <a class="btn btn-wide btn-danger left" data-dismiss="modal"><i class="fa fa-close"></i></a>
+                                    <button type="submit" data-style="expand-left" class="btn btn-wide btn-success ladda-button">
+                                        <span class="ladda-label">@Resource.Resource.View_SubmitButton</span><span class="ladda-spinner"></span>
+                                    </button>
+                                    <div id="ShekayatReader_Loading2" style="display: none;float: left;margin-left: 65px;">
+                                        <img src="~/Content/assets/global/images/ajax-load.gif" style="width:35px;" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" id="PipoShekayatChangeStatus"></div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade topfull" id="modal-topfull2" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-topfull">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>پاسخ درخواست</strong></h4>
+            </div>
+            @using (Ajax.BeginForm("ShekayatResponse", "Shekayat", new { F_ShekayatId = Model.ID }, new AjaxOptions
+            {
+                UpdateTargetId = "PipoShekayatResponse",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "PipoShekayatResponseResult_Loading",
+                HttpMethod = "Post"
+            }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.Hidden("F_ShekayatId", Model.ID)
+                <div class="modal-body">
+                    <div id="ShekayatResponsePost">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group" id="PipoShekayatResponseContent">
+                                    @Html.TextArea("Text", null, new { @class = "form-control form-white", placeholder = "متن پاسخ درخواست", rows = "10", style = "font-family: Vazir!important;" })
+                                    @Html.ValidationMessage("Text")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div id="PipoShekayatResponse"></div>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        @Resource.Resource.View_Close
+                    </button>
+                    <button type="submit" data-style="expand-left" class="btn btn-wide btn-success ladda-button">
+                        <span class="ladda-label">@Resource.Resource.Ticket_ReplySend</span><span class="ladda-spinner"></span>
+                    </button>
+                    <div id="PipoShekayatResponseResult_Loading" style="display: none;float: left;margin-right: 15px;">
+                        <img src="~/Content/assets/global/images/ajax-load.gif" style="width:35px;" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

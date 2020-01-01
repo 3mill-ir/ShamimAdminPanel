@@ -1,0 +1,163 @@
+﻿@model IEnumerable<AdminWeb.Models.DataModels.MenuDataModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/datatables/dataTables.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script src="~/Content/assets/global/plugins/datatables/jquery.dataTables.min.js"></script> <!-- Tables Filtering, Sorting & Editing -->
+    <script src="~/Content/assets/global/js/pages/table_dynamic.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        });
+    </script>
+    <script type="text/javascript">
+        function pipolinkClicked(el) {
+            var c = $("#form-field-select-1").find(":selected").attr("Value");
+            var temp = el.split("_");
+            var myid = temp[1];
+            $("#PipoModalBody").empty();
+            $("#PipoModalBody").append('<p> @Resource.Resource.View_AreYouShure' + ' (#' + myid + ')</p>');
+            var $self = $("#PipoModalForm");
+            $self.attr('action', '/Menu/ChangeStatusMenu?ID=' + myid + "&Page=" + 1);
+        };
+        document.getElementById("tab6_1").classList.add("active", "in");
+        document.querySelectorAll("#myTab6 > li")[0].classList.add("active");
+    </script>
+}
+<div class="row">
+    <div class="col-md-12">
+        @if (Model.Count() > 0)
+        {
+
+            <div class="panel">
+                <div class="panel-header panel-controls">
+                </div>
+                <div class="panel-content">
+                    <div class="nav-tabs2">
+                        <ul id="myTab6" class="nav nav-tabs">
+                            @{int count = 1;}
+                            @foreach (var LanguageItem in Model.OrderBy(u=>u.Weight).GroupBy(x => new { x.Language }).Select(g => g.FirstOrDefault().Language).ToList())
+                            {
+                                <li class=""><a href="#tab6_@count" data-toggle="tab">@LanguageItem</a></li>
+                                count++;
+                            }
+                        </ul>
+                        <div class="tab-content" style="background-color:white">
+                            @{count = 1; }
+                            @foreach (var languageItem in Model.GroupBy(x => new { x.Language }).Select(g => g.FirstOrDefault().Language).ToList())
+                            {
+                                <div class="tab-pane fade " id="tab6_@count">
+                                    <div class="panel-content pagination2 table-responsive">
+                                        <table class="table table-hover table-dynamic">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>نام</th>
+                                                    <th></th>
+                                                    <th class="text-center">ترتیب</th>
+                                                    <th class="text-center">وضعیت نمایش</th>
+                                                    <th class="text-center">عملیات</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{ string SIcon = "";}
+                                                @{var PipoModel = Model.Where(u => u.Language == languageItem);}
+                                                @foreach (var item in PipoModel)
+                                                {
+                                                    var NameObj = item;
+                                                    string MenuName = "";
+                                                    bool isfirst = true;
+                                                    while (NameObj != null)
+                                                    {
+                                                        MenuName = isfirst ? NameObj.Name : NameObj.Name + " > " + MenuName;
+
+                                                        NameObj = PipoModel.FirstOrDefault(i => i.ID == NameObj.F_MenuID);
+                                                        isfirst = false;
+                                                    }
+                                                    <tr>
+                                                        <td>@item.ID</td>
+                                                        <td>@MenuName</td>
+                                                        @if (item.Type == "DynamicPost")
+                                                        {
+                                                            <td><i class="fa fa-database"></i> </td> }
+                                                        else if (item.Type == "StaticPost")
+                                                        {
+                                                            <td><i class="fa fa-file-code-o"></i></td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td><i class="fa fa-navicon"></i> </td>
+                                                        }
+                                                        <td class="text-center">@item.Weight</td>
+                                                        <td class="text-center">
+                                                            @if (item.Status)
+                                                            {<i style="float: none;" class="glyphicon glyphicon-check"></i> SIcon = "glyphicon glyphicon-unchecked";
+                                                            }
+                                                            else
+                                                            {<i style="float: none;" class="glyphicon glyphicon-unchecked"></i> SIcon = "glyphicon glyphicon-check";
+                                                            }
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <a class="edit btn btn-sm btn-default" href="@Url.Action("Edit", "Menu", new { ID = item.ID })"><i class="icon-note"></i></a>
+                                                            <a id="PipoModalLink_@item.ID" class="btn btn-transparent btn-xs tooltips" data-toggle="modal" data-target="#modal-basic" title="تغییر وضعیت نمایش" onclick="pipolinkClicked(this.id)"><i class="@SIcon" data-toggle="modal" data-target="#PipoModal"></i></a>
+                                                            @*<a class="delete btn btn-sm btn-danger" href="javascript:;"><i class="icons-office-52"></i></a>*@
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                                        count++;
+                                                    }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="panel">
+                                                            <div class="panel-content text-center">
+                                                                <span style="font-size: 20px;color: red;">تا کنون منویی توسط شما ایجاد نشده !</span>
+                                                            </div>
+                                                        </div>
+                                                    }
+    </div>
+</div>
+<!-- BEGIN MODALS -->
+<div class="modal fade" id="modal-basic" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h2 class="modal-title"><strong>هشدار</strong></h2>
+            </div>
+            <div id="PipoModalBody" class="modal-body">
+                آیا از انجام عملیات تغییر وضعیت آیتم اطمینان خاطر دارید ؟<br>
+            </div>
+            @using (Html.BeginForm("ChangeStatusMenu", "Menu", new { SlideId = "_postid_" }, FormMethod.Post, new { Id = "PipoModalForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">بستن</button>
+                    <button type="submit" class="btn btn-primary btn-embossed">بله</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- END MODALS -->

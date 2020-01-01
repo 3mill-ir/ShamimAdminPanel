@@ -1,0 +1,74 @@
+﻿@model IEnumerable<AdminWeb.Models.DataModels.ScriptsModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        });
+        function PreShow(a) {
+            var ss = document.getElementById('ScriptBox_' + a).value;
+            console.log(ss);
+            win1 = open("", "win1", "status=yes,menubar=no,toolbar=no,width=530,height=400,resizable=yes,left=300,top=150,location=no,");
+            win1.document.write(ss);
+        }
+    </script>
+}
+<div class="row">
+    @{
+        int i = 0;
+    }
+    @foreach (var item in Model)
+    {
+        using (Html.BeginForm("EditScriptsPost", "Script", FormMethod.Post, new { id = "ScriptForm_" + i }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="col-md-8 col-md-push-1 portlets">
+                <div class="panel">
+                    <div class="panel-header panel-controls">
+                        <h3><strong>@item.DisplayPlace</strong></h3>
+                    </div>
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <div class="note-editor">
+                                        <input hidden name="DisplayPlace" value="@item.DisplayPlace" />
+                                        <input type="text" id="Scripttext_@i" name="ScriptName" style="direction: ltr" class="form-control m-b-10" value="@item.ScriptName" placeholder="عنوان">
+                                        <textarea id="ScriptBox_@i" name="Script" style="direction: ltr;height: 250px;" class="form-control">@item.Script</textarea>
+                                    </div>
+                                </div>
+                                <div id="AppendedResponses"></div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="panel panel-white">
+                                    <div class="panel-heading">
+                                        <div class="panel-title center">
+                                            @Resource.Resource.View_ScriptShow
+                                        </div>
+                                    </div>
+                                    <div class="panel-body center">
+                                        @Html.Raw(item.Script)
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-primary" style="width:100%;" id="ScriptButton_@i">@Resource.Resource.Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

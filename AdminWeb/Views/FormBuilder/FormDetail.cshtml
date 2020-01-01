@@ -1,0 +1,97 @@
+﻿@model AdminWeb.Models.DataModels.ItemNew
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+    <h2 class="modal-title"><strong>جزئیات</strong></h2>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-lg-7">
+            <fieldset>
+                <legend>
+                    @Model.Menu.Name
+                </legend>
+                <div id="AjaxResult">
+                    @if (Model.Menu != null)
+                    {
+                        @FormGenerator(Model.Menu.AttributeGroup.Where(u => u.F_AttributeGroupID == null), 0)
+                    }
+                    @helper FormGenerator(IEnumerable<AdminWeb.Models.DataModels.AttributeGroupNew> AttributeGroups, int count)
+                    {
+foreach (var item in AttributeGroups)
+{
+    var temp = item.AttributeGroup1;
+        <div style="margin-right:@(count*50)px;">
+            <div class="col-md-12 col-sm-12" style="margin-bottom:10px;">
+                <div class="ad-detail-heading">
+                    <h4>@item.Name</h4>
+                </div>
+            </div>
+            @foreach (var attribute in item.Attribute)
+        {
+                @Attr_AttrItem(attribute, 0, false)
+            }
+        </div>
+    if (temp.Count() > 0)
+    {
+            @FormGenerator(temp, count + 1)
+    }
+}
+}
+                    @helper Attr_AttrItem(AdminWeb.Models.DataModels.AttributeNew attribute, int count2, bool flag, string IDName = "", string ClassName = "")
+                    {
+var PipoValue = attribute.AttributeValue.Count > 0 ? attribute.AttributeValue[0].Value : null;
+    <div class="col-md-12 col-sm-12" style="margin-bottom:10px;">
+        <div style="margin-right:@(50 * count2)px" class="form-group">
+            <label class="col-sm-4 col-form-label">@attribute.Name</label>
+            <div class="col-sm-8">
+                @if (attribute.ComponentType == "Media" && !string.IsNullOrEmpty(PipoValue))
+                {
+                    <img src="@TempData["PrePath"].ToString()@PipoValue" style="height: 70px;float: right;" />
+                }
+                else
+                {
+                    <span>@PipoValue</span>
+                }
+            </div>
+        </div>
+    </div>
+}
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-lg-5">
+            <fieldset>
+                <legend>
+                    جزئیات فرم
+                </legend>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        @Html.DisplayName("شناسه"):
+                        @Html.DisplayFor(model => model.ID)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        @Html.DisplayName("توضیحات ادمین"):
+                        @Html.DisplayFor(model => model.AdminDescription)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        @Html.DisplayName("تاریخ ثبت آیتم"):
+                        @Html.Label(AdminWeb.Models.BLL.Tools.GetDateTimeReturnJalaliDate(Model.CreatedDateOnUTC ?? default(DateTime)), new { style = "direction:ltr;" })
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        @Html.DisplayName("وضعیت"):
+                        @Html.Label(Model.SubmitedState == "Available" ? "تایید شده" : "در حال انتظار")
+                    </label>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">بستن</button>
+</div>

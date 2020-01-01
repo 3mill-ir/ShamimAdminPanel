@@ -1,0 +1,439 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/metrojs/metrojs.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/maps-amcharts/ammap/ammap.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/font-awesome-animation/font-awesome-animation.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/magnific/magnific-popup.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/hover-effects/hover-effects.min.css" rel="stylesheet">
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/plugins/bootstrap-editable/js/bootstrap-editable.min.js"></script> <!-- Inline Edition X-editable -->
+    <script src="~/Content/assets/global/plugins/bootstrap-context-menu/bootstrap-contextmenu.min.js"></script> <!-- Context Menu -->
+    <script src="~/Content/assets/global/plugins/multidatepicker/multidatespicker.min.js"></script> <!-- Multi dates Picker -->
+    <script src="~/Content/assets/global/js/widgets/todo_list.js"></script>
+    <script src="~/Content/assets/global/plugins/metrojs/metrojs.min.js"></script> <!-- Flipping Panel -->
+    <script src="~/Content/assets/global/plugins/charts-chartjs/Chart.min.js"></script>  <!-- ChartJS Chart -->
+    <script src="~/Content/assets/global/plugins/skycons/skycons.min.js"></script> <!-- Animated Weather Icons -->
+    @*<script src="~/Content/assets/global/js/pages/dashboard.js"></script>*@
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/animations.js"></script>
+    <script src="~/Content/assets/admin/layout1/js/layout.js"></script>
+
+
+
+    <script src="~/Content/assets/global/plugins/magnific/jquery.magnific-popup.min.js"></script>  <!-- Image Popup -->
+    <script src="~/Content/assets/global/plugins/isotope/isotope.pkgd.min.js"></script>  <!-- Filter & sort magical Gallery -->
+
+    <script>
+        $(window).load(function () {
+            var $container = $('.portfolioContainer');
+            $container.isotope();
+            $('.portfolioFilter a').click(function () {
+                $('.portfolioFilter .current').removeClass('current');
+                $(this).addClass('current');
+                var selector = $(this).attr('data-filter');
+                $container.isotope({
+                    filter: selector
+                });
+                return false;
+            });
+        });
+    </script>
+
+}
+
+
+<div class="row">
+    <div class="col-lg-12 portlets">
+        <div class="panel panel-transparent">
+            <div class="panel-content">
+                <div class="portfolioFilter">
+                    <a href="#" data-filter="*" class="current">همه</a>
+                    <a href="#" data-filter=".nazaraat">نظرات</a>
+                    <a href="#" data-filter=".gallery">گالری</a>
+                    <a href="#" data-filter=".peyvandha">پیوندها</a>
+                    <a href="#" data-filter=".meno">منو</a>
+                    <a href="#" data-filter=".staticpage">صفحات ایستا</a>
+                    <a href="#" data-filter=".poll">نظرسنجی</a>
+                    <a href="#" data-filter=".dynamicpage">پست و بلاگ</a>
+                    <a href="#" data-filter=".scripts">اسکریپت</a>
+                    <a href="#" data-filter=".slider">اسلایدر</a>
+                    <a href="#" data-filter=".telegram">تلگرام</a>
+                </div>
+                <div class="portfolioContainer grid">
+                    <figure class="nazaraat effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>مدیریت نظرات</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201576003348454">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/bEn04?data[rnddiv]=15201576003348454&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="gallery effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>مدیریت پوشه ها</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201576917400616">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/J4qSF?data[rnddiv]=15201576917400616&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="gallery effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>تغییر فایل ها</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201577338078730">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/Gz8OT?data[rnddiv]=15201577338078730&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="gallery effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>افزودن فایل</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="1520157775165471">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/yOZFS?data[rnddiv]=1520157775165471&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="peyvandha effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>مدیریت پیوند ها</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201578576534190">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/2XD7c?data[rnddiv]=15201578576534190&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="meno effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>لیست منو ها</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201578858824834">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/NyEzJ?data[rnddiv]=15201578858824834&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="meno effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>ویرایش منو ها</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201579153886613">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/YBnlk?data[rnddiv]=15201579153886613&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="meno effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>حذف و تغییر وضعیت منو</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201579474983390">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/VJQRd?data[rnddiv]=15201579474983390&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="meno effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>افزودن منوی جدید</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201587364063041">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/BroXd?data[rnddiv]=15201587364063041&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+
+                    <figure class="staticpage effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>مدیریت صفحات ایستا</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201591006674552">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/Nehzx?data[rnddiv]=15201591006674552&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+
+                    <figure class="poll effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>لیست نظرسنجی</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201591264684946">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/pau6J?data[rnddiv]=15201591264684946&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+
+                    <figure class="poll effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>ویرایش نظر سنجی</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201591602571597">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/380XK?data[rnddiv]=15201591602571597&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="poll effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>تغییر وضعیت نظرسنجی</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201592093747694">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/t9JZy?data[rnddiv]=15201592093747694&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="poll effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>افزودن نظرسنجی جدید</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201592566022795">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/6bpRq?data[rnddiv]=15201592566022795&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="dynamicpage effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>لیست پست</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201593245408548">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/HyO7a?data[rnddiv]=15201593245408548&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="dynamicpage effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>ویرایش پست</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201593881439120">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/igQ4n?data[rnddiv]=15201593881439120&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="dynamicpage effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>افزودن پست</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201594149430303">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/aKBG4?data[rnddiv]=15201594149430303&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="scripts effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>مدیریت اسکریپت ها</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201594514169807">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/Id1MV?data[rnddiv]=15201594514169807&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="slider effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>مدیریت اسلایدر</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201594782757095">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/n8IWM?data[rnddiv]=15201594782757095&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="telegram effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                        <div class="panel">
+                            <div class="panel-header bg-primary">
+                                <h3>مدیریت تلگرام</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div id="15201595003320864">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/LeKmu?data[rnddiv]=15201595003320864&data[responsive]=yes"></script></div>
+                            </div>
+                        </div>
+                    </figure>
+
+                    @*<figure class="animal effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/9.jpg">
+                            <img src="~/Content/assets/global/images/gallery/9.jpg" alt="9" />
+                            <figcaption>
+                                <h2>Beautiful <span>Hover</span></h2>
+                                <i class="fa fa-heart"></i>
+                                <i class="fa fa-eye"></i>
+                                <i class="fa fa-paperclip"></i>
+                                <p>You can add many crazy hover effects.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="transport effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/8.jpg">
+                            <img src="~/Content/assets/global/images/gallery/8.jpg" alt="8" />
+                            <figcaption>
+                                <h2>Image <span>Title</span></h2>
+                                <i class="fa fa-heart"></i>
+                                <i class="fa fa-eye"></i>
+                                <i class="fa fa-paperclip"></i>
+                                <p>Image description goes here.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="animal effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/7.jpg">
+                            <img src="~/Content/assets/global/images/gallery/7.jpg" alt="7" />
+                            <figcaption>
+                                <h2>Image <span>Title</span></h2>
+                                <i class="fa fa-heart"></i>
+                                <i class="fa fa-eye"></i>
+                                <i class="fa fa-paperclip"></i>
+                                <p>Image description goes here.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="animal effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/6.jpg">
+                            <img src="~/Content/assets/global/images/gallery/6.jpg" alt="6" />
+                            <figcaption>
+                                <h2>Image <span>Title</span></h2>
+                                <i class="fa fa-heart"></i>
+                                <i class="fa fa-eye"></i>
+                                <i class="fa fa-paperclip"></i>
+                                <p>Image description goes here.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="transport effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/5.jpg">
+                            <img src="~/Content/assets/global/images/gallery/5.jpg" alt="5" />
+                            <figcaption>
+                                <h2>Image <span>Title</span></h2>
+                                <i class="fa fa-heart"></i>
+                                <i class="fa fa-eye"></i>
+                                <i class="fa fa-paperclip"></i>
+                                <p>Image description goes here.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="nature effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/4.jpg">
+                            <img src="~/Content/assets/global/images/gallery/4.jpg" alt="4" />
+                            <figcaption>
+                                <h2>Image <span>Title</span></h2>
+                                <i class="fa fa-heart"></i>
+                                <i class="fa fa-eye"></i>
+                                <i class="fa fa-paperclip"></i>
+                                <p>Image description goes here.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="animal effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/3.jpg">
+                            <img src="~/Content/assets/global/images/gallery/3.jpg" alt="3" />
+                            <figcaption>
+                                <h2>Image <span>Title</span></h2>
+                                <i class="fa fa-heart"></i>
+                                <i class="fa fa-eye"></i>
+                                <i class="fa fa-paperclip"></i>
+                                <p>Image description goes here.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="nature effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/2.jpg">
+                            <img src="~/Content/assets/global/images/gallery/2.jpg" alt="2" />
+                            <figcaption>
+                                <h2>Image <span>Title</span></h2>
+                                <i class="fa fa-heart"></i>
+                                <i class="fa fa-eye"></i>
+                                <i class="fa fa-paperclip"></i>
+                                <p>Image description goes here.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="transport effect-zoe magnific" data-mfp-src="~/Content/assets/global/images/gallery/1.jpg">
+                            <img src="~/Content/assets/global/images/gallery/1.jpg" alt="1" />
+                            <figcaption>
+                                <h2>Image <span>Title</span></h2>
+                                <i class="fa fa-heart"></i>
+                                <i class="fa fa-eye"></i>
+                                <i class="fa fa-paperclip"></i>
+                                <p>Image description goes here.</p>
+                            </figcaption>
+                        </figure>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="row bd border-bottom" >
+        <div class="col-md-3">
+            <div class="panel">
+                <div class="panel-header bg-primary">
+                    <h3>Colored <strong>Header</strong></h3>
+                </div>
+                <div class="panel-content">
+                    <div id="14861413653197856" >
+                        <script type="text/JavaScript" src="https://www.aparat.com/embed/8NbS0?data[rnddiv]=14861413653197856&data[responsive]=yes"></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel">
+                <div class="panel-header bg-primary">
+                    <h3>Colored <strong>Header</strong></h3>
+                </div>
+                <div class="panel-content">
+                    <div id="14861413653197856">
+                        <script type="text/JavaScript" src="https://www.aparat.com/embed/8NbS0?data[rnddiv]=14861413653197856&data[responsive]=yes"></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel">
+                <div class="panel-header bg-primary">
+                    <h3>Colored <strong>Header</strong></h3>
+                </div>
+                <div class="panel-content">
+                    <div id="14861413653197856">
+                        <script type="text/JavaScript" src="https://www.aparat.com/embed/8NbS0?data[rnddiv]=14861413653197856&data[responsive]=yes"></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel">
+                <div class="panel-header bg-primary">
+                    <h3>Colored <strong>Header</strong></h3>
+                </div>
+                <div class="panel-content">
+                    <div id="14861413653197856">
+                        <script type="text/JavaScript" src="https://www.aparat.com/embed/8NbS0?data[rnddiv]=14861413653197856&data[responsive]=yes"></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+

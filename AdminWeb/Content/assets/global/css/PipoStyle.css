@@ -1,0 +1,22 @@
+﻿.note-editor {
+    background-color: white;
+}
+
+
+.PipoCheckBox {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.parsley-errors-list {
+    display: none !important;
+}
+
+.PageTittle {
+    width: 100%;
+    padding-top: 50px;
+    padding-right: 25px;
+    background-color: #f3f3f3;
+    margin-bottom: -50px;
+}

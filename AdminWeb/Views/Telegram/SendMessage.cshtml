@@ -1,0 +1,25 @@
+﻿@model AdminWeb.Models.DataModels.TelegramModel
+<div class="col-md-8 col-md-push-2 portlets" style="margin-top:20px;">
+    <div class="panel">
+        <div class="panel-header panel-controls">
+            <h3><strong>@Resource.Resource.Telegram_SendMessage</strong></h3>
+        </div>
+        <div class="panel-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="note-editor">
+                            @Html.TextAreaFor(model => model.Caption, new { @class = "form-control autosize area-animated FixedColTextArea", placeholder = "متن پیام", @style = "height:85px; min-height:85px;  max-height:85px", maxlength = "190" })
+                            @Html.ValidationMessageFor(model => model.Caption)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align:center">
+                <button type="button" class="btn btn-primary btn-embossed" data-style="contract" onclick="TelegramMedia_Submit('SendMessage')">
+                    <span class="ladda-label">ارسال به تلگرام</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,401 @@
+﻿@model PagedList.IPagedList<AdminWeb.Models.DataModels.PostDataModel>
+@using PagedList.Mvc;
+@using AdminWeb.Models.BLL;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string DateNew = "";
+    string DateOld = "";
+    string NumberOfLikes = "";
+    string NumberOfDislikes = "";
+    string NumberOfVisitors = "";
+    switch (ViewBag.sortby as string)
+    {
+        case "DateNew":
+            DateNew = "bg-aero";
+            break;
+        case "DateOld":
+            DateOld = "bg-aero";
+            break;
+        case "NumberOfLikes":
+            NumberOfLikes = "bg-aero";
+            break;
+        case "NumberOfDislikes":
+            NumberOfDislikes = "bg-aero";
+            break;
+        case "NumberOfVisitors":
+            NumberOfVisitors = "bg-aero";
+            break;
+        default:
+            break;
+    }
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script src="~/Content/assets/global/plugins/bootstrap/js/jasny-bootstrap.min.js"></script>
+    <script src="~/Content/assets/global/js/pages/form_icheck.js"></script>
+    @*<script>
+            function CallAjax(F_MenuId) {
+                var formData = new FormData();
+                $(function () {
+                    document.getElementById('PipoBox2_Loading').style.display = 'block';
+                    $.ajax({
+                        url: '@Url.Action("FilteredPostList")',
+                        type: "Get",
+                        dataType: "html",
+                        data: { F_MenuID: F_MenuId, page: '@ViewBag.Page', PageSize: '10', Type: '1', Token: '' },
+                        success: function (data) {
+                            document.getElementById('PipoBox2_Loading').style.display = 'none';
+                            $("#AjaxResultBox").empty();
+                            $("#AjaxResultBox").append(data);
+                        },
+                        error: function (xhr) {
+                            document.getElementById('PipoBox2_Loading').style.display = 'none';
+                            alert('خطا در پردازش اطلاعات');
+                        }
+                    });
+
+                });
+            };
+        </script>*@
+    <script type="text/javascript">
+        function pipolinkClicked(el) {
+            var c = $("#form-field-select-1").find(":selected").attr("Value");
+            var temp = el.split("_");
+            var myid = temp[1];
+            $("#PipoModalBody").empty();
+            $("#PipoModalBody").append('<p> @Resource.Resource.View_AreYouShure' + ' (#' + myid + ')</p>');
+            var $self = $("#PipoModalForm");
+            $self.attr('action', '/DynamicPage/PostChangeStatus?ID=' + myid + "&Page=" + 1);
+        };
+        generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+
+        @*CallAjax(@ViewBag.F_MenuID);*@
+
+
+        jQuery(document).ready(function () {
+            $("#Lang").change(function () {
+                $("#F_MenuID").empty();
+                $("#select2-chosen-2").empty();
+                $("#select2-chosen-2").append('همه دسته بندی ها');
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetLanguageMenus", "Menu")', // we are calling json method
+                    dataType: 'json',
+                    data: { lang: $("#Lang").val() },
+                    success: function (states) {
+                        // states contains the JSON formatted list
+                        // of states passed from the controller
+                        $.each(states, function (i, state) {
+                            $("#F_MenuID").append('<option value="' + state.Value + '">' + state.Text + '</option>');
+                        }); // here we are adding option for States
+
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve states.' + ex);
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+}
+
+<div class="row">
+    <div class="col-md-12 portlets">
+        <div class="panel">
+            @*<div class="panel-header panel-controls">
+                </div>*@
+            <div class="row" style="margin-top:10px;">
+                @using (Html.BeginForm("PostList", "DynamicPage", FormMethod.Get, new
+                {
+                    PageSize = ViewBag.PageSize,
+                    Type = ViewBag.Type,
+                    FromDate = ViewBag.FromDate,
+                    ToDate = ViewBag.ToDate,
+                    page = ViewBag.page,
+                    SearchText = ViewBag.SearchText,
+                    Lang = ViewBag.Lang,
+                    F_MenuID = ViewBag.F_MenuID,
+                    sortby=ViewBag.sortby
+                }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row" style="margin-top:10px;">
+                        <div class="col-xs-2 col-xs-offset-4">
+                            <div class="dataTables_length" id="table2_length">
+                                <div class="form-group">
+                                    @Html.DropDownList("Lang", ViewBag.Languages as SelectList, new { @class = "form-control form-white", data_search = "true" })
+                                    @Html.ValidationMessage("Lang")
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-2" style="margin-right: 20px;">
+                            <div class="dataTables_length" id="table2_length">
+                                <div class="form-group">
+                                    @Html.DropDownList("F_MenuID", ViewBag.F_MenuIDs as SelectList, new { @class = "form-control form-white", data_search = "true" })
+                                    @Html.ValidationMessage("F_MenuID")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:10px;">
+                        <div class="col-xs-1" style="margin-right:20px;width:120px;">
+                            <div class="dataTables_length" id="table2_length">
+                                <label>
+                                    <select name="PageSize" class="form-control form-white" data-style="white">
+                                        <option value="5">5</option>
+                                        <option selected value="10">10</option>
+                                        <option value="15">15</option>
+                                        <option value="20">20</option>
+                                        <option value="25">25</option>
+                                        <option value="30">30</option>
+                                        <option value="35">35</option>
+                                        <option value="40">40</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="input-group">
+                                <input placeholder="جست و جو ..." type="search" class="form-control text-center form-white" aria-controls="table2" name="SearchText">
+                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="input-group">
+                                <input name="FromDate" type="text" data-mask="9999/99/99" class="form-control text-center form-white" placeholder="از تاریخ" style="direction: ltr;">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="input-group">
+                                <input name="ToDate" type="text" data-mask="9999/99/99" class="form-control text-center form-white" placeholder="تا تاریخ " style="direction: ltr;">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="dataTables_length" id="table2_length">
+                                <label style="width:100%;">
+                                    <select name="Type" class="form-control form-white" style="width:100%;" data-style="white">
+
+                                        <option value="3">عنوان + خلاصه + جزئیات</option>
+                                        <option value="2">عنوان + خلاصه</option>
+                                        <option value="1">عنوان</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-xs-2 col-xs-offset-4">
+                            <div class="dataTables_length" id="table2_length">
+                                <label>
+                                    <button type="submit" class="btn btn-default">اعمال فیلتر</button>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="m-b-10 f-left">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        مرتب سازی بر اساس
+                                        <span class="caret"></span>
+                                    </button>
+                                    <span class="dropdown-arrow dropdown-arrow-inverse"></span>
+                                    <ul class="dropdown-menu dropdown-inverse" role="menu">
+                                        <li>
+                                            <a href="@Url.Action("PostList", "DynamicPage", new
+                                                {
+                                                    PageSize = ViewBag.PageSize,
+                                                    Type = ViewBag.Type,
+                                                    FromDate = ViewBag.FromDate,
+                                                    ToDate = ViewBag.ToDate,
+                                                    page = ViewBag.page,
+                                                    SearchText = ViewBag.SearchText,
+                                                    Lang = ViewBag.Lang,
+                                                    F_MenuID = ViewBag.F_MenuID,
+                                                    sortby ="DateNew",
+                                            })" class="@DateNew">جدیدترین</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("PostList", "DynamicPage", new
+                                                {
+                                                    PageSize = ViewBag.PageSize,
+                                                    Type = ViewBag.Type,
+                                                    FromDate = ViewBag.FromDate,
+                                                    ToDate = ViewBag.ToDate,
+                                                    page = ViewBag.page,
+                                                    SearchText = ViewBag.SearchText,
+                                                    Lang = ViewBag.Lang,
+                                                    F_MenuID = ViewBag.F_MenuID,
+                                                    sortby ="DateOld",
+                                            })" class="@DateOld">قدیمی ترین</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("PostList", "DynamicPage", new
+                                                {
+                                                    PageSize = ViewBag.PageSize,
+                                                    Type = ViewBag.Type,
+                                                    FromDate = ViewBag.FromDate,
+                                                    ToDate = ViewBag.ToDate,
+                                                    page = ViewBag.page,
+                                                    SearchText = ViewBag.SearchText,
+                                                    Lang = ViewBag.Lang,
+                                                    F_MenuID = ViewBag.F_MenuID,
+                                                    sortby ="NumberOfLikes",
+                                            })" class="@NumberOfLikes">بیشترین لایک</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("PostList", "DynamicPage", new
+                                                {
+                                                    PageSize = ViewBag.PageSize,
+                                                    Type = ViewBag.Type,
+                                                    FromDate = ViewBag.FromDate,
+                                                    ToDate = ViewBag.ToDate,
+                                                    page = ViewBag.page,
+                                                    SearchText = ViewBag.SearchText,
+                                                    Lang = ViewBag.Lang,
+                                                    F_MenuID = ViewBag.F_MenuID,
+                                                    sortby ="NumberOfDislikes",
+                                            })" class="@NumberOfDislikes">بیشترین دیسلایک</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("PostList", "DynamicPage", new
+                                                {
+                                                    PageSize = ViewBag.PageSize,
+                                                    Type = ViewBag.Type,
+                                                    FromDate = ViewBag.FromDate,
+                                                    ToDate = ViewBag.ToDate,
+                                                    page = ViewBag.page,
+                                                    SearchText = ViewBag.SearchText,
+                                                    Lang = ViewBag.Lang,
+                                                    F_MenuID = ViewBag.F_MenuID,
+                                                    sortby ="NumberOfVisitors",
+                                            })" class="@NumberOfVisitors">بیشترین بیننده</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12" id="PipoBox2_Loading" style="text-align:center;padding:20px 0;display:none">
+                    <img src="~/Content/DefaultContent/Imgs/ajax-load.gif" />
+                </div>
+                <div class="panel-content" id="AjaxResultBox">
+                    <table class="table table-hover table-dynamic">
+                        <thead>
+                            <tr>
+                                <th class="text-center ">شناسه</th>
+                                <th class="text-center ">دسته</th>
+                                <th class="text-center ">عنوان پست</th>
+                                <th class="text-center ">وضعیت</th>
+                                <th class="text-center "><i class="fa fa-comments-o"></i></th>
+                                <th class="text-center "><i class="fa fa-users"></i></th>
+                                <th class="text-center "><i class="icon-like"></i></th>
+                                <th class="text-center "><i class="icon-dislike"></i></th>
+                                <th class="text-center ">تاریخ ایجاد</th>
+                                <th class="text-center ">آخرین ویرایش</th>
+                                <th class="text-center ">عملیات</th>
+                            </tr>
+                        </thead>
+                        @{ string SIcon = "";}
+                        <tbody>
+                            @{int count = Int32.Parse(ViewBag.Total.ToString()); }
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">@item.ID</td>
+                                    <td class="text-center">@item.MenuName</td>
+                                    <td class="text-center">@item.Tittle</td>
+                                    <td class="text-center">
+                                        @if (item.Status ?? default(bool))
+                                        {<i class="glyphicon glyphicon-check" style="float:none;"></i> SIcon = "glyphicon glyphicon-unchecked";
+                                        }
+                                        else
+                                        {<i class="glyphicon glyphicon-unchecked" style="float:none;"></i> SIcon = "glyphicon glyphicon-check";
+                                        }
+                                    </td>
+                                    <td class="text-center"><a href="@Url.Action("DynamicPageComments", "Comments", new { ID=item.ID})" class="text-center" data-toggle="tooltip" data-placement="top" title="نمایش کامنت ها">@item.NumberOfComments</a></td>
+                                    <td class="text-center">@item.NumberOfVisitors</td>
+                                    <td class="text-center">@item.NumberOfLikes</td>
+                                    <td class="text-center">@item.NumberOfDislikes</td>
+                                    <td class="text-center" style="text-align:left;">@Tools.GetDateTimeReturnJalaliDate(item.CreatedOnUTC ?? default(DateTime))</td>
+                                    <td class="text-center" style="text-align:left;">@Tools.GetDateTimeReturnJalaliDate(item.EditedDateOnUTC ?? default(DateTime))</td>
+                                    <td class="text-center">
+                                        <a id="PipoModalLink_@item.ID" class="btn btn-transparent btn-xs tooltips" data-toggle="modal" data-target="#modal-basic" title="تغییر وضعیت نمایش" onclick="pipolinkClicked(this.id)"><i class="@SIcon" data-toggle="modal" data-target="#PipoModal"></i></a>
+                                        <a href="@Url.Action("PostEdit", "DynamicPage", new { ID=item.ID})" class="btn btn-transparent btn-xs" title="ویرایش مطلب"><i class="fa fa-edit"></i></a>
+                                        <a href="@System.Configuration.ConfigurationManager.AppSettings["WebsiteAddress"]@ViewBag.UserName/@ViewBag.lang/Post/PostDetail/@item.ID" class="btn btn-transparent btn-xs" title="نمایش مطلب"><i class="fa fa-desktop"></i></a>
+                                        <a href="@Url.Action("SentContentToTelegramFromList", "Telegram", new {Caption=item.Tittle, Path=item.ImagePath,Url=System.Configuration.ConfigurationManager.AppSettings["WebsiteAddress"]+ViewBag.RootUserName+"/"+ViewBag.lang+"/Post/PostDetail/"+item.ID })" class="btn btn-transparent btn-xs" title="ارسال به تلگرام"><i class="fa fa-send"></i></a>
+                                    </td>
+                                </tr>
+                                count++;
+                            }
+                        </tbody>
+                    </table>
+                    <div class="col-md-4 col-md-push-5">
+                        <div class="pagination pagination-green margin-bottom-10 text-center">
+                            @Html.PagedListPager(Model, page => Url.Action("PostList", "DynamicPage", new
+                       {
+                           page,
+                           PageSize = ViewBag.PageSize,
+                           Type = ViewBag.Type,
+                           FromDate = ViewBag.FromDate,
+                           ToDate = ViewBag.ToDate,
+
+                           SearchText = ViewBag.SearchText,
+                           Lang = ViewBag.Lang,
+                           F_MenuID = ViewBag.F_MenuID,
+                       }))
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        @*<div class="col-md-4 col-md-push-5">
+                <div class="pagination pagination-green margin-bottom-10 text-center">
+                    صفحه @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) از @Model.PageCount
+                    @Html.PagedListPager(Model, page => Url.Action("PostList", "DynamicPage", new { page }))
+                </div>
+            </div>*@
+    </div>
+</div>
+<!-- BEGIN MODALS -->
+<div class="modal fade" id="modal-basic" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h2 class="modal-title"><strong>هشدار</strong></h2>
+            </div>
+            <div id="PipoModalBody" class="modal-body">
+                آیا از انجام عملیات مورد نظر اطمینان خاطر دارید ؟<br>
+            </div>
+            @using (Html.BeginForm("PostChangeStatus", "DynamicPage", new { SlideId = "_postid_" }, FormMethod.Post, new { Id = "PipoModalForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">بستن</button>
+                    <button type="submit" class="btn btn-primary btn-embossed">بله</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- END MODALS -->

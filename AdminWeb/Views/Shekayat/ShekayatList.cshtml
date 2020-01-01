@@ -1,0 +1,48 @@
+﻿@model PagedList.IPagedList<AdminWeb.Models.DataModels.Shekayat>
+@using AdminWeb.Infrastructure
+@using AdminWeb.Models.BLL;
+@using PagedList.Mvc;
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryajax")
+@foreach (var item in Model)
+{
+    string ShekayatStatus = "";
+    if (item.Status == "در وضعیت انتظار")
+    {
+        ShekayatStatus = "PipoShekayatWaiting";
+    }
+    else if (item.Status == "پاسخ داده شده")
+    {
+        ShekayatStatus = "PipoShekayatResponsed";
+    }
+    string temp = ViewBag.CurrentFilter;
+    string HitRemain = item.TrackingCode.ToLower();
+    if (!string.IsNullOrEmpty(temp))
+    {
+
+        HitRemain = HitRemain.Replace(temp.ToLower(), "<mark>" + temp.ToLower() + "</mark>");
+
+    }
+    @Ajax.RawActionLink("<div data-toggle=\"modal\" data-target=\"#modal-responsive\" class=\"user " + ShekayatStatus + "style=\"border-bottom: 1px solid; padding-bottom: 10px; border-bottom-color: #ebeaea;\"><div class=\"comment\"><p style=\"font-size: 13px;text-align: justify;\" class=\"c-primary m-b-0\"><strong>" + item.Text + "</strong></p></div><div class=\"item-event-detail\" style=\"margin-top: 5px;font-size: 11px;\"><p style =\"direction: ltr;\" ><i class=\"fa fa-inbox PipoShekayatListIcons\">" + item.CountInbox + "</i> <i style = \"margin-right: 5px;\" class=\"fa fa-upload PipoShekayatListIcons\"> " + item.CountOutbox + "</i><span class=\"separator\">|</span>" + Tools.GetDateTimeReturnJalaliDate(item.LastUpdateOnUtc) + "<span class=\"separator\">|</span>" + Html.Raw(HitRemain.ToUpper()) + "</p></div></div>",
+                                    "ShekayatDetail", "Shekayat",
+                                    new { F_ShekayatID = item.ID },
+                                         new AjaxOptions
+                                         {
+                                             UpdateTargetId = "ShekayatReader",
+                                             InsertionMode = InsertionMode.Replace,
+                                             LoadingElementId = "ShekayatReader_Loading",
+                                             HttpMethod = "Post",
+                                             OnBegin = "CleanReaderBox()"
+
+                                         }, null)
+
+}
+
+@if (Model.Count > 0)
+{
+    <div id="PipoToMovePaging" class="pagination pagination-green margin-bottom-10 center">
+        @Html.PagedListPager(Model, page => Url.Action("ShekayatList", "Shekayat", new { page, searchString = ViewBag.CurrentFilter, ShekayatStatus = ViewBag.CurrentStatus}), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "Post", UpdateTargetId = "PipoShekayatList", LoadingElementId = "ShekayatList_Loading1", OnSuccess = "PipoOnPageChange" }))
+    </div>
+}
+<input type="hidden" id="PipoCurrentStatus" name="PipoCurrentStatus" value="@ViewBag.CurrentStatus">

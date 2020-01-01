@@ -1,0 +1,66 @@
+﻿@model PagedList.IPagedList<AdminWeb.Models.DataModels.PostDataModel>
+@using PagedList.Mvc;
+
+<table class="table table-hover table-dynamic">
+    <thead>
+        <tr>
+            <th class="text-center ">ردیف</th>
+            <th class="text-center ">عنوان پست</th>
+            <th class="text-center ">وضعیت</th>
+            <th class="text-center ">نظرات</th>
+            <th class="text-center ">تعداد نمایش</th>
+            <th class="text-center ">تعداد لایک</th>
+            <th class="text-center ">تعداد دیس لایک</th>
+            <th class="text-center ">تاریخ ایجاد</th>
+            <th class="text-center ">عملیات</th>
+        </tr>
+    </thead>
+    @{ string SIcon = "";}
+    <tbody>
+        @{int count = Int32.Parse(ViewBag.Total.ToString()); }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">@count</td>
+                <td class="text-center">@item.Tittle</td>
+                <td class="text-center">
+                    @if (item.Status ?? default(bool))
+                    {<i class="glyphicon glyphicon-check" style="float:none;"></i> SIcon = "glyphicon glyphicon-unchecked";
+                    }
+                    else
+                    {<i class="glyphicon glyphicon-unchecked" style="float:none;"></i> SIcon = "glyphicon glyphicon-check";
+                    }
+                </td>
+                <td class="text-center"><a href="@Url.Action("DynamicPageComments", "Comments", new { ID=item.ID})" class="btn btn-dark btn-transparent btn-xs" data-toggle="tooltip" data-placement="top" title="نمایش کامنت ها"><i class="icon-bubble" style="margin-left: 5px;"></i>@item.NumberOfComments</a></td>
+                <td class="text-center">@item.NumberOfVisitors</td>
+                <td class="text-center">@item.NumberOfLikes</td>
+                <td class="text-center">@item.NumberOfDislikes</td>
+                <td class="text-center" style="text-align:left;">@item.CreatedOnUTC</td>
+                <td class="text-center">
+                    <a id="PipoModalLink_@item.ID" class="btn btn-transparent btn-xs tooltips" data-toggle="modal" data-target="#modal-basic" title="تغییر وضعیت نمایش" onclick="pipolinkClicked(this.id)"><i class="@SIcon" data-toggle="modal" data-target="#PipoModal"></i></a>
+                    <a href="@Url.Action("PostEdit", "DynamicPage", new { ID=item.ID})" class="btn btn-transparent btn-xs" title="ویرایش مطلب"><i class="fa fa-edit"></i></a>
+                    <a href="@Url.Action("PostDetail", "DynamicPage", new { ID=item.ID})" class="btn btn-transparent btn-xs" title="نمایش مطلب"><i class="fa fa-desktop"></i></a>
+                    <a href="@Url.Action("SentContentToTelegramFromList", "Telegram", new {Caption=item.Tittle, Path=item.ImagePath,Url="3mill.ir" })" class="btn btn-transparent btn-xs" title="ارسال به تلگرام"><i class="fa fa-send"></i></a>
+                </td>
+            </tr>
+            count++;
+        }
+    </tbody>
+</table>
+<div class="col-md-4 col-md-push-5">
+    <div class="pagination pagination-green margin-bottom-10 text-center">
+        @Html.PagedListPager(Model, page => Url.Action("FilteredPostList", "DynamicPage", new { 
+            PageSize = ViewBag.PageSize,
+            Type = ViewBag.Type,
+            FromDate = ViewBag.FromDate,
+            ToDate = ViewBag.ToDate,
+            page = ViewBag.page,
+            SearchText = ViewBag.SearchText,
+            Lang = ViewBag.Lang,
+            F_MenuID = ViewBag.F_MenuID,
+        }))
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryajax")

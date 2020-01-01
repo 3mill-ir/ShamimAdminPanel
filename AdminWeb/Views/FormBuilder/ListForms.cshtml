@@ -1,0 +1,137 @@
+﻿@model IEnumerable<AdminWeb.Models.DataModels.ItemDataModel>
+@using AdminWeb.Models.BLL
+    @section CSS_Requested{
+        <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+        <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+        <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+        <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+        <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+        <link href="~/Content/assets/global/plugins/datatables/dataTables.min.css" rel="stylesheet">
+    }
+
+    @section js_Requested
+{
+        <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+        <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+        <script src="~/Content/assets/global/plugins/datatables/jquery.dataTables.min.js"></script> <!-- Tables Filtering, Sorting & Editing -->
+        <script src="~/Content/assets/global/js/pages/table_dynamic.js"></script>
+        <script>
+            jQuery(document).ready(function () {
+                generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+            });
+
+        </script>
+        <script type="text/javascript">
+            function AjaxRequest(param) {
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("FormDetail", "FormBuilder")',
+                    dataType: 'html',
+                    data: { ItemID: param, Type: '@ViewBag.Type' },
+                    success: function (Result) {
+                        $("#DetailModalBody").empty();
+                        $("#DetailModalBody").append(Result);
+                    },
+                    error: function (ex) {
+                        alert('خطا در بارگذاری اطلاعات آیتم مورد نظر' + ex);
+                    }
+                });
+            }
+            $("a[id^='PipoModalLink_']").click('action', function () {
+                var temp = $(this).attr('id').split("_");
+                var myid = temp[1];
+                $("#PipoModalBody").empty();
+                $("#PipoModalBody").append('<p> @Resource.Resource.View_InsertDescriptionStatus' + ' (#' + myid + ')</p>');
+                var $self = $("#PipoModalForm");
+                $self.attr('action', '/FormBuilder/ChangeStateForm?Type=' + '@ViewBag.Type' + '&ItemID=' + myid + '&Type=@ViewBag.Type' + '&F_MenuID=@ViewBag.id');
+            });
+            $("a[id^='PipoModalLink2_']").click('action', function () {
+                var temp = $(this).attr('id').split("_");
+                var myid = temp[1];
+                $("#DetailModalBody").empty();
+                AjaxRequest(myid);
+            });
+        </script>
+    }
+    <div class="row">
+        <div class="col-md-12 portlets">
+            <div class="panel">
+                <div class="panel-header panel-controls">
+                </div>
+                <div class="panel-content">
+                    <div class="row" style="margin-top:20px;">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-dynamic">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">@Html.DisplayName(Resource.Resource.Item_ID)</th>
+                                            <th class="text-center">@Html.DisplayName(Resource.Resource.PollQuestion_F_User_Id)</th>
+                                            <th class="text-center">@Html.DisplayName(Resource.Resource.Item_CreatedDateOnUtc)</th>
+                                            <th class="text-center">@Html.DisplayName(Resource.Resource.Item_SubmitedState)</th>
+                                            <th class="text-center"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr style="background-color:@(item.SubmitedState == "Accepted" ? "#9fda9f" : "#f9d9b1")">
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.ID)</td>
+                                                <td class="text-center">@{string tu = Tools.FoundUser(ViewBag.Token, item.F_UserID).UserName;}@(tu=="Sahibmall"?"کاربر میهمان":tu)</td>
+                                                <td class="text-center" style="direction:ltr;">@Html.Label(AdminWeb.Models.BLL.Tools.GetDateTimeReturnJalaliDate(item.CreatedDateOnUTC ?? default(DateTime)))</td>
+                                                <td class="text-center">@Html.Label(item.SubmitedState == "Accepted" ? "تایید شده" : item.SubmitedState == "Review" ? "در حال بررسی" : item.SubmitedState == "Seen" ? "رویت شده" : item.SubmitedState == "Sent" ? "ارسال شده" : "تعیین نشده")</td>
+                                                <td class="text-center">
+                                                    <div class="text-center visible-md visible-lg visible-sm visible-xs">
+                                                        <a id="PipoModalLink2_@item.ID" class="btn btn-transparent btn-xs" data-toggle="modal" data-target="#modal-basic2" data-placement="top" title="جزییات"><i class="fa fa-times fa fa-info-circle"></i></a>
+                                                        <a id="PipoModalLink_@item.ID" class="btn btn-transparent btn-xs" data-toggle="modal" data-target="#modal-basic" data-placement="top"><i class="glyphicon glyphicon-check" data-toggle="modal" data-target="#PipoModal"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BEGIN MODALS -->
+    <div class="modal fade" id="modal-basic" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                    <h2 class="modal-title"><strong>ویرایش وضعیت آیتم</strong></h2>
+                </div>
+                <div id="PipoModalBody" class="modal-body">
+                    آیا از انجام عملیات مورد نظر اطمینان خاطر دارید ؟<br>
+                </div>
+                @using (Html.BeginForm("ChangeStateItem", "Item", new { ItemID = "" }, FormMethod.Post, new { Id = "PipoModalForm" }))
+            {
+                    @Html.AntiForgeryToken()
+                    <div class="modal-footer">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">@Html.DisplayName("توضیحات")</label>
+                            @Html.TextArea("Description", null, new { @class = "form-control", @id = "exampleInputEmail1", @placeholder = "توضیحات را وارد کنید", @type = "text", rows = 5 })
+                        </div>
+                        <div class="form-group m-b-20">
+                            <label for="exampleInputEmail1">@Html.DisplayName("وضعیت")</label>
+                            @Html.DropDownList("SubmitedState", ViewBag.Statuses as List<SelectListItem>, new { @class = "form-control" })
+                        </div>
+                        <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">بستن</button>
+                        <button type="submit" class="btn btn-primary btn-embossed">بله</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- END MODALS -->
+    <!-- BEGIN Detail MODALS -->
+    <div style="margin-top: -140px;" class="modal fade" id="modal-basic2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" style="width:70%;">
+            <div class="modal-content" id="DetailModalBody"></div>
+        </div>
+    </div>
+    <!-- END Detail MODALS -->

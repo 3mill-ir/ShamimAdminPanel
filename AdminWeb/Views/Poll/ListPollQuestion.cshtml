@@ -1,0 +1,128 @@
+﻿@model IEnumerable<AdminWeb.Models.DataModels.PollQuestionModel>
+@using AdminWeb.Models.BLL
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using PagedList.Mvc;
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+    <link href="~/Content/assets/global/plugins/datatables/dataTables.min.css" rel="stylesheet">
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script src="~/Content/assets/global/plugins/datatables/jquery.dataTables.min.js"></script> <!-- Tables Filtering, Sorting & Editing -->
+    <script src="~/Content/assets/global/js/pages/table_dynamic.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        });
+        $("a[id^='PipoModalLink_']").click('action', function () {
+            var temp = $(this).attr('id').split("_");
+            var myid = temp[1];
+
+            $("#PipoModalBody").empty();
+            $("#PipoModalBody").append('<p> @Resource.Resource.View_AreYouShure' + ' (#' + myid + ')</p>');
+            var $self = $("#PipoModalForm");
+            $self.attr('action', '/Poll/DeletePoll?PollQuestionId=' + myid);
+        });
+    </script>
+}
+<div class="row">
+    <div class="col-md-12 portlets">
+        <div class="panel">
+            <div class="panel-header panel-controls">
+            </div>
+            <div class="panel-content">
+                <div class="row" style="margin-top:20px;">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-dynamic">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">@Html.DisplayName(Resource.Resource.PollQuestion_ID)</th>
+                                        <th>@Html.DisplayName(Resource.Resource.PollQuestion_Question)</th>
+                                        <th>@Html.DisplayName(Resource.Resource.PollQuestion_ChartType)</th>
+                                        <th>@Html.DisplayName(Resource.Resource.PollQuestion_StartedOnUTC)</th>
+                                        <th>@Html.DisplayName(Resource.Resource.PollQuestion_EndDateUTC)</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        string Status = "";
+                                        if (item.StartDateOnUTC<=DateTime.Now && item.EndDateOnUTC>=DateTime.Now)
+                                        {
+                                            Status = "bg-aero";
+                                        }
+
+                                        <tr class="@Status">
+                                            <td class="text-center">@Html.DisplayFor(modelItem => item.ID)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Question)</td>
+                                            @if (item.ChartType == "DoughnutChart")
+                                            {
+                                                <td><i class="fa fa-circle-o-notch"></i></td>
+                                            }
+                                            else if (item.ChartType == "PieChart")
+                                            {
+                                                <td><i class="fa fa-pie-chart"></i></td>
+                                            }
+                                            else if (item.ChartType == "BarChart")
+                                            {
+                                                <td><i class="icon-bar-chart"></i></td>
+                                            }
+                                            else
+                                            {
+                                                <td>@Html.Label(Resource.Resource.View_Anonymous)</td>
+                                            }
+                                            <td>@Tools.GetDateTimeReturnJalaliDate(item.StartDateOnUTC ?? default(DateTime))</td>
+                                            <td>@Tools.GetDateTimeReturnJalaliDate(item.EndDateOnUTC ?? default(DateTime))</td>
+
+                                            <td class="text-center">
+                                                <div class="visible-md visible-lg visible-sm visible-xs">
+                                                    <a href="@Url.Action("DetailPollQuestion", "Poll", new { PollQuestionId = item.ID })" class="btn btn-transparent btn-xs" data-placement="top" title="جزییات"><i class="fa fa-times fa fa-bar-chart"></i></a>
+                                                    <a href="@Url.Action("EditPollQuestion", "Poll", new { PollQuestionId = item.ID })" class="btn btn-transparent btn-xs" data-placement="top" title="ویرایش"><i class="fa fa-times fa fa-pencil"></i></a>
+                                                    <a id="PipoModalLink_@item.ID" class="btn btn-transparent btn-xs" data-toggle="modal" data-target="#modal-basic" data-placement="top" title="حذف"><i class="fa fa-remove" data-toggle="modal" data-target="#PipoModal"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BEGIN MODALS -->
+<div class="modal fade" id="modal-basic" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h2 class="modal-title"><strong>هشدار</strong></h2>
+            </div>
+            <div id="PipoModalBody" class="modal-body">
+                آیا از انجام عملیات مورد نظر اطمینان خاطر دارید ؟<br>
+            </div>
+            @using (Html.BeginForm("DeletePoll", "Poll", new { SlideId = "_postid_" }, FormMethod.Post, new { Id = "PipoModalForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">بستن</button>
+                    <button type="submit" class="btn btn-primary btn-embossed">بله</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- END MODALS -->

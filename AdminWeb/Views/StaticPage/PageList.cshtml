@@ -1,0 +1,68 @@
+﻿@model  IEnumerable<AdminWeb.Models.DataModels.PageDataModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+<link href="~/Content/assets/global/plugins/datatables/dataTables.min.css" rel="stylesheet">
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+<script src="~/Content/assets/global/plugins/datatables/jquery.dataTables.min.js"></script> <!-- Tables Filtering, Sorting & Editing -->
+<script src="~/Content/assets/global/js/pages/table_dynamic.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        })
+    </script>
+}
+<div class="row">
+    <div class="col-md-8 col-md-push-2 portlets">
+        <div class="panel">
+            <div class="panel-header panel-controls">
+            </div>
+            <div class="panel-content">
+                <table class="table table-hover table-dynamic filter-select">
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center">نام صفحه</th>
+                            <th class="text-center">زبان</th>
+                            <th class="text-center">@Resource.Resource.Edit</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th style="visibility:hidden"></th>
+                            <th style="visibility:hidden"></th>
+                            <th>زبان</th>
+                            <th style="visibility:hidden"></th>
+          
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-center">@item.ID</td>
+                                <td class="text-center">@item.Name</td>
+                                <td class="text-center">@item.Language</td>
+                                <td class="text-center">
+                                <a href="@Url.Action("PageDetail", "StaticPage", new { idm = item.ID})" class="btn btn-transparent btn-xs" data-placement="top" title="ویرایش"><i class="fa fa-pencil"></i></a>
+                                    <a target="popup" onclick="window.open('@System.Configuration.ConfigurationManager.AppSettings["WebsiteAddress"]/@ViewBag.UserName/Page/Pagedetail/@item.Language/@item.ID', 'name', 'width=screen.width,height=screen.height')" href="#"  class="btn btn-transparent btn-xs" title="نمایش مطلب" ><i class="fa fa-desktop"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

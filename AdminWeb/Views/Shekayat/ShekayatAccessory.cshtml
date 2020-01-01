@@ -1,0 +1,48 @@
+﻿@using AdminWeb.Infrastructure
+@model AdminWeb.Models.DataModels.TicketAccessoryDataModel
+@{
+    string PipoAllCpunt = ViewBag.AllShekayatCount;
+    string PipoResponseCount = ViewBag.ResponseShekayatCount;
+    string PipoUnResponseCount = ViewBag.UnResponseShekayatCount;
+    string PipoToResponseCount = ViewBag.ToResponseShekayatCount;
+}
+
+<script>
+    function PipoStatusMid(ShekayatStatus) {
+        document.getElementById('PipoCurrentStatus').value = ShekayatStatus;
+        PipoShekayatAccessoryClicked(ShekayatStatus);
+    };
+</script>
+<div class="form-group" style="margin-right: 20px;">
+    <div class="radio clip-radio radio-success">
+        <input onchange="PipoStatusMid();" checked="checked" type="radio" id="PipoShekayatAccessory_1" name="vertical2" value="همه">
+        <label for="PipoShekayatAccessory_1" style="font-size:15px;">
+            همه
+            <span style="background-color: #1FBBA6 !important;" class="badge"> @Model.AllTicketCount </span>
+        </label>
+    </div>
+    <div class="radio clip-radio radio-success">
+        <input onchange="PipoStatusMid('پاسخ داده شده');" type="radio" id="PipoShekayatAccessory_2" name="vertical2" value="پاسخ داده شده">
+        <label for="PipoShekayatAccessory_2" style="font-size:15px;">
+            پاسخ داده شده
+            <span style="background-color: #1FBBA6 !important;" class="badge"> @Model.ResponseTicketCount </span>
+        </label>
+    </div>
+    <div class="radio clip-radio radio-success">
+        <input onchange="PipoStatusMid('در حال بررسی');" type="radio" id="PipoShekayatAccessory_3" name="vertical2" value="در حال بررسی">
+        <label for="PipoShekayatAccessory_3" style="font-size:15px;">
+            در حال بررسی
+            <span style="background-color: #1FBBA6 !important;" class="badge"> @Model.ToResponseTicketCount </span>
+        </label>
+    </div>
+    <div class="radio clip-radio radio-success">
+        <input onchange="PipoStatusMid('در وضعیت انتظار');" type="radio" id="PipoShekayatAccessory_4" name="vertical2" value="در وضعیت انتظار">
+        <label for="PipoShekayatAccessory_4" style="font-size:15px;">
+            در وضعیت انتظار
+            <span style="background-color: #1FBBA6 !important;" class="badge"> @Model.UnResponseTicketCount </span>
+        </label>
+    </div>
+</div>
+<div id="PipoPagingDist" style="height:10px;border-bottom:5px solid #808080"></div>
+<input id="PipoCurrentStatus" hidden>
+

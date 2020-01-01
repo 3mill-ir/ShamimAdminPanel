@@ -1,0 +1,104 @@
+﻿@model IEnumerable<AdminWeb.Models.DataModels.GalleryListModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        });
+        $("a[id^='PipoModalLink_']").click('action', function () {
+            var temp = $(this).attr('id').split("_");
+            var myid = temp[1];
+            $("#PipoModalBody").empty();
+            $("#PipoModalBody").append('<p> آیا اطمینان خاطر دارید که فایل مورد نظر را حذف کنید ؟' + ' (#' + myid + ')</p>');
+            var $self = $("#PipoModalForm");
+            $self.attr('action', '/Gallery/DeleteFile?FileID=' + myid);
+        });
+    </script>
+}
+<div class="row">
+    <div class="col-md-12 portlets">
+        <div class="panel">
+            <div class="panel-header panel-controls">
+            </div>
+            <div class="panel-content">
+                <div class="row" style="margin-top:20px;">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-12">
+                            <div class="panel panel-white" id="panel6">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title text-primary">@item.FolderName</h4>
+                                    <div class="panel-tools">
+                                        <a data-original-title="Collapse" data-toggle="tooltip" data-placement="top" class="btn btn-transparent btn-sm panel-collapse" href="#"><i class="ti-minus collapse-off"></i><i class="ti-plus collapse-on"></i></a>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="panel-scroll height-330">
+                                        <div class="row">
+                                            @foreach (var pic in item.Folders)
+                                            {
+                                                <div class="col-sm-6 col-md-3">
+                                                    <div class="thumbnail" style="background-color:rgba(221, 221, 221, 0.63);">
+                                                        @if (pic.BackupType == "image")
+                                                        {
+                                                            <img style="width:250px; height:150px;" src="@pic.Path" alt="">
+                                                        }
+                                                        else
+                                                        {
+                                                            <a target="_blank" href="@pic.Path"><img src="~/Content/DefaultContent/Imgs/telegram/@pic.BackupType-icon.png" /></a>
+                                                        }
+                                                        <div class="caption">
+                                                            <p style="height: 50px;text-align: center;">@pic.Text</p>
+                                                            <p><a id="PipoModalLink_@pic.ID" data-toggle="modal" data-target="#modal-basic" data-placement="top" href="#" class="btn btn-wide btn-danger" style="width:100%">@Resource.Resource.View_Delete</a></p>
+                                                            <p><a href="@Url.Action("EditFile", "Gallery", new {PhotoID=pic.ID })" class="btn btn-wide btn-info" style="width:100%">@Resource.Resource.Edit</a></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BEGIN MODALS -->
+<div class="modal fade" id="modal-basic" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h2 class="modal-title"><strong>هشدار</strong></h2>
+            </div>
+            <div id="PipoModalBody" class="modal-body">
+                آیا از انجام عملیات مورد نظر اطمینان خاطر دارید ؟<br>
+            </div>
+            @using (Html.BeginForm("DeleteFile", "Gallery", new { SlideId = "_postid_" }, FormMethod.Post, new { Id = "PipoModalForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">بستن</button>
+                    <button type="submit" class="btn btn-primary btn-embossed">بله</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- END MODALS -->

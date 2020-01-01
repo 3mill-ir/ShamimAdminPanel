@@ -1,0 +1,90 @@
+﻿@model AdminWeb.Models.DataModels.PageDataModel
+    @using AdminWeb.Models.BLL;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+    <link href="~/Content/assets/global/plugins/datatables/dataTables.min.css" rel="stylesheet">
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script src="~/Content/assets/global/plugins/datatables/jquery.dataTables.min.js"></script> <!-- Tables Filtering, Sorting & Editing -->
+    <script src="~/Content/assets/global/js/pages/table_dynamic.js"></script>
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="~/CKFinderScripts/ckfinder.js"></script>
+    <script src="~/Content/ckeditor/adapters/jquery.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+ 
+        });
+
+        @*$(document).ready(function(){
+            $('#exampleInputEmail1').ckeditor(function(){
+
+                // Capturando o conteúdo do editor
+                var data = $('#editor').val();
+                // Adicionando conteúdo ao editor
+                alert("dd");
+                var fileadd = '@Tools.ReturnPath("DetailHTMLFilePath", ViewBag.Username, "GetHtmldetail()")@Model.HTMLname';
+                alert(fileadd);
+                $('#exampleInputEmail1').val("");
+                alert("hi");
+                $.get(fileadd).done(function (data) {
+                    // Do something with the data
+                    $('#exampleInputEmail1').val(data);
+                });
+            });
+        });*@
+
+
+    </script>
+}
+@{Session["dynamic-user-folder"] = ViewBag.UserImageFolder;}
+<div class="row">
+    <div class="col-md-12 portlets">
+        <div class="panel">
+            <div class="panel-header panel-controls">
+            </div>
+            <div class="panel-content">
+                @using (Html.BeginForm("EditPage", "StaticPage"))
+                {
+                    @Html.AntiForgeryToken()
+                
+                <!-- start: TEXT EDITOR -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 style="text-align: center;margin-bottom: 25px;" class="over-title">@Resource.Resource.View_InsertYourFullContent</h4>
+
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-3">
+                                    <h3 class="over-title"><strong>عنوان صفحه : @ViewBag.MenuName</strong> </h3>
+                                </div>
+                                <div class="col-md-2">
+                                    <h3 class="over-title"><strong>زبان : @ViewBag.Lang</strong></h3>
+                                </div>
+                            </div>
+                       
+                            @Html.TextAreaFor(model => model.ActionContent, new { @class = "ckeditor", @id = "exampleInputEmail1", @type = "text" })
+                            @Html.ValidationMessageFor(model => model.ActionContent)
+                        </div>
+                    </div>
+                            @Html.HiddenFor(model => model.ID)
+           
+                            <!-- end: TEXT EDITOR -->
+                            <button style="width:100%;" type="submit" class="btn btn-wide btn-dark-green ladda-button margin-top-30" data-style="zoom-in" id="PipoSubmit">
+                                <span class="ladda-label">@Resource.Resource.Edit</span>
+                            </button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

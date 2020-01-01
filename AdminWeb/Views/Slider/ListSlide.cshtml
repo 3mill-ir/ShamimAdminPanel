@@ -1,0 +1,116 @@
+﻿@model IEnumerable<AdminWeb.Models.DataModels.SliderModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        });
+        function pipolinkClicked(el) {
+            var c = $("#form-field-select-1").find(":selected").attr("Value");
+            var temp = el.split("_");
+            var myid = temp[1];
+            $("#PipoModalBody").empty();
+            $("#PipoModalBody").append('<p> @Resource.Resource.View_AreYouShure' + ' (#' + myid + ')</p>');
+            var $self = $("#PipoModalForm");
+            $self.attr('action', '/Slider/ChangeDisplaySlide?SlideId=' + myid);
+        };
+    </script>
+}
+<div class="row">
+    <div class="col-md-12 portlets">
+        <div class="panel">
+            <div class="panel-content">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>@Resource.Resource.View_Photo</th>
+                            <th class="text-center">@Resource.Resource.View_SlidePriority</th>
+                            <th class="text-center">@Resource.Resource.View_SlideTitle</th>
+                            <th class="text-center">@Resource.Resource.Post_Display</th>
+                            <th class="text-center">@Resource.Resource.View_Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                @if (item.Img != "")
+                                {
+                                    <td>
+                                        <img style="width:135px; height:100px;" src="@ViewBag.prePath@item.Img" class="img-rounded" alt="image">
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <img style="width:135px; height:100px;" src="~/Content/DefaultContent/Slider/NoImage.jpg" class="img-rounded" alt="image">
+                                    </td>
+                                }
+                                <td class="text-center">@item.Priority</td>
+                                <td class="text-center">@item.Title</td>
+                                <td class="text-center">@Html.DisplayFor(modelItem => item.Display)</td>
+                                <td class="text-center">
+                                    <div class="visible-md visible-lg hidden-sm hidden-xs text-center">
+                                        @if (item.Img != "")
+                                        {
+                                            <a target="popup" onclick="window.open('@Url.Content(@ViewBag.prePath + item.Img)', 'name', 'width=screen.width,height=screen.height')" href="#" class="btn btn-transparent btn-xs" data-toggle="tooltip" data-placement="top" title="بزرگنمایی"><i class="fa fa-search-plus"></i></a>
+                                        }
+                                        else
+                                        {
+                                            <a target="popup" onclick="window.open('@Url.Content("/Content/DefaultContent/Slider/NoImage.jpg")', 'name', 'width=screen.width,height=screen.height')" href="#" class="btn btn-transparent btn-xs" data-toggle="tooltip" data-placement="top" title="بزرگنمایی"><i class="fa fa-search-plus"></i></a>
+                                        }
+                                        <a href="@Url.Action("EditSlide", "Slider", new { SlideId = item.ID })" class="btn btn-transparent btn-xs" data-placement="top" title="ویرایش"><i class="fa fa-pencil"></i></a>
+                                        @{ string SIcon = "";}
+                                        @if (item.Display)
+                                        {SIcon = "glyphicon glyphicon-unchecked";
+                                        }
+                                        else
+                                        {SIcon = "glyphicon glyphicon-check";
+                                        }
+                                        <a id="PipoModalLink_@item.ID" class="btn btn-transparent btn-xs tooltips" data-toggle="modal" data-target="#modal-basic" onclick="pipolinkClicked(this.id)" data-placement="top" title="تغییر وضعیت نمایش"><i class="@SIcon" data-toggle="modal" data-target="#PipoModal"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BEGIN MODALS -->
+<div class="modal fade" id="modal-basic" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h2 class="modal-title"><strong>هشدار</strong></h2>
+            </div>
+            <div id="PipoModalBody" class="modal-body">
+                آیا از انجام عملیات مورد نظر اطمینان خاطر دارید ؟<br>
+            </div>
+            @using (Html.BeginForm("ChangeDisplaySlide", "Slider", new { SlideId = "_postid_" }, FormMethod.Post, new { Id = "PipoModalForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">بستن</button>
+                    <button type="submit" class="btn btn-primary btn-embossed">بله</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- END MODALS -->

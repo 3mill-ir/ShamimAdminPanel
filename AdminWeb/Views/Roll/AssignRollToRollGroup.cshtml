@@ -1,0 +1,75 @@
+﻿@model IEnumerable<AdminWeb.Models.DataModels.AspNetRoles>
+@using AdminWeb.Models.DataModels
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int counter = 0;
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script src="~/Content/assets/global/plugins/bootstrap-loading/lada.min.js"></script>
+    <script src="~/Scripts/jscolor.min.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        });
+    </script>
+}
+<div class="row">
+    @using (Html.BeginForm("AssignRollToRollGroup", "Roll", new { RollGroupID = ViewBag.RollGroupID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-md-8 col-md-push-2 portlets">
+            <div class="panel">
+                <div class="panel-header panel-controls">
+                </div>
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row margin-top-30">
+                                <div class="col-md-10 col-lg-push-1">
+                                    @{ 
+                                        var AssignedRolls = TempData["AssignedRolls"] as List<AspNetRoles>;
+                                    }
+                                    <fieldset>
+                                        <legend>
+                                            @Resource.Resource.View_SelectRoll<span class="symbol required"></span>
+                                        </legend>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="icheck-inline">
+                                                    @foreach (var item in Model)
+                                                    {
+                                                        <label>
+                                                            <input @(AssignedRolls.FirstOrDefault(u=>u.Id==item.Id) !=null ? "checked" : "") value="@item.Id" type="checkbox" name="[@counter].Id" data-checkbox="icheckbox_square-blue">@item.Name
+                                                        </label>
+                                                        <input value="@item.Name" hidden name="[@counter].Name"/>
+                                                        counter++;
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="text-align:center">
+                                            <button type="submit" class="btn btn-success ladda-button" data-style="expand-right" style="width:100%;margin-top: 20px;">
+                                                <span class="ladda-label">@Resource.Resource.View_SubmitButton</span>
+                                            </button>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

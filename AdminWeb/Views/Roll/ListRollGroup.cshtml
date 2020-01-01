@@ -1,0 +1,110 @@
+﻿@model IEnumerable<AdminWeb.Models.DataModels.RollGroupe>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/datatables/dataTables.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script src="~/Content/assets/global/plugins/datatables/jquery.dataTables.min.js"></script> <!-- Tables Filtering, Sorting & Editing -->
+    <script src="~/Content/assets/global/js/pages/table_dynamic.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        });
+        function pipolinkClicked(el) {
+            var c = $("#form-field-select-1").find(":selected").attr("Value");
+            var temp = el.split("_");
+            var myid = temp[1];
+            $("#PipoModalBody").empty();
+            $("#PipoModalBody").append('<p> @Resource.Resource.View_AreYouShure' + ' (#' + myid + ')</p>');
+            var $self = $("#PipoModalForm");
+            $self.attr('action', '/Roll/DeleteRollGroup?ID=' + myid);
+        };
+    </script>
+}
+<div class="row">
+    <div class="col-md-8 col-md-push-2">
+        @if (Model.Count() > 0)
+        {
+            <div class="panel">
+                <div class="panel-header panel-controls">
+                </div>
+                <div class="panel-content">
+                    <div class="nav-tabs2">
+                        <div class="tab-content" style="background-color:white">
+                            <div class="panel-content pagination2 table-responsive">
+                                <table class="table table-hover table-dynamic">
+                                    <thead>
+                                        <tr>
+                                            <th>شناسه</th>
+                                            <th>نام سطح دسترسی</th>
+                                            <th>تعداد دسترسی ها</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.ID</td>
+                                                <td>@item.GroupeName</td>
+                                                <td>@item.Roll_Mapping_RollGroupe.Count</td>
+                                                <td class="text-center">
+                                                    <a class="edit btn btn-sm btn-default" title="مدیریت دسترسی های این سطح" href="@Url.Action("AssignRollToRollGroup", "Roll", new { RollGroupID = item.ID })"><i class="fa fa-sitemap"></i></a>
+                                                    <a id="PipoModalLink_@item.ID" class="btn btn-transparent btn-xs tooltips" data-toggle="modal" data-target="#modal-basic" title="حذف گروه دسترسی" onclick="pipolinkClicked(this.id)"><i class="icon-trash" data-toggle="modal" data-target="#PipoModal"></i></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+        else
+        {
+            <div class="panel">
+                <div class="panel-content text-center">
+                    <span style="font-size: 20px;color: red;">تا کنون سطح دسترسی توسط شما ایجاد نشده !</span>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- BEGIN MODALS -->
+<div class="modal fade" id="modal-basic" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h2 class="modal-title"><strong>هشدار</strong></h2>
+            </div>
+            <div id="PipoModalBody" class="modal-body">
+                آیا از انجام عملیات تغییر وضعیت اطمینان خاطر دارید ؟<br>
+            </div>
+            @using (Html.BeginForm("DeleteRollGroup", "Roll", new { ID = "_postid_" }, FormMethod.Post, new { Id = "PipoModalForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">بستن</button>
+                    <button type="submit" class="btn btn-primary btn-embossed">بله</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- END MODALS -->

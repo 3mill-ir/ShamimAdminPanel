@@ -1,0 +1,213 @@
+﻿@model IEnumerable<AdminWeb.Models.DataModels.TicketInboxModel>
+@using AdminWeb.Models.BLL;
+@*@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryajax")*@
+<link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+@{
+    bool isFirst = true;
+    string NotFirstTicket = "";
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+        @if (Model.FirstOrDefault() != null)
+        {
+            <a class="btn btn-primary" data-toggle="modal" data-target="#modal-topfull2">@Resource.Resource.Ticket_Reply</a>
+        }
+        @if (Model.FirstOrDefault() != null)
+        {
+            <a class="btn btn-warning" data-toggle="modal" data-target="#modal-topfull">@Resource.Resource.Ticket_ChangeStatus</a>
+            <div style="float: left;margin-left: 50px;background-color: @(ViewBag.Status=="پاسخ داده شده"?"#b7ff99":ViewBag.Status=="در حال بررسی"?"#ffc899":"#ffffad");padding: 5px 50px;">وضعیت : @ViewBag.Status</div>
+        }
+    </div>
+    <div class="modal-body">
+        <section>
+            <div class="email-details-inner withScroll mCustomScrollbar _mCS_20" data-height="window" data-padding="155" style="height: 450px;">
+                <div class="mCustomScrollBox mCS-light" id="mCSB_20" style="position:relative; height:100%; overflow-y:scroll; max-width:100%;padding-left:50px;">
+                    <div class="mCSB_container" style="position:relative; top:0;">
+                        <div class="email-content">
+                            @foreach (var q in Model)
+                            {
+                                foreach (var p in q.TicketOutbox)
+                                {
+                                    if (isFirst)
+                                    {
+
+                                        {
+                                            isFirst = false;
+
+                                        }
+                                    }
+                                    <div style="background-color: #c8cbcc;padding: 15px;border-radius: 15px;margin-bottom: 10px;margin-right: 100px;padding-bottom: 1px;">
+                                        <blockquote class="blue">
+                                            <p><strong>@p.Content_One</strong></p>
+                                            <div class="email-subject">
+                                                <div class="clearfix">
+                                                    <p style="float: left;font-size: 14px;">پاسخ سرور<strong><span class="sender"></span></strong><span class="date" style="float: right;direction: ltr;margin-left: 15px;">@Tools.GetDateTimeReturnJalaliDate(p.CreatedOnUTC)</span></p>
+                                                </div>
+                                            </div>
+                                        </blockquote>
+                                    </div>
+                                    { NotFirstTicket = "NotFirstTicketItem"; }
+                                }
+                                if (isFirst)
+                                {
+
+                                    {
+                                        isFirst = false;
+
+                                    }
+                                }
+                                <div style="background-color: #c5f4ff;padding: 15px;border-radius: 15px;margin-bottom: 10px;">
+                                    <p>@q.TicketContent</p>
+                                    <div class="email-subject">
+                                        <div class="clearfix">
+                                            <p>ارسال شده از <strong><span class="sender">@q.TicketFrom</span></strong><span class="date" style="float: right;direction: ltr;margin-left: 15px;">@Tools.GetDateTimeReturnJalaliDate(q.CreatedOnUTC)</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="message-content" style="text-align: right !important;">
+                                        <p style="text-align: justify;">@q.TicketContent</p>
+                                        @{
+                                            foreach (var query in q.TicketInboxMedia)
+                                            {
+                                                if (query.MediaType.StartsWith("video"))
+                                                {
+                                                    <video src="/Streaming/File/@query.MediaType.Split('/')[0]/@query.MediaPath.Split('.')[0]/@query.MediaPath.Split('.')[1]/@ViewBag.F_UserName" width="270" height="220" controls style="margin-right:-5px" type="@query.MediaType"></video>
+                                                }
+                                                else if (query.MediaType.StartsWith("audio"))
+                                                {
+                                                    <audio src="/Streaming/File/@query.MediaType.Split('/')[0]/@query.MediaPath.Split('.')[0]/@query.MediaPath.Split('.')[1]/@ViewBag.F_UserName" width="270" height="220" controls style="margin-right:-5px" type="@query.MediaType"></audio>
+                                                }
+                                                else if (query.MediaType.StartsWith("image"))
+                                                {
+                                                    <img src="/Streaming/File/@query.MediaType.Split('/')[0]/@query.MediaPath.Split('.')[0]/@query.MediaPath.Split('.')[1]/@ViewBag.F_UserName" width="270" style="margin-right:-5px" type="@query.MediaType">
+                                                }
+                                                else
+                                                {
+                                                    <a style="width:100%;" class="btn btn-wide btn-dark-purple ladda-button " href="/Streaming/File/@query.MediaType.Split('/')[0]/@query.MediaPath.Split('.')[0]/@query.MediaPath.Split('.')[1]/@ViewBag.F_UserName" data-style="contract" id="PipoSubmit">
+                                                        <span class="ladda-label">دانلود فایل ضمیمه (@query.MediaPath.Split('.')[1])</span>
+                                                    </a>
+                                                }
+
+                                            }
+                                        }
+                                    </div>*@
+                                { NotFirstTicket = "NotFirstTicketItem"; }
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+}
+@*@if (ViewBag.Coordinate != "" && ViewBag.Coordinate != "0,0")
+    {
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBye854sw7Zf4_ces8HaWcxqhrAevjcx6s&callback=myMap"></script>
+        <script>
+            function myMap() {
+                var myCenter = new google.maps.LatLng('@ViewBag.Coordinate.Substring(0, ViewBag.Coordinate.IndexOf(','))', '@ViewBag.Coordinate.Substring(ViewBag.Coordinate.IndexOf(',') + 1)');
+                var mapCanvas = document.getElementById("googleMap");
+                var mapOptions = { center: myCenter, zoom: 14 };
+                var map = new google.maps.Map(mapCanvas, mapOptions);
+                var marker = new google.maps.Marker({ position: myCenter });
+                marker.setMap(map);
+            }
+        </script>
+    }*@
+
+<div class="modal fade topfull" id="modal-topfull" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-topfull">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>تغییر وضعیت درخواست</strong></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    @using (Ajax.BeginForm("TicketChangeStatus", "Ticket", new { F_TicketId = Model.FirstOrDefault().F_Ticket_Id }, new AjaxOptions
+                    {
+                        UpdateTargetId = "PipoTicketChangeStatus",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "TicketReader_Loading2",
+                        HttpMethod = "Post"
+                    }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @*@Html.Hidden("ID", Model.FirstOrDefault().F_Ticket_Id)*@
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DropDownList("Status", ViewData["TicketStatus"] as List<SelectListItem>, new { @class = "form-control form-white", value = ViewBag.Status, data_style = "white" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <a class="btn btn-wide btn-danger left" data-dismiss="modal"><i class="fa fa-close"></i></a>
+                                    <button type="submit" data-style="expand-left" class="btn btn-wide btn-success ladda-button">
+                                        <span class="ladda-label">@Resource.Resource.View_SubmitButton</span><span class="ladda-spinner"></span>
+                                    </button>
+                                    <div id="TicketReader_Loading2" style="display: none;float: left;margin-left: 65px;">
+                                        <img src="~/Content/assets/global/images/ajax-load.gif" style="width:35px;" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" id="PipoTicketChangeStatus"></div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade topfull" id="modal-topfull2" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-topfull">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>پاسخ درخواست</strong></h4>
+            </div>
+            @using (Ajax.BeginForm("TicketResponse", "Ticket", new { F_LastTicketInboxId = Model.FirstOrDefault().ID }, new AjaxOptions
+            {
+                UpdateTargetId = "PipoTicketResponse",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "PipoTicketResponseResult_Loading",
+                HttpMethod = "Post"
+            }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.Hidden("F_TicketInbox_Id", Model.FirstOrDefault().ID)
+                <div class="modal-body">
+                    <div id="TicketResponsePost">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group" id="PipoTicketResponseContent">
+                                    @Html.TextArea("Content_One", null, new { @class = "form-control form-white", placeholder = "متن پاسخ درخواست", rows = "10",style= "font-family: Vazir!important;" })
+                                    @Html.ValidationMessage("Content_One")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div id="PipoTicketResponse"></div>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        @Resource.Resource.View_Close
+                    </button>
+                    <button type="submit" data-style="expand-left" class="btn btn-wide btn-success ladda-button">
+                        <span class="ladda-label">@Resource.Resource.Ticket_ReplySend</span><span class="ladda-spinner"></span>
+                    </button>
+                    <div id="PipoTicketResponseResult_Loading" style="display: none;float: left;margin-right: 15px;">
+                        <img src="~/Content/assets/global/images/ajax-load.gif" style="width:35px;"/>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

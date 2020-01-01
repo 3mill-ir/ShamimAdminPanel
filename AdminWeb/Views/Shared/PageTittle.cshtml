@@ -1,0 +1,19 @@
+﻿<div class="header bg-gray m-b-20">
+    <div class="row">
+        <div class="col-lg-8 m-l-20">
+            <h2><strong>@ViewBag.PageTittle_Tittle</strong></h2>
+            <h4>@ViewBag.PageTittle_ContactUS</h4>
+            <h5>@ViewBag.PageTittle_Description</h5>
+        </div>
+        <div class="col-lg-2 col-lg-offset-1 m-t-20 " >
+            <div class="btn-group btn-group-vertical">
+                @foreach (var path in (List<AdminWeb.Models.DataModels.PageTitle>)ViewBag.PathLog)
+            {
+                    <a class="btn @path.HtmlAttribute btn-embossed" href="~/@path.ControllerName/@path.ActionName@path.RouteValue">
+                        <span>@path.Pagetitle</span>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

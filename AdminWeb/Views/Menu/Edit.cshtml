@@ -1,0 +1,248 @@
+﻿@model AdminWeb.Models.DataModels.MenuDataModel
+    @using AdminWeb.Models.BLL
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/switchery/switchery.min.js"></script> <!-- IOS Switch -->
+    <script src="~/Content/assets/global/plugins/bootstrap-tags-input/bootstrap-tagsinput.min.js"></script> <!-- Select Inputs -->
+    <script src="~/Content/assets/global/js/pages/form_icheck.js"></script>  <!-- Change Icheck Color - DEMO PURPOSE - OPTIONAL -->
+    <script src="~/Content/assets/global/plugins/dropzone/dropzone.min.js"></script>  <!-- Upload Image & File in dropzone -->
+    <script src="~/Content/assets/global/plugins/summernote/summernote.min.js"></script> <!-- Simple HTML Editor -->
+    <script src="~/Content/assets/global/plugins/typed/typed.min.js"></script> <!-- Animated Typing -->
+    <script src="~/Content/assets/global/js/pages/editor.js"></script>
+    <script src="~/Content/assets/global/plugins/step-form-wizard/plugins/parsley/parsley.min.js"></script> <!-- OPTIONAL, IF YOU NEED VALIDATION -->
+    <script src="~/Content/assets/global/plugins/step-form-wizard/js/step-form-wizard.js"></script> <!-- Step Form Validation -->
+    <script src="~/Content/assets/global/js/pages/form_wizard.js"></script>
+    <script src="~/Content/assets/admin/layout1/js/layout.js"></script>
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+            document.getElementById("Descript").setAttribute("value", '@Model.Description');
+            document.getElementsByClassName("note-editable")[0].innerHTML = '@Html.Raw(Model.Description)';
+        });
+        function myFunction() {
+            var c = document.getElementsByClassName("note-editable")[0].innerHTML;
+            document.getElementById("Descript").setAttribute("value", c);
+        }
+
+        function DeletePic() {
+            $("#PipoModalBody").empty();
+        }
+    </script>
+    <script type="text/javascript">
+        function pipolinkClicked(el) {
+            var c = $("#form-field-select-1").find(":selected").attr("Value");
+            var temp = el.split("_");
+            var myid = temp[1];
+            $("#PipoModalBody").empty();
+            $("#PipoModalBody").append('<p> @Resource.Resource.View_AreYouShure' + ' (#' + myid + ')</p>');
+            var $self = $("#PipoModalForm");
+            $self.attr('action', '/Menu/DeleteMenu?ID=' + myid + "&Page=" + 1);
+        };
+        function pipolinkClickedCascade(el) {
+            var c = $("#form-field-select-1").find(":selected").attr("Value");
+            var temp = el.split("_");
+            var myid = temp[1];
+            $("#PipoModalBody1").empty();
+            $("#PipoModalBody1").append('<p> @Resource.Resource.View_AreYouShure' + ' (#' + myid + ')</p>');
+            var $self = $("#PipoModalForm1");
+            $self.attr('action', '/Menu/DeleteMenuCascade?ID=' + myid + "&Page=" + 1);
+        };
+    </script>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="tabs tabs-linetriangle">
+            <div class="tab-content center">
+                <div class="tab-pane active" id="validation">
+                    @using (Html.BeginForm("Edit", "Menu", FormMethod.Post,
+new { enctype = "multipart/form-data", @class = "wizard /*wizard-validation*/", data_style = "arrow", onsubmit = "myFunction()" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.ID)
+                        <fieldset style="height: 660px;">
+                            <legend>اطلاعات پایه</legend>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.Name)<i class="fa fa-star c-red f-10"></i></label>
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @id = "exampleInputEmail1", @placeholder = "نام را وارد کنید", @type = "text", required = "", data_parsley_group = "block0" })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "form-error" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.Language)<i class="fa fa-star c-red f-10"></i></label>
+                                        @Html.DropDownListFor(model => model.Language, ViewBag.Languages as SelectList, new { @class = "form-control", data_search = "true" })
+                                        @Html.ValidationMessageFor(model => model.Language, "", new { @class = "form-error" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.F_MenuID)</label>
+                                        @Html.DropDownListFor(model => model.F_MenuID, ViewBag.F_MenuIDs as SelectList, new { @class = "form-control", data_search = "true" })
+                                        @Html.ValidationMessageFor(model => model.F_MenuID)
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.Weight)<i class="fa fa-star c-red f-10"></i></label>
+                                        @Html.DropDownListFor(model => model.Weight, AdminWeb.Models.BLL.Tools.MenuWeightsCombo(), new { @class = "form-control", data_search = "true" })
+                                        @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "form-error" })
+                                    </div>
+
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.Image)</label>
+                                        <div class="fileinput-new thumbnail">
+                                            @if (string.IsNullOrEmpty(Model.Image))
+                                            { <img data-src="" src="/Content/assets/global/images/gallery/3.jpg" class="img-responsive" alt="gallery 3">
+                                            }else{ 
+                                            <img data-src="" src="@Tools.ReturnPath("MenuImages", ViewBag.UserName, "EditView")@Model.Image" class="img-responsive" alt="gallery 3">
+                                            }
+                                        </div>
+                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                        <div>
+                                            <span class="btn btn-default btn-file">
+                                                <span class="fileinput-new">انتخاب تصویر ...</span><span class="fileinput-exists">ویرایش</span>
+                                                <input type="file" name="MyFile">
+                                            </span>
+                                            <a id="pipoDelete" href="#" class="btn btn-default " data-dismiss="fileinput" onclick="DeletePic">حذف</a>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Image)
+                                    </div>
+                                </div>
+                                <div class="col-lg-7 col-lg-push-1">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.Description)</label>
+                                        @Html.TextBoxFor(model => model.Description, new { @class = "summernote", @id = "Descript", @type = "text" })
+                                        @Html.ValidationMessageFor(model => model.Description)
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="icheck-inline">
+                                            <label for="exampleInputEmail2" class="PipoCheckBox">
+                                                @Html.DisplayNameFor(model => model.DisplayInFooter)
+                                                @Html.CheckBoxFor(model => model.DisplayInFooter, new { data_checkbox = "icheckbox_square-blue", @id = "exampleInputEmail2" })
+                                            </label>
+                                            @Html.ValidationMessageFor(model => model.DisplayInFooter)
+                                            <label for="exampleInputEmail3" class="PipoCheckBox">
+                                                @Html.DisplayNameFor(model => model.DisplayInSidebar)
+                                                @Html.CheckBoxFor(model => model.DisplayInSidebar, new { @data_checkbox = "icheckbox_square-blue", @id = "exampleInputEmail3" })
+                                            </label>
+                                            @Html.ValidationMessageFor(model => model.DisplayInSidebar)
+                                        </div>
+                                    </div>
+                                    @Html.HiddenFor(model => model.Image)
+                             @Html.HiddenFor(model=>model.Type)
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset style="height: 250px;">
+                            <legend>سئو</legend>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.MetaKeywords)</label>
+                                        @Html.TextBoxFor(model => model.MetaKeywords, new { @class = "form-control", @id = "exampleInputEmail1", @placeholder = "کلمات کلیدی را وارد کنید", @type = "text", rel = "popover", data_placement = "bottom", data_content = "کلمات کلیدی در هدر صفحات گنجانده می شوند" })
+                                        @Html.ValidationMessageFor(model => model.MetaKeywords)
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.MetaDescription)</label>
+                                        @Html.TextBoxFor(model => model.MetaDescription, new { @class = "form-control", @id = "exampleInputEmail1", @placeholder = "توضیحات را وارد کنید", @type = "text", rel = "popover", data_placement = "bottom", data_content = "توضیحات در هدر صفحات گنجانده می شود" })
+                                        @Html.ValidationMessageFor(model => model.MetaDescription)
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.MetaTittle)</label>
+                                        @Html.TextBoxFor(model => model.MetaTittle, new { @class = "form-control", @id = "exampleInputEmail1", @placeholder = "عنوان صفحه را وارد کنید", @type = "text", rel = "popover", data_placement = "bottom", data_content = "می توانید عنوان صفحه را باز نویسی کنید. در صورت خالی بودن عنوان صفحه همان نام منو خواهد بود" })
+                                        @Html.ValidationMessageFor(model => model.MetaTittle)
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.MetaSeoName)</label>
+                                        @Html.TextBoxFor(model => model.MetaSeoName, new { @class = "form-control", @id = "exampleInputEmail1", @placeholder = "آدرس SEO را وارد کنید", @type = "text", rel = "popover", data_placement = "bottom", data_content = "به عنوان آدرس صفحه مورد نظر در موتور های جست و جو مورد استفاده قرار می گیرد. در صورت خالی بودن فیلد آدرس همان نام منو خواهد بود" })
+                                        @Html.ValidationMessageFor(model => model.MetaSeoName)
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset style="height: 100px;">
+                            <legend>پایان</legend>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="form-group">
+                                        <p>آیا می خواهید منوی ایجاد شده شما برای عموم نمایش داده شود یا فعلا مخفی بماند ؟</p>
+                                        <div class="input-group">
+                                            <div class="icheck-inline">
+                                                @{ string IsChecked1 = "", IsChecked2 = "";
+                                                    if (Model.Status == true) { IsChecked1 = "checked"; } else { IsChecked2 = "checked"; }
+                                                }
+                                                <label><input type="radio" value="true" name="Status" @IsChecked1 data-radio="iradio_flat-blue">می خواهم نمایش داده شود</label>
+                                                <label><input type="radio" value="false" name="Status" @IsChecked2 data-radio="iradio_flat-blue"> نمی خواهم نمایش داده شود</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                                                    }
+                </div>
+            </div>
+        </div>
+        <button type="button" onclick="pipolinkClicked(this.id)" id="PipoModalLink_@Model.ID" class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#modal-basic">حذف</button>
+        <button type="button" onclick="pipolinkClickedCascade(this.id)" id="PipoModalLink1_@Model.ID" class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#modal-basic1">حذف همه</button>
+    </div>
+</div>
+<!-- BEGIN MODALS -->
+<div class="modal fade" id="modal-basic" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h2 class="modal-title"><strong>هشدار</strong></h2>
+            </div>
+            <div id="PipoModalBody" class="modal-body">
+                آیا از انجام عملیات مورد نظر اطمینان خاطر دارید ؟<br>
+            </div>
+            @using (Html.BeginForm("DeleteMenu", "Menu", new { ID = "" }, FormMethod.Post, new { Id = "PipoModalForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">بستن</button>
+                    <button type="submit" class="btn btn-primary btn-embossed">بله</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- END MODALS -->
+
+<!-- BEGIN MODALS -->
+<div class="modal fade" id="modal-basic1" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h2 class="modal-title"><strong>هشدار</strong></h2>
+            </div>
+            <div id="PipoModalBody1" class="modal-body">
+                آیا از انجام عملیات مورد نظر اطمینان خاطر دارید ؟<br>
+            </div>
+            @using (Html.BeginForm("DeleteMenuCascade", "Menu", new { ID = "" }, FormMethod.Post, new { Id = "PipoModalForm1" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">بستن</button>
+                    <button type="submit" class="btn btn-primary btn-embossed">بله</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- END MODALS -->

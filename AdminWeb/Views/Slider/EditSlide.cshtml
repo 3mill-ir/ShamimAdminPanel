@@ -1,0 +1,138 @@
+﻿@model AdminWeb.Models.DataModels.SliderModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        });
+    </script>
+}
+<div class="row">
+    <div class="col-md-12 portlets">
+        @using (Html.BeginForm("EditSlide", "Slider", FormMethod.Post,
+                                new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="container-fluid container-fullw bg-white">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row margin-top-30">
+                            <div class="col-lg-6 col-md-12">
+                                <fieldset>
+                                    <legend>
+                                        @Resource.Resource.View_SlideTitle
+                                    </legend>
+                                    <div class="form-group">
+                                        <div class="note-editor">
+                                            @Html.TextAreaFor(model => model.Title, new { @class = "form-control autosize area-animated FixedColTextArea", placeholder = "تیتر اسلاید را وارد کنید", @style = "height:85px; min-height:85px;  max-height:85px", maxlength = "190" })
+                                            @Html.ValidationMessageFor(model => model.Title)
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend>
+                                        @Resource.Resource.View_Photo
+                                    </legend>
+                                    <div class="col-lg-10 col-md-12">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="user-image">
+                                                <div class="fileinput-new thumbnail">
+                                                    @{
+                                                        string path = System.Configuration.ConfigurationManager.AppSettings["SliderPath"];
+                                                      
+                                                    }
+                                                    @if (Model.Img != "")
+                                                    {
+                                                        <img src="@ViewBag.prePath@Model.Img " alt="">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/Content/DefaultContent/Slider/NoImage.jpg" alt="">
+                                                    }
+                                                </div>
+                                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                <div class="user-image-buttons">
+                                                    <span class="btn btn-azure btn-file btn-sm">
+                                                        <span class="fileinput-new"><i class="fa fa-pencil"></i></span><span class="fileinput-exists"><i class="fa fa-pencil"></i></span>
+                                                        <input id="newUploadImage" name="newUploadImage" type="file">
+                                                    </span>
+                                                    <a href="#" class="btn fileinput-exists btn-red btn-sm" data-dismiss="fileinput">
+                                                        <i class="fa fa-times"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Img)
+                                        <div class="alert alert-block alert-warning fade in">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                            <h4 class="alert-heading margin-bottom-10"><i class="ti-alert"></i> توجه !</h4>
+                                            <p class="margin-bottom-10">
+                                                برای نمایش بهتر عکس لطفا سایز عکس را (1150:500) پیکسل تنظیم نمایید.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <fieldset>
+                                    <legend>
+                                        @Resource.Resource.View_SlideDescription
+                                    </legend>
+                                    <div class="form-group">
+                                        <div class="note-editor">
+                                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control autosize area-animated FixedColTextArea", placeholder = "خلاصه اسلاید را وارد کنید", @style = "height:120px; min-height:120px;  max-height:120px", maxlength = "300" })
+                                            @Html.ValidationMessageFor(model => model.Description)
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend>
+                                        @Resource.Resource.View_Url
+                                    </legend>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.Link, new { placeholder = Resource.Resource.View_EnterYourUrl, id = "form-field-13", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Link)
+                                    </div>
+                                    @Html.HiddenFor(model => model.ID)
+                                    @Html.HiddenFor(model => model.Display)
+                                </fieldset>
+                                <fieldset>
+                                    <legend>
+                                        @Resource.Resource.View_SlidePriority
+                                    </legend>
+                                    <div class="form-group">
+                                        <div class="input-group bootstrap-touchspin">
+                                            <input id="demo4" type="number" value="0" name="Priority" touchspin="" data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down" class="form-control" style="display: block;">
+                                        </div>
+                                    </div>
+                                    <input hidden name="Priority" id="Priority" />
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align:left">
+                    <button type="submit" class="btn btn-lg btn-primary">
+                        <span class="ladda-label">@Resource.Resource.Edit</span>
+                    </button>
+                </div>
+            </div>
+                                                        }
+    </div>
+</div>

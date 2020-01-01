@@ -1,0 +1,84 @@
+﻿@{ 
+    Layout=null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>دسترسی غیر مجاز - @Resource.Resource.View_ParkName</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="شبکه مدیریت یکپارچه محتوی - شمیم" name="description" />
+    <meta content="توسعه تجارت الکترونیک هزاره سوم" name="author" />
+    <link href="~/Content/assets/global/css/style.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/ui.css" rel="stylesheet">
+    <link href="~/Content/assets/admin/layout1/css/layout.css" rel="stylesheet">
+</head>
+<body class="rtl error-page">
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+            <div class="error-container">
+                <div class="error-main">
+                    <h1><span id="500"></span></h1>
+                    <h3><span id="500-txt"></span></h3>
+                    <h4><span id="500-txt-2"></span></h4>
+                    <br>
+                    <div class="row" id="content-500">
+                        <div class="col-md-12 text-center">
+                            <div class="btn-group">
+                                <a class="btn btn-white" href="~/Account/Login">
+                                    <i class="icon-login"></i> ورود به سامانه
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="copyright">2017 © شمیم پارک علم و فناوری آذربایجان غربی</div>
+    </div>
+    <script src="~/Content/assets/global/plugins/jquery/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="~/Content/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/global/plugins/typed/typed.js"></script>
+    <script>
+        $(function () {
+            $("#500").typed({
+                strings: ["401"],
+                typeSpeed: 200,
+                backDelay: 500,
+                loop: false,
+                contentType: 'html',
+                loopCount: false,
+                callback: function () {
+                    $('h1 .typed-cursor').css('-webkit-animation', 'none').animate({ opacity: 0 }, 500);
+                    $("#500-txt").typed({
+                        strings: ["دسترسی غیر مجاز !"],
+                        typeSpeed: 1,
+                        backDelay: 500,
+                        loop: false,
+                        contentType: 'html',
+                        loopCount: false,
+                        callback: function () {
+                            $('h3 .typed-cursor').css('-webkit-animation', 'none').animate({ opacity: 0 }, 500);
+                            $('h1 .typed-cursor').css('display','none');
+                            $("#500-txt-2").typed({
+                                strings: ["به صفحه قبل باز گردید یا در صورت داشتن نام کاربری و رمز عبور معتبر از طریق لینک زیر به صفحه ورود بروید"],
+                                typeSpeed: 1,
+                                backDelay: 500,
+                                loop: false,
+                                contentType: 'html',
+                                loopCount: false,
+                                callback: function () {
+                                    $('#content-500').delay(300).slideDown();
+                                },
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+﻿@model AdminWeb.Models.DataModels.LinkModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        });
+    </script>
+}
+<div class="row">
+    <div class="col-md-6 col-md-push-3 portlets">
+        <div class="panel">
+            <div class="panel-header panel-controls">
+                <h3><strong>@Resource.Resource.View_LinkInformation</strong></h3>
+            </div>
+            <div class="panel-content">
+                @using (Html.BeginForm("EditFooterLink", "Links", FormMethod.Post,
+                    new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group col-md-12">
+                        <div class="form-group margin-top-15">
+                            <h5 for="form-field-select-2">@Resource.Resource.View_LinkText</h5>
+                            @Html.TextBoxFor(model => model.Text, new { type = "text", id = "form-field-13", @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Text)
+                    </div>
+                    @Html.HiddenFor(model => model.ID)
+                    <div class="form-group col-md-12">
+                        <div class="form-group margin-top-15">
+                            <h5 for="form-field-select-2">@Resource.Resource.View_InternetAddress</h5>
+                            @Html.TextBoxFor(model => model.Link, new { type = "text", id = "form-field-13", @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Link)
+                    </div>
+                    <button type="submit" class="btn btn-lg btn-primary" style="width:100%;">
+                        <span class="ladda-label">@Resource.Resource.Edit</span>
+                        <span class="ladda-spinner"></span><div class="ladda-progress" id="ladda-progressPipo" style="width: 0px;"></div>
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

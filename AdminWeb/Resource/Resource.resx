@@ -1,0 +1,1308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Account_Detail_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Account_Detail_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Account_Detail_Tittle_PageTittle" xml:space="preserve">
+    <value>جزئیات </value>
+  </data>
+  <data name="Account_Edit_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Account_Edit_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Account_Edit_Tittle_PageTittle" xml:space="preserve">
+    <value>ویرایش</value>
+  </data>
+  <data name="Account_List_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Account_List_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Account_List_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست کاربران</value>
+  </data>
+  <data name="AddFolder_Gallery_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="AddFolder_Gallery_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="AddFolder_Gallery_Tittle_PageTittle" xml:space="preserve">
+    <value>افزودن پرونده جدید</value>
+  </data>
+  <data name="AddPhoto_Gallery_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="AddPhoto_Gallery_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="AddPhoto_Gallery_Tittle_PageTittle" xml:space="preserve">
+    <value>افزودن تصویر جدید</value>
+  </data>
+  <data name="AddPollQuestion_Poll_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="AddPollQuestion_Poll_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="AddPollQuestion_Poll_Tittle_PageTittle" xml:space="preserve">
+    <value>افزودن نظرسنجی جدید</value>
+  </data>
+  <data name="AdminMenu_AddFile" xml:space="preserve">
+    <value>افزودن آیتم جدید</value>
+  </data>
+  <data name="AdminMenu_AddMenu" xml:space="preserve">
+    <value>افزودن منوی جدید</value>
+  </data>
+  <data name="AdminMenu_AddPollQuestion" xml:space="preserve">
+    <value>افزودن نظرسنجی جدید</value>
+  </data>
+  <data name="AdminMenu_CategoryList" xml:space="preserve">
+    <value>مدیریت دسته بندی ها</value>
+  </data>
+  <data name="AdminMenu_CommentsList" xml:space="preserve">
+    <value>لیست کامنت ها</value>
+  </data>
+  <data name="AdminMenu_CommentsManagement" xml:space="preserve">
+    <value>مدیریت کامنت ها</value>
+  </data>
+  <data name="AdminMenu_CompanyList" xml:space="preserve">
+    <value>لیست شرکت ها</value>
+  </data>
+  <data name="AdminMenu_Dashboard" xml:space="preserve">
+    <value>داشبورد</value>
+  </data>
+  <data name="AdminMenu_DemandList" xml:space="preserve">
+    <value>لیست تقاضا ها</value>
+  </data>
+  <data name="AdminMenu_DynamicPostAdd" xml:space="preserve">
+    <value>افزودن مطلب جدید</value>
+  </data>
+  <data name="AdminMenu_DynamicPostList" xml:space="preserve">
+    <value>مدیریت مطالب</value>
+  </data>
+  <data name="AdminMenu_DynamicPostManagement" xml:space="preserve">
+    <value>مطالب</value>
+  </data>
+  <data name="AdminMenu_EditScript" xml:space="preserve">
+    <value>ویرایش اسکریپت ها</value>
+  </data>
+  <data name="AdminMenu_FanBazarManagement" xml:space="preserve">
+    <value>مدیریت فن بازار</value>
+  </data>
+  <data name="AdminMenu_FooterLinkList" xml:space="preserve">
+    <value>لیست پیوند های فوتر</value>
+  </data>
+  <data name="AdminMenu_GalleryManagement" xml:space="preserve">
+    <value>مدیریت گالری</value>
+  </data>
+  <data name="AdminMenu_LinkManagement" xml:space="preserve">
+    <value>مدیریت پیوند ها</value>
+  </data>
+  <data name="AdminMenu_ListFile" xml:space="preserve">
+    <value>لیست تصاویر</value>
+  </data>
+  <data name="AdminMenu_ListMenu" xml:space="preserve">
+    <value>لیست منو ها</value>
+  </data>
+  <data name="AdminMenu_ListPollQuestion" xml:space="preserve">
+    <value>لیست نظرسنجی ها</value>
+  </data>
+  <data name="AdminMenu_ListSlide" xml:space="preserve">
+    <value>لیست اسلاید ها</value>
+  </data>
+  <data name="AdminMenu_ManageFolder" xml:space="preserve">
+    <value>مدیریت پوشه ها</value>
+  </data>
+  <data name="AdminMenu_MenuManagement" xml:space="preserve">
+    <value>مدیریت منو</value>
+  </data>
+  <data name="AdminMenu_OfferList" xml:space="preserve">
+    <value>لیست عرضه ها</value>
+  </data>
+  <data name="AdminMenu_PageLinkList" xml:space="preserve">
+    <value>لیست پیوند های صفحه</value>
+  </data>
+  <data name="AdminMenu_PollManagement" xml:space="preserve">
+    <value>مدیریت نظرسنجی ها</value>
+  </data>
+  <data name="AdminMenu_ScriptManagement" xml:space="preserve">
+    <value>مدیریت اسکریپت ها</value>
+  </data>
+  <data name="AdminMenu_SliderManagement" xml:space="preserve">
+    <value>مدیریت اسلایدر ها</value>
+  </data>
+  <data name="AdminMenu_StaticPageList" xml:space="preserve">
+    <value>لیست صفحات ایستا</value>
+  </data>
+  <data name="AdminMenu_StaticPageManagement" xml:space="preserve">
+    <value>مدیریت صفحات ایستا</value>
+  </data>
+  <data name="AdminMenu_TelegramManagementPannel" xml:space="preserve">
+    <value>مدیریت کانال تلگرام</value>
+  </data>
+  <data name="AdminMenu_UsersList" xml:space="preserve">
+    <value>لیست کاربران</value>
+  </data>
+  <data name="AttributeGroupe_Add_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="AttributeGroupe_Add_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="AttributeGroupe_Add_Tittle_PageTittle" xml:space="preserve">
+    <value>افزودن گروه ویژگی جدید</value>
+  </data>
+  <data name="AttributeGroupe_Detail_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="AttributeGroupe_Detail_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="AttributeGroupe_Detail_Tittle_PageTittle" xml:space="preserve">
+    <value>جزئیات گروه ویژگی مورد نظر</value>
+  </data>
+  <data name="AttributeGroupe_Edit_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="AttributeGroupe_Edit_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="AttributeGroupe_Edit_Tittle_PageTittle" xml:space="preserve">
+    <value>ویرایش گروه ویژگی مورد نظر</value>
+  </data>
+  <data name="AttributeGroupe_List_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="AttributeGroupe_List_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="AttributeGroupe_List_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست گروه ویژگی ها</value>
+  </data>
+  <data name="AttributeItem_Add_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="AttributeItem_Add_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="AttributeItem_Add_Tittle_PageTittle" xml:space="preserve">
+    <value>افزودن آیتم ویژگی جدید</value>
+  </data>
+  <data name="AttributeItem_Detail_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="AttributeItem_Detail_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="AttributeItem_Detail_Tittle_PageTittle" xml:space="preserve">
+    <value>جزئیات آیتم ویژگی مورد نظر</value>
+  </data>
+  <data name="AttributeItem_Edit_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="AttributeItem_Edit_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="AttributeItem_Edit_Tittle_PageTittle" xml:space="preserve">
+    <value>ویرایش آیتم ویژگی مورد نظر</value>
+  </data>
+  <data name="AttributeItem_List_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="AttributeItem_List_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="AttributeItem_List_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست آیتم های ویژگی</value>
+  </data>
+  <data name="Attribute_Add_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Attribute_Add_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Attribute_Add_Tittle_PageTittle" xml:space="preserve">
+    <value>افزودن ویژگی جدید</value>
+  </data>
+  <data name="Attribute_Detail_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Attribute_Detail_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Attribute_Detail_Tittle_PageTittle" xml:space="preserve">
+    <value>جزئیات ویژگی مورد نظر</value>
+  </data>
+  <data name="Attribute_Edit_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Attribute_Edit_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Attribute_Edit_Tittle_PageTittle" xml:space="preserve">
+    <value>ویرایش ویژگی مورد نظر</value>
+  </data>
+  <data name="Attribute_ListAttributeItemAttributes_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Attribute_ListAttributeItemAttributes_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Attribute_ListAttributeItemAttributes_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست ویژگی های آیتم ویژگی مورد نظر</value>
+  </data>
+  <data name="Attribute_List_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Attribute_List_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Attribute_List_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست ویژگی ها</value>
+  </data>
+  <data name="Category_Add_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Category_Add_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Category_Add_Tittle_PageTittle" xml:space="preserve">
+    <value>افزودن دسته بندی جدید</value>
+  </data>
+  <data name="Category_Detail_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Category_Detail_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Category_Detail_Tittle_PageTittle" xml:space="preserve">
+    <value>جزئیات دسته بندی مورد نظر</value>
+  </data>
+  <data name="Category_Edit_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Category_Edit_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Category_Edit_Tittle_PageTittle" xml:space="preserve">
+    <value>ویرایش دسته بندی مورد نظر</value>
+  </data>
+  <data name="Category_List_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Category_List_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Category_List_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست دسته بندی ها</value>
+  </data>
+  <data name="Comments_CreatedDateOnUtc" xml:space="preserve">
+    <value>تاریخ</value>
+  </data>
+  <data name="Comments_DynamicPageComments_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Comments_DynamicPageComments_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Comments_DynamicPageComments_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست کامنت ها</value>
+  </data>
+  <data name="Comments_NumberOfDisLikes" xml:space="preserve">
+    <value>تعداد دیس لایک ها</value>
+  </data>
+  <data name="Comments_NumberOfLikes" xml:space="preserve">
+    <value>تعداد لایک ها</value>
+  </data>
+  <data name="Comments_NumberOfReplies" xml:space="preserve">
+    <value>تعداد پاسخ ها</value>
+  </data>
+  <data name="Comments_PostTitle" xml:space="preserve">
+    <value>عنوان پست</value>
+  </data>
+  <data name="Comments_Text" xml:space="preserve">
+    <value>متن نظر</value>
+  </data>
+  <data name="Comments_Tools" xml:space="preserve">
+    <value>عملیات</value>
+  </data>
+  <data name="DetailPollQuestion_Poll_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="DetailPollQuestion_Poll_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="DetailPollQuestion_Poll_Tittle_PageTittle" xml:space="preserve">
+    <value>جزئیات نظرسنجی مورد نظر</value>
+  </data>
+  <data name="DynamicPage_PostCreate_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="DynamicPage_PostCreate_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="DynamicPage_PostCreate_Tittle_PageTittle" xml:space="preserve">
+    <value>افزودن مطلب جدید</value>
+  </data>
+  <data name="DynamicPage_PostEdit_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="DynamicPage_PostEdit_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="DynamicPage_PostEdit_Tittle_PageTittle" xml:space="preserve">
+    <value>ویرایش مطلب مورد نظر</value>
+  </data>
+  <data name="DynamicPage_PostList_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="DynamicPage_PostList_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="DynamicPage_PostList_Tittle_PageTittle" xml:space="preserve">
+    <value>مدیریت مطالب</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>ویرایش</value>
+  </data>
+  <data name="EditContact_Contact_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="EditContact_Contact_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="EditContact_Contact_Tittle_PageTittle" xml:space="preserve">
+    <value>مدیریت تماس با ما</value>
+  </data>
+  <data name="EditFolder_Gallery_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="EditFolder_Gallery_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="EditFolder_Gallery_Tittle_PageTittle" xml:space="preserve">
+    <value>ویرایش پرونده جدید</value>
+  </data>
+  <data name="EditFooterLink_Links_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="EditFooterLink_Links_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="EditFooterLink_Links_Tittle_PageTittle" xml:space="preserve">
+    <value>ویرایش پیوند های فوتر</value>
+  </data>
+  <data name="EditMainLink_Links_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="EditMainLink_Links_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="EditMainLink_Links_Tittle_PageTittle" xml:space="preserve">
+    <value>ویرایش پیوند اصلی مورد نظر</value>
+  </data>
+  <data name="EditPhoto_Gallery_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="EditPhoto_Gallery_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="EditPhoto_Gallery_Tittle_PageTittle" xml:space="preserve">
+    <value>ویرایش تصویر مورد نظر</value>
+  </data>
+  <data name="EditPollQuestion_Poll_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="EditPollQuestion_Poll_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="EditPollQuestion_Poll_Tittle_PageTittle" xml:space="preserve">
+    <value>ویرایش نظرسنجی مورد نظر</value>
+  </data>
+  <data name="EditScripts_Script_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="EditScripts_Script_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="EditScripts_Script_Tittle_PageTittle" xml:space="preserve">
+    <value>ویرایش اسکریپت ها</value>
+  </data>
+  <data name="EditSlide_Slider_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="EditSlide_Slider_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="EditSlide_Slider_Tittle_PageTittle" xml:space="preserve">
+    <value>ویرایش اسلاید مورد نظر</value>
+  </data>
+  <data name="Form_Addition" xml:space="preserve">
+    <value>افزودن فرم جدید</value>
+  </data>
+  <data name="Form_Add_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Form_Add_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Form_Add_Tittle_PageTittle" xml:space="preserve">
+    <value>افزودن فرم جدید</value>
+  </data>
+  <data name="Form_Creator" xml:space="preserve">
+    <value>فرم ساز</value>
+  </data>
+  <data name="Form_Detail_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Form_Detail_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Form_Detail_Tittle_PageTittle" xml:space="preserve">
+    <value>جزئیات فرم</value>
+  </data>
+  <data name="Form_Edit_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Form_Edit_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Form_Edit_Tittle_PageTittle" xml:space="preserve">
+    <value>ویرایش فرم</value>
+  </data>
+  <data name="Form_List" xml:space="preserve">
+    <value>لیست فرم ها</value>
+  </data>
+  <data name="Form_List_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Form_List_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Form_List_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست فرم ها</value>
+  </data>
+  <data name="Index_ChangeLog_Tittle_PageTittle" xml:space="preserve">
+    <value>تغییرات شمیم</value>
+  </data>
+  <data name="Index_Help_Tittle_PageTittle" xml:space="preserve">
+    <value>راهنمای استفاده از شمیم</value>
+  </data>
+  <data name="Index_Home_Tittle_PageTittle" xml:space="preserve">
+    <value>داشبورد</value>
+  </data>
+  <data name="Item_CreatedDateOnUtc" xml:space="preserve">
+    <value>تاریخ ایجاد</value>
+  </data>
+  <data name="Item_Description" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Item_ID" xml:space="preserve">
+    <value>شناسه</value>
+  </data>
+  <data name="Item_ListItem_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Item_ListItem_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Item_ListItem_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست آیتم ها</value>
+  </data>
+  <data name="Item_Name" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="Item_SubmitedState" xml:space="preserve">
+    <value>وضعیت</value>
+  </data>
+  <data name="Layout_Folders" xml:space="preserve">
+    <value>پوشه ها</value>
+  </data>
+  <data name="Layout_FoldersName" xml:space="preserve">
+    <value>نام پوشه ها</value>
+  </data>
+  <data name="Layout_FullScreen" xml:space="preserve">
+    <value>حالت تمام صفحه</value>
+  </data>
+  <data name="Layout_HideUserAndSearch" xml:space="preserve">
+    <value>مخفی کردن یوزر و جستجو</value>
+  </data>
+  <data name="Layout_LockScreen" xml:space="preserve">
+    <value>قفل صفحه</value>
+  </data>
+  <data name="Layout_LogOut" xml:space="preserve">
+    <value>خروج از حساب کاربری</value>
+  </data>
+  <data name="Layout_MenuOrder" xml:space="preserve">
+    <value>ترتیب منوها</value>
+  </data>
+  <data name="Layout_MenuSettings" xml:space="preserve">
+    <value>تنظیمات منو</value>
+  </data>
+  <data name="Layout_Mydocuments" xml:space="preserve">
+    <value>اسناد من</value>
+  </data>
+  <data name="Layout_Myimages" xml:space="preserve">
+    <value>عکس های من</value>
+  </data>
+  <data name="Layout_RemoveElements" xml:space="preserve">
+    <value>حذف المان ها</value>
+  </data>
+  <data name="Layout_SearchPlaceHolder" xml:space="preserve">
+    <value>جستجو ...</value>
+  </data>
+  <data name="Layout_Securedata" xml:space="preserve">
+    <value>ایمن سازی داده ها</value>
+  </data>
+  <data name="Layout_Settings" xml:space="preserve">
+    <value>تنظیمات</value>
+  </data>
+  <data name="ListFooterLinks_Links_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="ListFooterLinks_Links_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="ListFooterLinks_Links_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست پیوند های فوتر</value>
+  </data>
+  <data name="ListMainLinks_Links_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="ListMainLinks_Links_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="ListMainLinks_Links_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست پیوند های اصلی</value>
+  </data>
+  <data name="ListPhoto_Gallery_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="ListPhoto_Gallery_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="ListPhoto_Gallery_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست تصاویر</value>
+  </data>
+  <data name="ListPollQuestion_Poll_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="ListPollQuestion_Poll_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="ListPollQuestion_Poll_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست نظرسنجی ها</value>
+  </data>
+  <data name="ListSlide_Slider_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="ListSlide_Slider_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="ListSlide_Slider_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست اسلاید ها</value>
+  </data>
+  <data name="ManageFolder_Gallery_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="ManageFolder_Gallery_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="ManageFolder_Gallery_Tittle_PageTittle" xml:space="preserve">
+    <value>مدیریت پرونده ها</value>
+  </data>
+  <data name="Menu_Add_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Menu_Add_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Menu_Add_Tittle_PageTittle" xml:space="preserve">
+    <value>افزودن منوی جدید</value>
+  </data>
+  <data name="Menu_Edit_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Menu_Edit_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Menu_Edit_Tittle_PageTittle" xml:space="preserve">
+    <value>ویرایش منوی مورد نظر</value>
+  </data>
+  <data name="Menu_List_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Menu_List_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Menu_List_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست منو ها</value>
+  </data>
+  <data name="PollAnswer_AnswerColor" xml:space="preserve">
+    <value>رنگ گزینه</value>
+  </data>
+  <data name="PollAnswer_AnswerKey" xml:space="preserve">
+    <value>کلید پاسخ</value>
+  </data>
+  <data name="PollAnswer_AnswerText" xml:space="preserve">
+    <value>متن گزینه</value>
+  </data>
+  <data name="PollAnswer_ChooseColor" xml:space="preserve">
+    <value>انتخاب رنگ</value>
+  </data>
+  <data name="PollAnswer_F_PollQuestion_Id" xml:space="preserve">
+    <value>شناسه</value>
+  </data>
+  <data name="PollAnswer_ID" xml:space="preserve">
+    <value>شناسه</value>
+  </data>
+  <data name="PollAnswer_Score" xml:space="preserve">
+    <value>امتیاز</value>
+  </data>
+  <data name="PollAnswer_Text" xml:space="preserve">
+    <value>متن گزینه</value>
+  </data>
+  <data name="PollQuestion_Active" xml:space="preserve">
+    <value>فعال بودن</value>
+  </data>
+  <data name="PollQuestion_AnswerBoxes" xml:space="preserve">
+    <value>گزینه های پاسخ</value>
+  </data>
+  <data name="PollQuestion_ChartType" xml:space="preserve">
+    <value>نوع نمودار</value>
+  </data>
+  <data name="PollQuestion_CreatedOnUTC" xml:space="preserve">
+    <value>تاریخ ایجاد</value>
+  </data>
+  <data name="PollQuestion_EndDateUTC" xml:space="preserve">
+    <value>تاریخ پایان </value>
+  </data>
+  <data name="PollQuestion_F_User_Id" xml:space="preserve">
+    <value>شناسه کاربر</value>
+  </data>
+  <data name="PollQuestion_ID" xml:space="preserve">
+    <value>شناسه</value>
+  </data>
+  <data name="PollQuestion_Question" xml:space="preserve">
+    <value>سوال نظر سنجی</value>
+  </data>
+  <data name="PollQuestion_StartedOnUTC" xml:space="preserve">
+    <value>تاریخ شروع</value>
+  </data>
+  <data name="PollQuestion_Status" xml:space="preserve">
+    <value>وضعیت</value>
+  </data>
+  <data name="Post_Content_One" xml:space="preserve">
+    <value>عنوان پست</value>
+  </data>
+  <data name="Post_Display" xml:space="preserve">
+    <value>نمایش</value>
+  </data>
+  <data name="StaticPage_PageDetail_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="StaticPage_PageDetail_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="StaticPage_PageDetail_Tittle_PageTittle" xml:space="preserve">
+    <value>جزئیات و ویرایش صفحه استاتیک مورد نظر</value>
+  </data>
+  <data name="StaticPage_PageList_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="StaticPage_PageList_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="StaticPage_PageList_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست صفحات استاتیکی</value>
+  </data>
+  <data name="TelegramManagementPannel_Telegram_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="TelegramManagementPannel_Telegram_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="TelegramManagementPannel_Telegram_Tittle_PageTittle" xml:space="preserve">
+    <value>مدیریت تلگرام</value>
+  </data>
+  <data name="TelegramModel_Caption" xml:space="preserve">
+    <value>کپشن</value>
+  </data>
+  <data name="TelegramModel_Path" xml:space="preserve">
+    <value>مسیر فایل</value>
+  </data>
+  <data name="Telegram_SendDocument" xml:space="preserve">
+    <value>ارسال فایل</value>
+  </data>
+  <data name="Telegram_SendMessage" xml:space="preserve">
+    <value>ارسال پیام</value>
+  </data>
+  <data name="Telegram_SendPhoto" xml:space="preserve">
+    <value>ارسال تصویر</value>
+  </data>
+  <data name="Telegram_SendVideo" xml:space="preserve">
+    <value>ارسال ویدئو</value>
+  </data>
+  <data name="Telegram_SendVoice" xml:space="preserve">
+    <value>ارسال صوت</value>
+  </data>
+  <data name="View_Address" xml:space="preserve">
+    <value>آدرس</value>
+  </data>
+  <data name="View_Anonymous" xml:space="preserve">
+    <value>نامشخص</value>
+  </data>
+  <data name="View_Answer" xml:space="preserve">
+    <value>پاسخ</value>
+  </data>
+  <data name="View_AreYouShure" xml:space="preserve">
+    <value>آیا اطمینان خاطر دارید ؟</value>
+  </data>
+  <data name="View_Attribute" xml:space="preserve">
+    <value>مشخصات ویژگی</value>
+  </data>
+  <data name="View_AttributeGroupe" xml:space="preserve">
+    <value>مشخصات گروه ویژگی</value>
+  </data>
+  <data name="View_AttributeItem" xml:space="preserve">
+    <value>آیتم های ویژگی</value>
+  </data>
+  <data name="View_BarChart" xml:space="preserve">
+    <value>نمودار میله ای</value>
+  </data>
+  <data name="View_ContactManagement" xml:space="preserve">
+    <value>مدیریت تماس با ما</value>
+  </data>
+  <data name="View_CreateNewFolder" xml:space="preserve">
+    <value>افزودن پرونده جدید</value>
+  </data>
+  <data name="View_Date" xml:space="preserve">
+    <value>تاریخ</value>
+  </data>
+  <data name="View_DateConflictError" xml:space="preserve">
+    <value>تداخل در زمان بندی نظر سنجی وجود دارد</value>
+  </data>
+  <data name="View_DateFormatError" xml:space="preserve">
+    <value>فرمت تاریخ صحیح نمی باشد</value>
+  </data>
+  <data name="View_Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="View_DoughnutChart" xml:space="preserve">
+    <value>نمودار حلقه ای</value>
+  </data>
+  <data name="View_EditDetail" xml:space="preserve">
+    <value>ویرایش کاربر مورد نظر</value>
+  </data>
+  <data name="View_EditFolder" xml:space="preserve">
+    <value>ویرایش پرونده</value>
+  </data>
+  <data name="View_Email" xml:space="preserve">
+    <value>آدرس ایمیل</value>
+  </data>
+  <data name="View_EnterFolderName" xml:space="preserve">
+    <value>نام پرونده را وارد کنید</value>
+  </data>
+  <data name="View_EnterYourUrl" xml:space="preserve">
+    <value>لینک مورد نظر را وارد کنید</value>
+  </data>
+  <data name="View_Facebook" xml:space="preserve">
+    <value>آدرس فیس بوک</value>
+  </data>
+  <data name="View_Fax" xml:space="preserve">
+    <value>فاکس</value>
+  </data>
+  <data name="View_FolderName" xml:space="preserve">
+    <value>نام پرونده</value>
+  </data>
+  <data name="View_FromDate" xml:space="preserve">
+    <value>از تاریخ</value>
+  </data>
+  <data name="View_ImageCount" xml:space="preserve">
+    <value>تعداد تصاویر</value>
+  </data>
+  <data name="View_ImageText" xml:space="preserve">
+    <value>متن همراه تصویر</value>
+  </data>
+  <data name="View_InsertDescriptionStatus" xml:space="preserve">
+    <value>لطفا وضعیت و توضیحات مربوط به آیتم انتخابی را تعیین کنید</value>
+  </data>
+  <data name="View_InsertYourFullContent" xml:space="preserve">
+    <value>لطفا محتوی صفحه مورد نظر را به صورت کامل در ویرایشگر زیر طراحی کنید</value>
+  </data>
+  <data name="View_Instagram" xml:space="preserve">
+    <value>آدرس اینستاگرام</value>
+  </data>
+  <data name="View_InternetAddress" xml:space="preserve">
+    <value>آدرس اینترنتی</value>
+  </data>
+  <data name="View_ItemDetail" xml:space="preserve">
+    <value>جزئیات آیتم</value>
+  </data>
+  <data name="View_LinkInformation" xml:space="preserve">
+    <value>اطلاعات لینک</value>
+  </data>
+  <data name="View_LinkText" xml:space="preserve">
+    <value>متن لینک</value>
+  </data>
+  <data name="View_MenuName" xml:space="preserve">
+    <value>نام منو</value>
+  </data>
+  <data name="View_MoreAnswers" xml:space="preserve">
+    <value>پاسخ های بیشتر</value>
+  </data>
+  <data name="View_Option" xml:space="preserve">
+    <value>گزینه</value>
+  </data>
+  <data name="View_ParkName" xml:space="preserve">
+    <value>پارک علم و فناوری آذربایجان غربی</value>
+  </data>
+  <data name="View_Phone" xml:space="preserve">
+    <value>تلفن تماس</value>
+  </data>
+  <data name="View_Photo" xml:space="preserve">
+    <value>تصویر</value>
+  </data>
+  <data name="View_PhotoInformation" xml:space="preserve">
+    <value>اطلاعات تصویر مورد نظر</value>
+  </data>
+  <data name="View_PieChart" xml:space="preserve">
+    <value>نمودار دایره ای</value>
+  </data>
+  <data name="View_Poll" xml:space="preserve">
+    <value>نظرسنجی</value>
+  </data>
+  <data name="View_PollDetail" xml:space="preserve">
+    <value>جزئیات نظرسنجی</value>
+  </data>
+  <data name="View_PollOptions" xml:space="preserve">
+    <value>گزینه های نظرسنجی</value>
+  </data>
+  <data name="View_PollResult" xml:space="preserve">
+    <value>نتیجه نظرسنجی</value>
+  </data>
+  <data name="View_Row" xml:space="preserve">
+    <value>ردیف</value>
+  </data>
+  <data name="View_ScriptShow" xml:space="preserve">
+    <value>نمایش اسکریپت فعلی</value>
+  </data>
+  <data name="View_SlideDescription" xml:space="preserve">
+    <value>خلاصه اسلاید</value>
+  </data>
+  <data name="View_SlidePriority" xml:space="preserve">
+    <value>اولویت اسلاید ها</value>
+  </data>
+  <data name="View_SlideTitle" xml:space="preserve">
+    <value>تیتر اسلاید</value>
+  </data>
+  <data name="View_SubmitButton" xml:space="preserve">
+    <value>ثبت</value>
+  </data>
+  <data name="View_SureAllImagesDeleted" xml:space="preserve">
+    <value>آیا اطمینان دارید ؟ تمامی عکس های موجود در این پرونده هم پاک خواهند شد</value>
+  </data>
+  <data name="View_Telegram" xml:space="preserve">
+    <value>آدرس تلگرام</value>
+  </data>
+  <data name="View_ToDate" xml:space="preserve">
+    <value>تا تاریخ</value>
+  </data>
+  <data name="View_Tools" xml:space="preserve">
+    <value>ابزار</value>
+  </data>
+  <data name="View_Twitter" xml:space="preserve">
+    <value>آدرس تویتر</value>
+  </data>
+  <data name="View_Url" xml:space="preserve">
+    <value>لینک</value>
+  </data>
+  <data name="View_UserDetail" xml:space="preserve">
+    <value>جزئیات کاربر مورد نظر</value>
+  </data>
+  <data name="View_ValidationError" xml:space="preserve">
+    <value>فیلد مورد نظر را تکمیل کنید</value>
+  </data>
+  <data name="View_TelegramChatID" xml:space="preserve">
+    <value>آی دی کانال تلگرام</value>
+  </data>
+  <data name="EditPopUp_PopUp_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="EditPopUp_PopUp_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="EditPopUp_PopUp_Tittle_PageTittle" xml:space="preserve">
+    <value>مدیریت پاپ آپ</value>
+  </data>
+  <data name="View_PopUpMedia" xml:space="preserve">
+    <value>تصویر پاپ آپ</value>
+  </data>
+  <data name="View_PopUpStatus" xml:space="preserve">
+    <value>وضعیت نمایش</value>
+  </data>
+  <data name="View_PopUpTitle" xml:space="preserve">
+    <value>تیتر</value>
+  </data>
+  <data name="Manage_ChangePassword_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Manage_ChangePassword_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Manage_ChangePassword_Tittle_PageTittle" xml:space="preserve">
+    <value>ویرایش رمز عبور</value>
+  </data>
+  <data name="View_ChangePassword" xml:space="preserve">
+    <value>ویرایش رمز عبور</value>
+  </data>
+  <data name="Post_CreatedDateOnUtc" xml:space="preserve">
+    <value>تاریخ ایجاد پست</value>
+  </data>
+  <data name="Ticket_TicketManagement_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Ticket_TicketManagement_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Ticket_TicketManagement_Tittle_PageTittle" xml:space="preserve">
+    <value>مدیریت درخواست ها</value>
+  </data>
+  <data name="Ticket_Management" xml:space="preserve">
+    <value>مدیریت درخواست ها</value>
+  </data>
+  <data name="Ticket_ListTicket" xml:space="preserve">
+    <value>لیست درخواست ها</value>
+  </data>
+  <data name="Ticket_ChangeStatus" xml:space="preserve">
+    <value>تغییر وضعیت درخواست</value>
+  </data>
+  <data name="Ticket_Reply" xml:space="preserve">
+    <value>پاسخ درخواست</value>
+  </data>
+  <data name="Ticket_ReplySend" xml:space="preserve">
+    <value>ثبت پاسخ</value>
+  </data>
+  <data name="Ticket_ResponseForm" xml:space="preserve">
+    <value>فرم پاسخ درخواست</value>
+  </data>
+  <data name="Ticket_Status" xml:space="preserve">
+    <value>وضعیت درخواست</value>
+  </data>
+  <data name="View_Close" xml:space="preserve">
+    <value>بستن</value>
+  </data>
+  <data name="Shekayat_ShekayatManagement_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Shekayat_ShekayatManagement_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Shekayat_ShekayatManagement_Tittle_PageTittle" xml:space="preserve">
+    <value>مدیریت شکایات</value>
+  </data>
+  <data name="Shekayat_ListShekayat" xml:space="preserve">
+    <value>لیست شکایات</value>
+  </data>
+  <data name="Shekayat_Management" xml:space="preserve">
+    <value>مدیریت شکایات</value>
+  </data>
+  <data name="ShoppingCart_ListShop" xml:space="preserve">
+    <value>لیست سفارشات</value>
+  </data>
+  <data name="ShoppingCart_Management" xml:space="preserve">
+    <value>مدیریت فروشگاه</value>
+  </data>
+  <data name="ShoppingCart_Edit_List_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="ShoppingCart_Edit_List_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="ShoppingCart_Edit_List_Tittle_PageTittle" xml:space="preserve">
+    <value>ویرایش سفارش مورد نظر</value>
+  </data>
+  <data name="ShoppingCart_List_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="ShoppingCart_List_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="ShoppingCart_List_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست سفارشات</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ShoppingCart_ID" xml:space="preserve">
+    <value>شناسه</value>
+  </data>
+  <data name="ShoppingCart_OrderedDate" xml:space="preserve">
+    <value>تاریخ ثبت سفارش</value>
+  </data>
+  <data name="ShoppingCart_State" xml:space="preserve">
+    <value>وضعیت</value>
+  </data>
+  <data name="ShoppingCart_TotalPrice" xml:space="preserve">
+    <value>مبلغ فاکتور</value>
+  </data>
+  <data name="View_InsertOrderStatus" xml:space="preserve">
+    <value>لطفا وضعیت سفارش انتخابی را تعیین کنید</value>
+  </data>
+  <data name="Roll_AddRoleGroup" xml:space="preserve">
+    <value>افزودن گروه دسترسی</value>
+  </data>
+  <data name="Roll_AddRoll" xml:space="preserve">
+    <value>افزودن دسترسی</value>
+  </data>
+  <data name="Roll_ListRoll" xml:space="preserve">
+    <value>لیست دسترسی ها</value>
+  </data>
+  <data name="Roll_ListRollGroup" xml:space="preserve">
+    <value>لیست گروه دسترسی ها</value>
+  </data>
+  <data name="Roll_ListUsers" xml:space="preserve">
+    <value>لیست کاربران</value>
+  </data>
+  <data name="Roll_Management" xml:space="preserve">
+    <value>مدیریت نقش ها</value>
+  </data>
+  <data name="Roll_UsersManagement" xml:space="preserve">
+    <value>مدیریت حساب های کاربری</value>
+  </data>
+  <data name="Roll_AddRollGroup_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Roll_AddRollGroup_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Roll_AddRollGroup_Tittle_PageTittle" xml:space="preserve">
+    <value>افزودن سطح دسترسی جدید</value>
+  </data>
+  <data name="Roll_Add_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Roll_Add_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Roll_Add_Tittle_PageTittle" xml:space="preserve">
+    <value>افزودن دسترسی جدید</value>
+  </data>
+  <data name="Roll_AssignRollGroupToUser_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Roll_AssignRollGroupToUser_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Roll_AssignRollGroupToUser_Tittle_PageTittle" xml:space="preserve">
+    <value>اختصاص سطح دسترسی به کاربر</value>
+  </data>
+  <data name="Roll_AssignRollToRollGroup_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Roll_AssignRollToRollGroup_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Roll_AssignRollToRollGroup_Tittle_PageTittle" xml:space="preserve">
+    <value>اختصاص دسترسی به سطح مورد نظر</value>
+  </data>
+  <data name="Roll_AssignRollToUser_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Roll_AssignRollToUser_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Roll_AssignRollToUser_Tittle_PageTittle" xml:space="preserve">
+    <value>اختصاص دسترسی به کاربر</value>
+  </data>
+  <data name="Roll_ListRollGroupOfUser_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Roll_ListRollGroupOfUser_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Roll_ListRollGroupOfUser_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست سطوح دسترسی کاربر مورد نظر</value>
+  </data>
+  <data name="Roll_ListRollGroup_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Roll_ListRollGroup_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Roll_ListRollGroup_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست سطوح دسترسی</value>
+  </data>
+  <data name="Roll_ListRollOfUser_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Roll_ListRollOfUser_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Roll_ListRollOfUser_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست دسترسی های کاربر مورد نظر</value>
+  </data>
+  <data name="Roll_ListRollsOfRollGroup_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Roll_ListRollsOfRollGroup_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Roll_ListRollsOfRollGroup_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست دسترسی های مختص سطح مورد نظر</value>
+  </data>
+  <data name="Roll_List_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Roll_List_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Roll_List_Tittle_PageTittle" xml:space="preserve">
+    <value>لیست دسترسی ها</value>
+  </data>
+  <data name="Roll_UsersManagement_ContactUs_PageTittle" xml:space="preserve">
+    <value>ارتباط با ما </value>
+  </data>
+  <data name="Roll_UsersManagement_Description_PageTittle" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Roll_UsersManagement_Tittle_PageTittle" xml:space="preserve">
+    <value>مدیریت دسترسی کاربران</value>
+  </data>
+  <data name="View_Roll" xml:space="preserve">
+    <value>ویژگی های دسترسی</value>
+  </data>
+  <data name="View_RollGroup" xml:space="preserve">
+    <value>ویژگی های سطح دسترسی</value>
+  </data>
+  <data name="View_SelectRoll" xml:space="preserve">
+    <value>انتخاب دسترسی های مورد نظر</value>
+  </data>
+  <data name="View_SelectRollGroup" xml:space="preserve">
+    <value>انتخاب گروه دسترسی های مورد نظر</value>
+  </data>
+</root>

@@ -1,0 +1,45 @@
+﻿@model AdminWeb.Models.DataModels.TelegramModel
+
+<div class="col-md-8 col-md-push-2 portlets" style="margin-top:20px;">
+    <div class="panel">
+        <div class="panel-header panel-controls">
+            <h3><strong>@Resource.Resource.Telegram_SendDocument</strong></h3>
+        </div>
+        <div class="panel-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <div class="note-editor">
+                                @Html.TextAreaFor(model => model.Caption, new { @class = "form-control form-white FixedColTextArea", placeholder = @Resource.Resource.Post_Content_One, @style = "height:224px; min-height:224px;  max-height:224px", maxlength = "190" })
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-embossed" data-style="contract" onclick="TelegramMedia_Submit('SendPhoto')">
+                            <span class="ladda-label">ارسال به تلگرام</span>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail">
+                                    <img src="~/Content/DefaultContent/Imgs/Documents-icon.png" alt="">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                <div class="user-edit-image-buttons">
+                                    <span class="btn btn-azure btn-file">
+                                        <span class="fileinput-new btn btn-default"><i class="fa fa-picture"></i> انتخاب فایل</span><span class="fileinput-exists"><i class="fa fa-picture"></i> تغییر</span>
+                                        @Html.TextBoxFor(model => model.Path, new { type = "file" })
+                                    </span>
+                                    <a href="#" class="btn fileinput-exists btn-red" data-dismiss="fileinput">
+                                        <i class="fa fa-times"></i> حذف
+                                    </a>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Path)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

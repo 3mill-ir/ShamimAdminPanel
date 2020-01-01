@@ -1,0 +1,107 @@
+﻿@model AdminWeb.Models.DataModels.MenuDataModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/switchery/switchery.min.js"></script> <!-- IOS Switch -->
+    <script src="~/Content/assets/global/plugins/bootstrap-tags-input/bootstrap-tagsinput.min.js"></script> <!-- Select Inputs -->
+    <script src="~/Content/assets/global/js/pages/form_icheck.js"></script>  <!-- Change Icheck Color - DEMO PURPOSE - OPTIONAL -->
+    <script src="~/Content/assets/global/plugins/dropzone/dropzone.min.js"></script>  <!-- Upload Image & File in dropzone -->
+    <script src="~/Content/assets/global/plugins/summernote/summernote.min.js"></script> <!-- Simple HTML Editor -->
+    <script src="~/Content/assets/global/plugins/typed/typed.min.js"></script> <!-- Animated Typing -->
+    <script src="~/Content/assets/global/js/pages/editor.js"></script>
+    <script src="~/Content/assets/global/plugins/step-form-wizard/plugins/parsley/parsley.min.js"></script> <!-- OPTIONAL, IF YOU NEED VALIDATION -->
+    <script src="~/Content/assets/global/plugins/step-form-wizard/js/step-form-wizard.js"></script> <!-- Step Form Validation -->
+    <script src="~/Content/assets/global/js/pages/form_wizard.js"></script>
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        });
+        function myFunction() {
+            var c = document.getElementsByClassName("note-editable")[0].innerHTML;
+            document.getElementById("Descript").setAttribute("value", c);
+        }
+    </script>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="tabs tabs-linetriangle">
+            <div class="tab-content center">
+                <div class="tab-pane active" id="validation">
+                    @using (Html.BeginForm("Add", "FormBuilder", FormMethod.Post,
+new { enctype = "multipart/form-data", @class = "wizard /*wizard-validation*/", data_style = "arrow", onsubmit = "myFunction()" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <fieldset style="height: 460px;">
+                            <legend>اطلاعات پایه</legend>
+                            <div class="row">
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">@Html.Label("نام فرم")</label>
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @id = "exampleInputEmail1", @placeholder = "نام فرم را وارد کنید", @type = "text", required = "", data_parsley_group = "block0" })
+                                        @Html.ValidationMessageFor(model => model.Name)
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.Language)</label>
+                                        @Html.DropDownListFor(model => model.Language, ViewBag.Languages as SelectList, new { @class = "form-control", data_search = "true" })
+                                        @Html.ValidationMessageFor(model => model.Language)
+                                    </div>
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <label for="exampleInputEmail1">@Html.Label("تصویر فرم")</label>
+                                        <div class="fileinput-new thumbnail">
+                                            <img data-src="" src="~/Content/assets/global/images/gallery/3.jpg" class="img-responsive" alt="gallery 3">
+                                        </div>
+                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                        <div>
+                                            <span class="btn btn-default btn-file">
+                                                <span class="fileinput-new">انتخاب تصویر ...</span><span class="fileinput-exists">ویرایش</span>
+                                                <input type="file" name="MyFile">
+                                            </span>
+                                            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">حذف</a>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Image)
+                                    </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.Description)</label>
+                                        @Html.TextBoxFor(model => model.Description, new { @class = "summernote", @id = "Descript", @type = "text" })
+                                        @Html.ValidationMessageFor(model => model.Description)
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset style="height: 100px;">
+                            <legend>پایان</legend>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="form-group">
+                                        <p>آیا می خواهید فرم ایجاد شده شما برای عموم نمایش داده شود یا فعلا مخفی بماند ؟</p>
+                                        <div class="input-group">
+                                            <div class="icheck-inline">
+                                                <label>@Html.RadioButtonFor(model => model.Status, true, new { @data_radio = "iradio_flat-blue" }) می خواهم نمایش داده شود</label>
+                                                <label>@Html.RadioButtonFor(model => model.Status, false, new { @checked = true, @data_radio = "iradio_flat-blue" })نمی خواهم نمایش داده شود</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

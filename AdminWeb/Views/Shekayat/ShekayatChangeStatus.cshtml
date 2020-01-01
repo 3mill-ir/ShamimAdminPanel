@@ -1,0 +1,5 @@
+﻿<div id="basic-preview" class="preview active" style="width: 100%;float: right;">
+    <div style="padding: 10px;" class="alert alert-@(ViewBag.Notification?"success":"danger") media fade in">
+        <p><strong>@(ViewBag.Notification ? "تبریک !" : "خطا !") </strong> @(ViewBag.Notification ? "درخواست مورد نظر با موفقیت تغییر وضعیت داده شد" : "متاسفانه خطایی در فرآیند تغییر وضعیت درخواست پیش آمده، لطفا مجددا تلاش کنید")</p>
+    </div>
+</div>

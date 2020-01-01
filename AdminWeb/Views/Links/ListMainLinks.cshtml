@@ -1,0 +1,62 @@
+﻿@model IEnumerable<AdminWeb.Models.DataModels.LinkModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        })
+    </script>
+}
+<div class="row">
+    @{
+        int i = 1;
+    }
+    @foreach (var item in Model)
+    {
+
+        <div class="col-sm-3">
+            <div class="panel panel-white" id="panel1">
+                <div class="panel-heading">
+                    <h4 class="panel-title text-primary">@Resource.Resource.View_Url @(i++)</h4>
+                    <div class="panel-tools">
+                        <a data-original-title="Collapse" data-toggle="tooltip" data-placement="top" class="btn btn-transparent btn-sm panel-collapse" href="#"><i class="ti-minus collapse-off"></i><i class="ti-plus collapse-on"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body" style="display: block;">
+                    <div class="col-md-12">
+                        @if (item.Image == "Rahbari.jpg")
+                        {
+                            <img style="width:100%;" src="~/Content/DefaultContent/Links/Rahbari.jpg" alt="" class="media-object pull-right">
+                        }
+                        else
+                        {
+                            <img style="width:100%;" src="@ViewBag.PrePath@item.Image" alt="" class=" media-object">
+                        }
+                        <div class="pull-right margin-top-10" style="width:100%;">
+                            <div class="alert alert-info center">
+                                <h4 class="alert-heading margin-bottom-10">آدرس اینترنتی :</h4>
+                                <strong>@item.Link</strong>
+                            </div>
+                        </div>
+                        <a type="button" style="width:100%;" href="@Url.Action("EditMainLink", "Links", new {LinkID=item.ID })" class="btn btn-wide btn-o btn-primary">
+                            @Resource.Resource.Edit
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

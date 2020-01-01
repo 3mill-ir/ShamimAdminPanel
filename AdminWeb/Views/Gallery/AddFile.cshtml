@@ -1,0 +1,101 @@
+﻿@model AdminWeb.Models.DataModels.GalleryModelAdmin
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool ValidPage = false;
+    if (ViewBag.ListFolders != null && (ViewBag.ListFolders as List<string>).Count() > 0)
+    {
+        ValidPage = true;
+    }
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script src="~/Content/assets/global/plugins/bootstrap-loading/lada.min.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        });
+    </script>
+}
+@if (ValidPage)
+{
+    <div class="row">
+        @using (Html.BeginForm("AddFile", "Gallery", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="col-md-8 col-md-push-2 portlets">
+                <div class="panel">
+                    <div class="panel-header panel-controls">
+                    </div>
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-7">
+                                <fieldset>
+                                    <legend>
+                                        @Resource.Resource.View_PhotoInformation <span class="symbol required"></span>
+                                    </legend>
+
+                                    <div class="form-group col-md-12">
+                                        <select class="form-control form-white" name="model.Type" id="Type">
+                                            @foreach (var item in ViewBag.ListFolders as List<string>)
+                                            {
+                                                <option value="@item">@item</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                <div class="user-image">
+                                                    <div class="fileinput-new thumbnail">
+                                                        <img src="~/Content/DefaultContent/Imgs/Camera-icon.png" alt="">
+                                                    </div>
+                                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                    <div class="user-image-buttons">
+                                                        <span class="btn btn-azure btn-file btn-sm">
+                                                            <span class="fileinput-new"><i class="fa fa-pencil"></i></span><span class="fileinput-exists"><i class="fa fa-pencil"></i></span>
+                                                            <input name="AttachmentFile" type="file" id="FileUpload">
+                                                        </span>
+                                                        <a href="#" class="btn fileinput-exists btn-red btn-sm" data-dismiss="fileinput">
+                                                            <i class="fa fa-times"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <div class="form-group margin-top-15">
+                                                <h5 for="form-field-select-2">@Resource.Resource.View_ImageText</h5>
+                                                <div class="note-editor">
+                                                    <textarea name="model.Text" class="form-control" id="ContentText"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="AjaxTicketNotificationBox" class="col-md-12 margin-top-20">
+                                        <button type="submit" class="btn btn-success ladda-button" data-style="expand-right" style="width:100%;">
+                                            <span class="ladda-label">@Resource.Resource.View_SubmitButton</span>
+                                            <span class="ladda-spinner"></span>
+                                            <div class="ladda-progress" style="width: 0px;"></div>
+                                        </button>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

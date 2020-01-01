@@ -1,0 +1,126 @@
+﻿@model IEnumerable<AdminWeb.Models.DataModels.FolderModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        })
+        function AppendAdd() {
+            $('#AppendedAdd').removeClass("hidden");
+        }
+        function ClearAdd() {
+            $('#AppendedAdd').addClass("hidden");
+        }
+        $("a[id^='PipoModalLink_']").click('action', function () {
+            var temp = $(this).attr('id').split("_");
+            var myid = temp[1];
+
+            $("#PipoModalBody").empty();
+            $("#PipoModalBody").append('<p> @Resource.Resource.View_SureAllImagesDeleted' + ' (#' + myid + ')</p>');
+            var $self = $("#PipoModalForm");
+            $self.attr('action', '/Gallery/DeleteFolder?FolderName=' + myid);
+        });
+    </script>
+}
+<div class="row">
+    <div class="col-md-8 col-md-push-2 portlets">
+        <div class="panel">
+            <div class="panel-header panel-controls">
+            </div>
+            <div class="panel-content">
+                <div class="row" style="margin-top:20px;">
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">@Resource.Resource.View_FolderName</th>
+                                    <th class="text-center">@Resource.Resource.View_ImageCount</th>
+                                    <th class="text-center"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="text-center">@item.FolderName</td>
+                                        <td class="text-center">@item.ExistingImagesCount</td>
+                                        <td class="text-center">
+                                            <div class="visible-md visible-lg text-center">
+                                                <a href="@Url.Action("EditFolder", "Gallery", new {FolderName=item.FolderName })" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="ویرایش"><i class="fa fa-pencil"></i></a>
+                                                <a id="PipoModalLink_@item.FolderName" class="btn btn-transparent btn-xs tooltips" data-toggle="modal" data-target="#modal-basic" data-placement="top" title="حذف پرونده"><i class="fa fa-times fa-white" data-target="#PipoModal"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary" onclick="AppendAdd()">
+                            <span class="ladda-label">@Resource.Resource.View_CreateNewFolder</span>
+                        </button>
+                    </div>
+                    <div id="AppendedAdd" class="col-md-12 hidden">
+                        @using (Html.BeginForm("AddFolder", "Gallery", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="row">
+                                <div class="col-md-8 col-md-push-2 portlets">
+                                    <div class="panel" style="background-color:#f7f7f7">
+                                        <div class="panel-header panel-controls">
+                                            @Resource.Resource.View_CreateNewFolder
+                                        </div>
+                                        <div class="panel-content">
+                                            <a style="margin-left:-25px;margin-top:-25px;" onclick="ClearAdd()" href="#" class="btn btn-transparent btn-xs tooltips pull-left" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
+                                            <input name="FolderName" placeholder="@Resource.Resource.View_EnterFolderName" id="form-field-13" class="form-control pull-right" style="width:70%;" />
+                                            <button type="submit" class="btn btn-primary">
+                                                <span class="ladda-label">@Resource.Resource.View_SubmitButton</span>
+                                                <span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BEGIN MODALS -->
+<div class="modal fade" id="modal-basic" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h2 class="modal-title"><strong>هشدار</strong></h2>
+            </div>
+            <div id="PipoModalBody" class="modal-body">
+                آیا از انجام عملیات مورد نظر اطمینان خاطر دارید ؟<br>
+            </div>
+            @using (Html.BeginForm("DeleteFolder", "Gallery", new { SlideId = "_postid_" }, FormMethod.Post, new { Id = "PipoModalForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">بستن</button>
+                    <button type="submit" class="btn btn-primary btn-embossed">بله</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- END MODALS -->

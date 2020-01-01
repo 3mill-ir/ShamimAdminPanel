@@ -1,0 +1,273 @@
+﻿@model AdminWeb.Models.DataModels.TelegramModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using AdminWeb.Infrastructure
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script src="~/Content/assets/global/plugins/bootstrap-loading/lada.min.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#SendMessageAppendBtn").click(function () {
+                PipoClearFeature();
+                var element = document.getElementById("pipoSendMessage");
+                element.classList.add("featured");
+            });
+            $("#SendPhotoAppendBtn").click(function () {
+                PipoClearFeature();
+                var element = document.getElementById("pipoSendPhoto");
+                element.classList.add("featured");
+            });
+            $("#SendVideoAppendBtn").click(function () {
+                PipoClearFeature();
+                var element = document.getElementById("pipoSendVideo");
+                element.classList.add("featured");
+            });
+            $("#SendVoiceAppendBtn").click(function () {
+                PipoClearFeature();
+                var element = document.getElementById("pipoSendVoice");
+                element.classList.add("featured");
+            });
+            $("#SendDocumentAppendBtn").click(function () {
+                PipoClearFeature();
+                var element = document.getElementById("pipoSendDocumnet");
+                element.classList.add("featured");
+            });
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        function PipoClearFeature() {
+            var element;
+            element = document.getElementById("pipoSendMessage");
+            element.classList.remove("featured");
+
+            element = document.getElementById("pipoSendPhoto");
+            element.classList.remove("featured");
+
+
+            element = document.getElementById("pipoSendVideo");
+            element.classList.remove("featured");
+
+
+            element = document.getElementById("pipoSendVoice");
+            element.classList.remove("featured");
+
+
+            element = document.getElementById("pipoSendDocumnet");
+            element.classList.remove("featured");
+
+        };
+
+
+        function TelegramMedia_Submit(ActionName) {
+            var temp = ActionName;
+            var formData = new FormData();
+            if (ActionName != "SendMessage") {
+                var file = document.getElementById("Path").files[0];
+                formData.append("Path", file);
+            }
+            var Caption = document.getElementById("Caption").value;
+            formData.append("Caption", Caption);
+            $.ajax({
+                type: "POST",
+                url: "../../Telegram/" + ActionName,
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
+                    if (ActionName == "SendMessage") {
+                        document.getElementById('SendMessage_Loading').style.display = 'block';
+                    }
+                    else if (ActionName == "SendPhoto") {
+                        document.getElementById('SendPhoto_Loading').style.display = 'block';
+                    }
+                    else if (ActionName == "SendVideo") {
+                        document.getElementById('SendVideo_Loading').style.display = 'block';
+                    }
+                    else if (ActionName == "SendVoice") {
+                        document.getElementById('SendVoice_Loading').style.display = 'block';
+                    }
+                    else if (ActionName == "SendDocument") {
+                        document.getElementById('SendDocument_Loading').style.display = 'block';
+                    }
+                },
+                success: function (response) {
+                    $("#AppendedAnswers").empty();
+                    $("#AppendedAnswers").append(response);
+                },
+                complete: function () {
+                    if (ActionName == "SendMessage") {
+                        document.getElementById('SendMessage_Loading').style.display = 'none';
+                    }
+                    else if (ActionName == "SendPhoto") {
+                        document.getElementById('SendPhoto_Loading').style.display = 'none';
+                    }
+                    else if (ActionName == "SendVideo") {
+                        document.getElementById('SendVideo_Loading').style.display = 'none';
+                    }
+                    else if (ActionName == "SendVoice") {
+                        document.getElementById('SendVoice_Loading').style.display = 'none';
+                    }
+                    else if (ActionName == "SendDocument") {
+                        document.getElementById('SendDocument_Loading').style.display = 'none';
+                    }
+                },
+                error: function (response) {
+                    $("#AppendedAnswers").empty();
+                    $("#AppendedAnswers").append("<div class=\"col-lg-6 col-lg-offset-3\"><div role=\"alert\" class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">×</span></button> عملیات ارسال به کانال تلگرام با موفقیت انجام گرفت. </div></div>");
+                },
+
+            });
+        };
+    </script>
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryajax")
+<div class="row">
+    <div class="col-md-12">
+        <div class="pricing-table pricing-blue">
+            <div class="col-lg-1 col-md-1 col-xs-6"></div>
+            <div class="col-lg-2 col-md-2 col-xs-6">
+                <div class="plan" id="pipoSendMessage">
+                    <div class="plan-header bg-primary">
+                        <div class="title" style="background-color: #327d8e;"><span>@Resource.Resource.Telegram_SendMessage</span></div>
+                        <img src="~/Content/DefaultContent/Imgs/telegram/text-icon.png" class="img-responsive" />
+                        <img src="~/Content/DefaultContent/Imgs/ajax-load.gif" class="img-responsive" id="SendMessage_Loading" style="display:none;width: 50px;margin: 10px auto;" />
+                    </div>
+                    <div class="descriptionbg-primary">
+                        <div class="text-center plan-bottom-btn p-b-10">
+                            @Ajax.RawActionLink("<i class=\"fa fa-send fa fa-white\"></i>",
+                                              "SendMessage", "Telegram",null,
+                                         new AjaxOptions
+                                         {
+                                             UpdateTargetId = "AppendedAnswers",
+                                             InsertionMode = InsertionMode.Replace,
+                                             LoadingElementId = "SendMessage_Loading",
+                                             LoadingElementDuration = 5,
+
+                                         }, new { id = "SendMessageAppendBtn", @class = "btn btn-primary btn-embossed", style = "margin-top: 10px;margin-bottom: 0px;margin-right: 10px;" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-xs-6">
+                <div class="plan" id="pipoSendPhoto">
+                    <div class="plan-header bg-primary">
+                        <div class="title" style="background-color: #327d8e;"><span>@Resource.Resource.Telegram_SendPhoto</span></div>
+                        <img src="~/Content/DefaultContent/Imgs/telegram/image-icon.png" class="img-responsive" />
+                        <img src="~/Content/DefaultContent/Imgs/ajax-load.gif" class="img-responsive" id="SendPhoto_Loading" style="display:none;width: 50px;margin: 10px auto;" />
+                    </div>
+                    <div class="descriptionbg-primary">
+                        <div class="text-center plan-bottom-btn p-b-10">
+                            @Ajax.RawActionLink("<i class=\"fa fa-send fa fa-white\"></i>",
+                                              "SendPhoto", "Telegram", null,
+                                         new AjaxOptions
+                                         {
+                                             UpdateTargetId = "AppendedAnswers",
+                                             InsertionMode = InsertionMode.Replace,
+                                             LoadingElementId = "SendPhoto_Loading",
+                                             LoadingElementDuration = 5,
+
+                                         }, new { id = "SendPhotoAppendBtn", @class = "btn btn-primary btn-embossed", style = "margin-top: 10px;margin-bottom: 0px;margin-right: 10px;" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-xs-6">
+                <div class="plan" id="pipoSendVideo">
+                    <div class="plan-header bg-primary">
+                        <div class="title" style="background-color: #327d8e;"><span>@Resource.Resource.Telegram_SendVideo</span></div>
+                        <img src="~/Content/DefaultContent/Imgs/telegram/video-icon.png" class="img-responsive" />
+                        <img src="~/Content/DefaultContent/Imgs/ajax-load.gif" class="img-responsive" id="SendVideo_Loading" style="display:none;width: 50px;margin: 10px auto;" />
+                    </div>
+                    <div class="descriptionbg-primary">
+                        <div class="text-center plan-bottom-btn p-b-10">
+                            @Ajax.RawActionLink("<i class=\"fa fa-send fa fa-white\"></i>",
+                                    "SendVideo", "Telegram",
+                                    null,
+                                         new AjaxOptions
+                                         {
+                                             UpdateTargetId = "AppendedAnswers",
+                                             InsertionMode = InsertionMode.Replace,
+                                             LoadingElementId = "SendVideo_Loading",
+                                             LoadingElementDuration = 5,
+
+                                         }, new { id = "SendVideoAppendBtn", @class = "btn btn-primary btn-embossed", style = "margin-top: 10px;margin-bottom: 0px;margin-right: 10px;" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-xs-6">
+                <div class="plan" id="pipoSendVoice">
+                    <div class="plan-header bg-primary">
+                        <div class="title" style="background-color: #327d8e;"><span>@Resource.Resource.Telegram_SendVoice</span></div>
+                        <img src="~/Content/DefaultContent/Imgs/telegram/voice-icon.png" class="img-responsive" />
+                        <img src="~/Content/DefaultContent/Imgs/ajax-load.gif" class="img-responsive" id="SendVoice_Loading" style="display:none;width: 50px;margin: 10px auto;" />
+                    </div>
+                    <div class="descriptionbg-primary">
+                        <div class="text-center plan-bottom-btn p-b-10">
+                            @Ajax.RawActionLink("<i class=\"fa fa-send fa fa-white\"></i>",
+                                             "SendVoice", "Telegram",
+                                    null,
+                                         new AjaxOptions
+                                         {
+                                             UpdateTargetId = "AppendedAnswers",
+                                             InsertionMode = InsertionMode.Replace,
+                                             LoadingElementId = "SendVoice_Loading",
+                                             LoadingElementDuration = 5,
+
+                                         }, new { id = "SendVoiceAppendBtn", @class = "btn btn-primary btn-embossed", style = "margin-top: 10px;margin-bottom: 0px;margin-right: 10px;" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-xs-6">
+                <div class="plan" id="pipoSendDocumnet">
+                    <div class="plan-header bg-primary">
+                        <div class="title" style="background-color: #327d8e;"><span>@Resource.Resource.Telegram_SendDocument</span></div>
+                        <img src="~/Content/DefaultContent/Imgs/telegram/file-icon.png" class="img-responsive" />
+                        <img src="~/Content/DefaultContent/Imgs/ajax-load.gif" class="img-responsive" id="SendDocument_Loading" style="display:none;width: 50px;margin: 10px auto;" />
+                    </div>
+                    <div class="descriptionbg-primary">
+                        <div class="text-center plan-bottom-btn p-b-10">
+                            @Ajax.RawActionLink("<i class=\"fa fa-send fa fa-white\"></i>",
+                                                      "SendDocument", "Telegram",
+                                    null,
+                                         new AjaxOptions
+                                         {
+                                             UpdateTargetId = "AppendedAnswers",
+                                             InsertionMode = InsertionMode.Replace,
+                                             LoadingElementId = "SendDocument_Loading",
+                                             LoadingElementDuration = 5,
+
+                                         }, new { id = "SendDocumentAppendBtn", @class = "btn btn-primary btn-embossed", style = "margin-top: 10px;margin-bottom: 0px;margin-right: 10px;" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1 col-md-1 col-xs-6"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="AppendedAnswers" class="col-lg-12">
+
+        </div>
+    </div>
+</div>

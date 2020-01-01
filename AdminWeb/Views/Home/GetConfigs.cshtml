@@ -1,0 +1,137 @@
+﻿@model AdminWeb.Models.DataModels.PageConfigsModel
+
+<script src="~/Content/assets/global/plugins/jquery/jquery-1.11.1.min.js"></script>
+<script src="~/Content/assets/global/plugins/mcustom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="~/Content/assets/global/plugins/backstretch/backstretch.min.js"></script>
+<script src="~/Content/assets/admin/layout1/js/layout.js"></script>
+<script src="~/Content/assets/global/js/sidebar_hover.js"></script>
+<script src="~/Content/assets/global/plugins/jquery-cookies/jquery.cookies.min.js"></script>
+<script src="~/Content/assets/global/js/builder.js"></script>
+@*<script src="~/Content/assets/global/js/application.js"></script>*@
+<script src="~/Content/assets/global/plugins/bootstrap-loading/lada.min.js"></script>
+@using (Html.BeginForm("ChangeConfigs", "Home", null, FormMethod.Post, new { onsubmit = "ConfigsFormSubmit()" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="builder hidden-sm hidden-xs" id="builder">
+        <a class="builder-toggle"><i class="icon-wrench"></i></a>
+        <div class="inner">
+            <div class="builder-container">
+                <a href="#" class="btn btn-sm btn-default" id="reset-style">تنظیمات پیش فرض</a>
+                <h4>تنظیمات صفحه</h4>
+                <div class="layout-option">
+                    <span>ثابت نمودن ساید بار</span>
+                    <label class="switch pull-right">
+                        <input data-layout="sidebar" name="FixedSidebar" id="switch-sidebar" type="checkbox" class="switch-input">
+                        <input type="hidden" id="HandlerHelper1" />
+                        <span class="switch-label" data-on="روشن" data-off="خاموش"></span>
+                        <span class="switch-handle" id="swww1"></span>
+                    </label>
+                </div>
+                <div class="layout-option">
+                    <span>نمایش ساید بار هنگام اشاره</span>
+                    <label class="switch pull-right">
+                        <input data-layout="sidebar-hover" name="SidebaronHover" id="switch-sidebar-hover" type="checkbox" class="switch-input">
+                        <input type="hidden" id="HandlerHelper2" />
+                        <span class="switch-label" data-on="روشن" data-off="خاموش"></span>
+                        <span class="switch-handle" id="swww2"></span>
+                    </label>
+                </div>
+                <div class="layout-option">
+                    <span>مخفی کردن زیر منو ها</span>
+                    <label class="switch pull-right">
+                        <input data-layout="submenu-hover" name="SubmenuonHover" id="switch-submenu-hover" type="checkbox" class="switch-input">
+                        <input type="hidden" id="HandlerHelper3" />
+                        <span class="switch-label" data-on="روشن" data-off="خاموش"></span>
+                        <span class="switch-handle" id="swww3"></span>
+                    </label>
+                </div>
+                <div class="layout-option">
+                    <span>ثابت کردن منوی بالایی</span>
+                    <label class="switch pull-right">
+                        <input data-layout="topbar" name="FixedTopbar" id="switch-topbar" type="checkbox" class="switch-input">
+                        <input type="hidden" id="HandlerHelper4" />
+                        <span class="switch-label" data-on="روشن" data-off="خاموش"></span>
+                        <span class="switch-handle" id="swww4"></span>
+                    </label>
+                </div>
+                <div class="layout-option">
+                    <span>فشرده کردن قالب</span>
+                    <label class="switch pull-right">
+                        <input type="hidden" id="HandlerHelper5" />
+                        <input data-layout="boxed" name="BoxedLayout" id="switch-boxed" type="checkbox" class="switch-input">
+                        <span class="switch-label" data-on="روشن" data-off="خاموش"></span>
+                        <span class="switch-handle" id="swww5"></span>
+                    </label>
+                </div>
+                <h4 class="border-top">رنگ تم</h4>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="theme-color bg-dark" data-main="default" data-color="#2B2E33" id="PipoDark"></div>
+                        <div class="theme-color background-primary" data-main="primary" data-color="#319DB5" id="PipoPrimary"></div>
+                        <div class="theme-color bg-red" data-main="red" data-color="#C75757" id="PipoRed"></div>
+                        <div class="theme-color bg-green" data-main="green" data-color="#1DA079" id="PipoGreen"></div>
+                        <div class="theme-color bg-orange" data-main="orange" data-color="#D28857" id="PipoOrange"></div>
+                        <div class="theme-color bg-purple" data-main="purple" data-color="#B179D7" id="PipoPurple"></div>
+                        <div class="theme-color bg-blue" data-main="blue" data-color="#4A89DC" id="PipoBlue"></div>
+                        <input type="hidden" name="Color" id="ColorInput" />
+                    </div>
+                </div>
+                <h4 class="border-top">نوع تم</h4>
+                <div class="row row-sm">
+                    <input type="hidden" name="Theme" id="ThemeInput" />
+                    <div class="col-xs-6">
+                        <div class="theme clearfix sdtl" data-theme="sdtl" id="te1">
+                            <div class="header theme-left"></div>
+                            <div class="header theme-right-light"></div>
+                            <div class="theme-sidebar-dark"></div>
+                            <div class="bg-light"></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="theme clearfix sltd" data-theme="sltd" id="te2">
+                            <div class="header theme-left"></div>
+                            <div class="header theme-right-dark"></div>
+                            <div class="theme-sidebar-light"></div>
+                            <div class="bg-light"></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="theme clearfix sdtd" data-theme="sdtd" id="te3">
+                            <div class="header theme-left"></div>
+                            <div class="header theme-right-dark"></div>
+                            <div class="theme-sidebar-dark"></div>
+                            <div class="bg-light"></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="theme clearfix sltl" data-theme="sltl" id="te4">
+                            <div class="header theme-left"></div>
+                            <div class="header theme-right-light"></div>
+                            <div class="theme-sidebar-light"></div>
+                            <div class="bg-light"></div>
+                        </div>
+                    </div>
+                </div>
+                <h4 class="border-top">پس زمینه</h4>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="bg-color bg-clean" data-bg="clean" data-color="#F8F8F8" id="cl1"></div>
+                        <div class="bg-color bg-lighter" data-bg="lighter" data-color="#EFEFEF" id="cl2"></div>
+                        <div class="bg-color bg-light-default" data-bg="light-default" data-color="#E9E9E9" id="cl3"></div>
+                        <div class="bg-color bg-light-blue" data-bg="light-blue" data-color="#E2EBEF" id="cl4"></div>
+                        <div class="bg-color bg-light-purple" data-bg="light-purple" data-color="#E9ECF5" id="cl5"></div>
+                        <div class="bg-color bg-light-dark" data-bg="light-dark" data-color="#DCE1E4" id="cl6"></div>
+                        <input type="hidden" name="BackGround" id="BackGroundInput" />
+                    </div>
+                </div>
+                <h4 class="border-top"></h4>
+                @{string color = Model.Color;}
+                <button type="submit" style="width:100%;background-color:@color" class="btn btn-success ladda-button" data-style="zoom-in"><span class="ladda-label">ذخیره تنظیمات</span><span class="ladda-spinner"></span></button>
+            </div>
+        </div>
+    </div>
+                    }
+<script src="~/Scripts/AdminWebJS.js"></script>
+<script>
+    SetConfigs('@Model.Color', '@Model.BackGround', '@Model.Theme', '@Model.BoxedLayout', '@Model.FixedTopbar', '@Model.SubmenuonHover', '@Model.SidebaronHover', '@Model.FixedSidebar');
+</script>

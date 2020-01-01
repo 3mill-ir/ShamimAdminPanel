@@ -1,0 +1,220 @@
+﻿@model AdminWeb.Models.DataModels.PollQuestionModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool AnswerBoxHasValue = false;
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    @*<script src="~/Content/assets/global/plugins/charts-chartjs/Chart.min.js"></script>*@   @*ChartJS Chart*@
+    @*<script src="~/Content/assets/global/js/pages/charts.js"></script>*@
+    <script src="~/Scripts/charts.js"></script>
+    <script src="~/Scripts/Chart.js/Chart.min.js"></script>
+    @{
+        Random rnd = new Random();
+
+        <script>
+
+            var ScoreResult = [];
+            var LableResult = [];
+            var AllResult = [];
+            var AllSubResult = [];
+
+            @if(Model.ChartType!="BarChart")
+            {
+            for (int i=0; i < @Model.PollAnswer.Count; i++){
+        <text>
+            ScoreResult.push({
+                value: '@Model.PollAnswer[i].Score',
+                color: '#@Model.PollAnswer[i].Color',
+                highlight: '#6C7A89',
+                label: 'گزینه @Model.PollAnswer[i].AnswerKey'
+            });
+            </text>
+            }
+            }
+            else{
+            for (int i=0; i < Model.PollAnswer.Count; i++){
+        <text>
+            ScoreResult.push("@Model.PollAnswer[i].Score");
+            LableResult.push("@Model.PollAnswer[i].Text");
+            </text>
+            }
+
+}
+            jQuery(document).ready(function () {
+                Charts.init("@Model.ChartType", "pieChart", "pieLegend", ScoreResult, LableResult);
+            });
+            $("a[id^='PipoModalLink_']").click('action', function () {
+                var temp = $(this).attr('id').split("_");
+                var myid = temp[1];
+                $("#PipoModalBody").empty();
+                $("#PipoModalBody").append('<p> @Resource.Resource.View_AreYouShure' + ' (#' + myid + ')</p>');
+                var $self = $("#PipoModalForm");
+                $self.attr('action', '/Poll/DeletePollAnswer?PollAnswerId=' + myid + '&PollQuestionID=' + '@Model.ID');
+            });
+        </script>
+    }
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        });
+    </script>
+}
+<div class="row">
+    <div class="col-md-12 portlets">
+        <div class="panel">
+            <div class="panel-header panel-controls">
+            </div>
+            <div class="panel-content">
+                <div class="row" style="margin-top:20px;">
+                    <div class="col-md-12">
+                        <div class="row margin-top-30">
+                            <div class="col-lg-6 col-md-12">
+                                <fieldset>
+                                    <legend>
+                                        @Resource.Resource.View_PollDetail
+                                    </legend>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">
+                                            @Html.DisplayNameFor(model => model.Question):
+                                            @Html.DisplayFor(model => model.Question)
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">
+                                            @Html.DisplayNameFor(model => model.CreatedOnUTC):
+                                            @Html.Label(AdminWeb.Models.BLL.Tools.GetDateTimeReturnJalaliDate(Model.CreatedOnUTC ?? default(DateTime)), new { style = "direction:ltr;" })
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">
+                                            @Html.DisplayNameFor(model => model.StartDateOnUTC):
+                                            @Html.Label(AdminWeb.Models.BLL.Tools.GetDateTimeReturnJalaliDate(Model.StartDateOnUTC ?? default(DateTime)), new { style = "direction:ltr;" })
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">
+                                            @Html.DisplayNameFor(model => model.EndDateOnUTC):
+                                            @Html.Label(AdminWeb.Models.BLL.Tools.GetDateTimeReturnJalaliDate(Model.EndDateOnUTC ?? default(DateTime)), new { style = "direction:ltr;" })
+                                        </label>
+                                    </div>
+
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <fieldset>
+                                    <legend>
+                                        @Resource.Resource.View_PollResult
+                                    </legend>
+                                    <div class="col-lg-8 col-md-12">
+                                        <div class="text-center margin-bottom-15">
+                                            @for (int i = 0; i < Model.PollAnswer.Count; i++)
+                                            {
+                                                if (Model.PollAnswer[i].Score > 0)
+                                                {
+                                                    AnswerBoxHasValue = true;
+                                                }
+                                            }
+                                            @if (AnswerBoxHasValue == false)
+                                            {
+                                                <div class="alert alert-danger">
+                                                    در حال حاضر نظری ثبت نشده است.
+                                                </div>
+                                            }
+                                            <canvas id="pieChart" class="full-width" width="300" height="150" style="width: 300px; height: 150px;"></canvas>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <div id="pieLegend" class="chart-legend"></div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    @if (@ViewBag.ErrorinDelete != null)
+                                    {
+                                        <div class="alert alert-danger">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                            @ViewBag.ErrorinDelete
+                                        </div>
+                                    }
+                                    <fieldset>
+                                        <legend>
+                                            @Resource.Resource.View_PollOptions
+                                        </legend>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover " id="sample-table-1">
+                                                <thead>
+                                                    <tr>
+                                                        <th>شماره گزینه</th>
+                                                        <th>متن گزینه</th>
+                                                        <th class="text-center">@Html.DisplayName(Resource.Resource.PollAnswer_AnswerColor)</th>
+                                                      
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @for (int i = 0; i < Model.PollAnswer.Count; i++)
+                                                    {
+                                                        <tr>
+                                                            <td>@Model.PollAnswer[i].AnswerKey</td>
+                                                            <td>@Model.PollAnswer[i].Text</td>
+                                                            <td class="text-center">
+                                                                <div style="width:30px;height:30px;background-color:#@Model.PollAnswer[i].Color;margin-right:auto;margin-left:auto;"></div>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <div class="visible-md visible-lg visible-sm visible-xs">
+                                                                    <a id="PipoModalLink_@Model.PollAnswer[i].ID" class="btn btn-transparent btn-xs" data-toggle="modal" data-target="#modal-basic" data-placement="top" title="حذف"><i class="fa fa-times fa-white" data-toggle="modal" data-target="#PipoModal"></i></a>
+                                                                </div>
+
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BEGIN MODALS -->
+<div class="modal fade" id="modal-basic" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h2 class="modal-title"><strong>هشدار</strong></h2>
+            </div>
+            <div id="PipoModalBody" class="modal-body">
+                آیا از انجام عملیات مورد نظر اطمینان خاطر دارید ؟<br>
+            </div>
+            @using (Html.BeginForm("ChangeStatusPollQuestion", "Poll", new { SlideId = "_postid_" }, FormMethod.Post, new { Id = "PipoModalForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">بستن</button>
+                    <button type="submit" class="btn btn-primary btn-embossed">بله</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- END MODALS -->

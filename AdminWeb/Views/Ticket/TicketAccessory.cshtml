@@ -1,0 +1,48 @@
+﻿@using AdminWeb.Infrastructure
+@model AdminWeb.Models.DataModels.TicketAccessoryDataModel
+@{
+    string PipoAllCpunt = ViewBag.AllTicketCount;
+    string PipoResponseCount = ViewBag.ResponseTicketCount;
+    string PipoUnResponseCount = ViewBag.UnResponseTicketCount;
+    string PipoToResponseCount = ViewBag.ToResponseTicketCount;
+}
+
+<script>
+    function PipoStatusMid(TicketStatus) {
+        document.getElementById('PipoCurrentStatus').value = TicketStatus;
+        PipoTicketAccessoryClicked(TicketStatus);
+    };
+</script>
+<div class="form-group" style="margin-right: 20px;">
+    <div class="radio clip-radio radio-success">
+        <input onchange="PipoStatusMid();" checked="checked" type="radio" id="PipoTicketAccessory_1" name="vertical2" value="همه">
+        <label for="PipoTicketAccessory_1" style="font-size:15px;">
+            همه
+            <span style="background-color: #1FBBA6 !important;" class="badge"> @Model.AllTicketCount </span>
+        </label>
+    </div>
+    <div class="radio clip-radio radio-success">
+        <input onchange="PipoStatusMid('پاسخ داده شده');" type="radio" id="PipoTicketAccessory_2" name="vertical2" value="پاسخ داده شده">
+        <label for="PipoTicketAccessory_2" style="font-size:15px;">
+            پاسخ داده شده
+            <span style="background-color: #1FBBA6 !important;" class="badge"> @Model.ResponseTicketCount </span>
+        </label>
+    </div>
+    <div class="radio clip-radio radio-success">
+        <input onchange="PipoStatusMid('در حال بررسی');" type="radio" id="PipoTicketAccessory_3" name="vertical2" value="در حال بررسی">
+        <label for="PipoTicketAccessory_3" style="font-size:15px;">
+            در حال بررسی
+            <span style="background-color: #1FBBA6 !important;" class="badge"> @Model.ToResponseTicketCount </span>
+        </label>
+    </div>
+    <div class="radio clip-radio radio-success">
+        <input onchange="PipoStatusMid('در وضعیت انتظار');" type="radio" id="PipoTicketAccessory_4" name="vertical2" value="در وضعیت انتظار">
+        <label for="PipoTicketAccessory_4" style="font-size:15px;">
+            در وضعیت انتظار
+            <span style="background-color: #1FBBA6 !important;" class="badge"> @Model.UnResponseTicketCount </span>
+        </label>
+    </div>
+</div>
+<div id="PipoPagingDist" style="height:10px;border-bottom:5px solid #808080"></div>
+<input id="PipoCurrentStatus" hidden>
+

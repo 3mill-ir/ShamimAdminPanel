@@ -1,0 +1,329 @@
+﻿@model IEnumerable<AdminWeb.Models.DataModels.AspNetRoles>
+@using AdminWeb.Infrastructure
+<div class="sidebar-inner">
+    <div class="sidebar-top">
+        @*<form action="search-result.html" method="post" class="searchform" id="search-results">
+                <input type="text" class="form-control" name="keyword" placeholder="@Resource.Resource.Layout_SearchPlaceHolder">
+            </form>*@
+        <div class="userlogged clearfix">
+            <i class="icon icons-faces-users-01"></i>
+            @*<div class="user-details">
+                    <h4>@ViewBag.UserName</h4>
+                    <div class="dropdown user-login">
+                        <button class="btn btn-xs dropdown-toggle btn-rounded" type="button" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-delay="300">
+                            <i class="online"></i><span>online</span><i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="online"></i><span>Online</span></a></li>
+                            <li><a href="#"><i class="busy"></i><span>Busy</span></a></li>
+                            <li><a href="#"><i class="turquoise"></i><span>Hidden</span></a></li>
+                            <li><a href="#"><i class="away"></i><span>Away</span></a></li>
+                        </ul>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+    @*<div class="menu-title">
+            @Resource.Resource.Layout_MenuSettings
+            <div class="pull-right menu-settings">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-delay="300">
+                    <i class="icon-settings"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" id="reorder-menu" class="reorder-menu">@Resource.Resource.Layout_MenuOrder</a></li>
+                    <li><a href="#" id="remove-menu" class="remove-menu">@Resource.Resource.Layout_RemoveElements</a></li>
+                    <li><a href="#" id="hide-top-sidebar" class="hide-top-sidebar">@Resource.Resource.Layout_HideUserAndSearch</a></li>
+                </ul>
+            </div>
+        </div>*@
+    @{
+        var Rolls =Model.Select(q => q.Name);
+    }
+    <ul class="nav nav-sidebar">
+        <li class="@Url.MakeActiveController("Home")"><a href="@Url.Action("Index","Home")"><i class="icon-home"></i><span>@Resource.Resource.AdminMenu_Dashboard</span></a></li>
+        @if (Rolls.Contains("لیست دسترسی ها") || Rolls.Contains("افزودن دسترسی") || Rolls.Contains("لیست سطوح دسترسی") || Rolls.Contains("افزودن سطح دسترسی") || Rolls.Contains("مدیریت حساب های کاربری"))
+            {
+                <li class="nav-parent @Url.MakeActive_AllController("Roll")">
+                    <a><i class="fa fa-user fa-lg"></i><span>@Resource.Resource.Roll_Management</span> <span class="fa arrow"></span></a>
+                    <ul class="children collapse">
+                        @if (Rolls.Contains("لیست دسترسی ها"))
+                    {
+                            <li class="@Url.MakeActiveAction("List")"><a href="@Url.Action("List", "Roll")">@Resource.Resource.Roll_ListRoll</a></li>}
+                        @if (Rolls.Contains("افزودن دسترسی"))
+                    {
+                            <li class="@Url.MakeActiveAction("Add")"><a href="@Url.Action("Add", "Roll")">@Resource.Resource.Roll_AddRoll</a></li> }
+                        @if (Rolls.Contains("لیست سطوح دسترسی"))
+                    {
+                            <li class="@Url.MakeActiveAction("ListRollGroup")"><a href="@Url.Action("ListRollGroup", "Roll")">@Resource.Resource.Roll_ListRollGroup</a></li> }
+                        @if (Rolls.Contains("افزودن سطح دسترسی"))
+                    {
+                            <li class="@Url.MakeActiveAction("AddRollGroup")"><a href="@Url.Action("AddRollGroup", "Roll")">@Resource.Resource.Roll_AddRoleGroup</a></li> }
+                        @if (Rolls.Contains("مدیریت حساب های کاربری"))
+                    {
+                            <li class="@Url.MakeActiveAction("UsersManagement")"><a href="@Url.Action("UsersManagement", "Roll")">@Resource.Resource.Roll_UsersManagement</a></li> }
+                    </ul>
+                </li>
+            }
+        @*<li class="nav-parent @Url.MakeActive_AllController("Roll")">
+            <a><i class="fa fa-user fa-lg"></i><span>@Resource.Resource.Roll_Management</span> <span class="fa arrow"></span></a>
+            <ul class="children collapse">
+                <li class="@Url.MakeActiveAction("List")"><a href="@Url.Action("List", "Roll")">@Resource.Resource.Roll_ListRoll</a></li>
+                <li class="@Url.MakeActiveAction("Add")"><a href="@Url.Action("Add", "Roll")">@Resource.Resource.Roll_AddRoll</a></li>
+                <li class="@Url.MakeActiveAction("ListRollGroup")"><a href="@Url.Action("ListRollGroup", "Roll")">@Resource.Resource.Roll_ListRollGroup</a></li>
+                <li class="@Url.MakeActiveAction("AddRoleGroup")"><a href="@Url.Action("AddRoleGroup", "Roll")">@Resource.Resource.Roll_AddRoleGroup</a></li>
+                <li class="@Url.MakeActiveAction("AddRoleGroup")"><a href="@Url.Action("AddRoleGroup", "Roll")">@Resource.Resource.Roll_AddRoleGroup</a></li>
+            </ul>
+        </li>*@
+        @if (Rolls.Contains("افزودن منو") || Rolls.Contains("لیست منو ها"))
+        {
+            <li class="nav-parent @Url.MakeActiveController("Menu")">
+                <a href="#"><i class="icon-puzzle"></i><span>@Resource.Resource.AdminMenu_MenuManagement</span> <span class="fa arrow"></span></a>
+                <ul class="children collapse">
+                    @if (Rolls.Contains("لیست منو ها"))
+                {
+                        <li class="@Url.MakeActiveAction("List")"><a href="@Url.Action("List", "Menu")">@Resource.Resource.AdminMenu_ListMenu</a></li> }
+                    @if (Rolls.Contains("افزودن منو"))
+                {
+                        <li class="@Url.MakeActiveAction("Add")"><a href="@Url.Action("Add", "Menu")">@Resource.Resource.AdminMenu_AddMenu</a></li> }
+                </ul>
+            </li>
+        }
+        @if (Rolls.Contains("مدیریت مطالب") || Rolls.Contains("افزودن مطلب جدید"))
+        {
+            <li class="nav-parent @Url.MakeActiveController("DynamicPage")">
+                <a href="#"><i class="glyphicon glyphicon-list-alt"></i><span>@Resource.Resource.AdminMenu_DynamicPostManagement</span> <span class="fa arrow"></span></a>
+                <ul class="children collapse">
+                    @if (Rolls.Contains("مدیریت مطالب"))
+                {
+                        <li class="@Url.MakeActiveAction("PostList")"><a href="@Url.Action("PostList", "DynamicPage")">@Resource.Resource.AdminMenu_DynamicPostList</a></li> }
+                    @if (Rolls.Contains("افزودن مطلب جدید"))
+                {
+                        <li class="@Url.MakeActiveAction("PostCreate")"><a href="@Url.Action("PostCreate", "DynamicPage")">@Resource.Resource.AdminMenu_DynamicPostAdd</a></li> }
+                </ul>
+            </li>
+        }
+        @if (Rolls.Contains("لیست صفحات ایستا"))
+        {
+            <li class="nav-parent @Url.MakeActiveController("StaticPage")">
+                <a href="#"><i class="glyphicon glyphicon-file"></i><span>@Resource.Resource.AdminMenu_StaticPageManagement</span> <span class="fa arrow"></span></a>
+                <ul class="children collapse">
+                    @if (Rolls.Contains("لیست صفحات ایستا"))
+                {
+                        <li class="@Url.MakeActiveAction("PageLists")"><a href="@Url.Action("PageList", "StaticPage")">@Resource.Resource.AdminMenu_StaticPageList</a></li> }
+                </ul>
+            </li>
+        }
+        @if (Rolls.Contains("مدیریت اسلایدر"))
+        {
+            <li class="nav-parent @Url.MakeActiveController("Slider")">
+                <a href="#"><i class="fa fa-sliders"></i><span>@Resource.Resource.AdminMenu_SliderManagement</span> <span class="fa arrow"></span></a>
+                <ul class="children collapse">
+                    @if (Rolls.Contains("مدیریت اسلایدر"))
+                {
+                        <li class="@Url.MakeActiveAction("ListSlide")"><a href="@Url.Action("ListSlide", "Slider")">@Resource.Resource.AdminMenu_ListSlide</a></li>}
+                </ul>
+            </li>
+        }
+        @if (Rolls.Contains("مدیریت پیوند های صفحه") || Rolls.Contains("مدیریت پیوند های فوتر"))
+        {
+            <li class="nav-parent @Url.MakeActiveController("Links")">
+                <a href="#"><i class="fa fa-link"></i><span>@Resource.Resource.AdminMenu_LinkManagement</span> <span class="fa arrow"></span></a>
+                <ul class="children collapse">
+                    @if (Rolls.Contains("مدیریت پیوند های صفحه"))
+                    {
+                        <li class="@Url.MakeActiveAction("ListMainLinks")"><a href="@Url.Action("ListMainLinks", "Links")">@Resource.Resource.AdminMenu_PageLinkList</a></li>
+                    }
+                    @if (Rolls.Contains("مدیریت پیوند های فوتر"))
+                    {
+                        <li class="@Url.MakeActiveAction("ListFooterLinks")"><a href="@Url.Action("ListFooterLinks", "Links")">@Resource.Resource.AdminMenu_FooterLinkList</a></li>
+                    }
+                </ul>
+            </li>
+        }
+        @if (Rolls.Contains("مدیریت اسکریپت ها"))
+        {
+            <li class="nav-parent @Url.MakeActiveController("Script")">
+                <a href="#"><i class="fa fa-code-fork"></i><span>@Resource.Resource.AdminMenu_ScriptManagement</span> <span class="fa arrow"></span></a>
+                <ul class="children collapse">
+                    @if (Rolls.Contains("مدیریت اسکریپت ها"))
+                    {
+                        <li class="@Url.MakeActiveAction("EditScripts")"><a href="@Url.Action("EditScripts", "Script")">@Resource.Resource.AdminMenu_EditScript</a></li>
+                    }
+                </ul>
+            </li>
+        }
+        @if (Rolls.Contains("مدیریت پوشه ها") || Rolls.Contains("افزودن فایل") || Rolls.Contains("لیست فایل ها"))
+        {
+            <li class="nav-parent @Url.MakeActiveController("Gallery")">
+                <a href="#"><i class="fa fa-camera"></i><span>@Resource.Resource.AdminMenu_GalleryManagement</span> <span class="fa arrow"></span></a>
+                <ul class="children collapse">
+                    @if (Rolls.Contains("مدیریت پوشه ها"))
+                    {
+                        <li class="@Url.MakeActiveAction("ManageFolder")"><a href="@Url.Action("ManageFolder", "Gallery")">@Resource.Resource.AdminMenu_ManageFolder</a></li>
+                    }
+                    @if (Rolls.Contains("افزودن فایل"))
+                    {
+                        <li class="@Url.MakeActiveAction("AddFile")"><a href="@Url.Action("AddFile", "Gallery")">@Resource.Resource.AdminMenu_AddFile</a></li>
+                    }
+                    @if (Rolls.Contains("لیست فایل ها"))
+                    {
+                        <li class="@Url.MakeActiveAction("ListFile")"><a href="@Url.Action("ListFile", "Gallery")">@Resource.Resource.AdminMenu_ListFile</a></li>
+                    }
+                </ul>
+            </li>
+        }
+        @if (Rolls.Contains("مدیریت کامنت ها"))
+        {
+            <li class="nav-parent @Url.MakeActiveController("Comments")">
+                <a href="#"><i class="fa fa-comment-o"></i><span>@Resource.Resource.AdminMenu_CommentsManagement</span> <span class="fa arrow"></span></a>
+                <ul class="children collapse">
+                    @if (Rolls.Contains("مدیریت کامنت ها"))
+                    {
+                        <li class="@Url.MakeActiveAction("DynamicPageComments")"><a href="@Url.Action("DynamicPageComments", "Comments")">@Resource.Resource.AdminMenu_CommentsList</a></li>
+                    }
+                </ul>
+            </li>
+        }
+        @if (Rolls.Contains("افزودن نظرسنجی") || Rolls.Contains("لیست نظرسنجی ها"))
+        {
+            <li class="nav-parent @Url.MakeActiveController("Poll")">
+                <a href="#"><i class="fa fa-check-square-o"></i><span>@Resource.Resource.AdminMenu_PollManagement</span> <span class="fa arrow"></span></a>
+                <ul class="children collapse">
+                    @if (Rolls.Contains("لیست نظرسنجی ها"))
+                    {
+                        <li class="@Url.MakeActiveAction("ListPollQuestion")"><a href="@Url.Action("ListPollQuestion", "Poll")">@Resource.Resource.AdminMenu_ListPollQuestion</a></li>
+                    }
+                    @if (Rolls.Contains("افزودن نظرسنجی"))
+                    {
+                        <li class="@Url.MakeActiveAction("AddPollQuestion")"><a href="@Url.Action("AddPollQuestion", "Poll")">@Resource.Resource.AdminMenu_AddPollQuestion</a></li>
+                    }
+                </ul>
+            </li>
+        }
+        @if (Rolls.Contains("لیست کاربران") || Rolls.Contains("لیست دسته بندی ها") || Rolls.Contains("لیست عرضه ها") || Rolls.Contains("لیست تقاضا ها") || Rolls.Contains("لیست شرکت ها"))
+        {
+            <li class="nav-parent @Url.MakeActive_AllController("Account_Item_Category")">
+                <a href="@Url.Action("SpecialIndex", "Home")"><i class="fa fa-wrench"></i><span>@Resource.Resource.AdminMenu_FanBazarManagement</span> <span class="fa arrow"></span></a>
+                <ul class="children collapse">
+                    @if (Rolls.Contains("لیست کاربران"))
+                    {
+                        <li class="@Url.MakeActiveAction("ListUser")"><a href="@Url.Action("ListUser", "Account")">@Resource.Resource.AdminMenu_UsersList</a></li>
+                    }
+                    @if (Rolls.Contains("لیست دسته بندی ها"))
+                    {
+                        <li class="@Url.MakeActiveAction("List")"><a href="@Url.Action("List", "Category")">@Resource.Resource.AdminMenu_CategoryList</a></li>
+                    }
+                    @if (Rolls.Contains("لیست عرضه ها"))
+                    {
+                        <li class="@Url.MakeActiveActionWithType("ListItem", "Offer")"><a href="@Url.Action("ListItem", "Item", new { Type = "FanbazarOffer" })">@Resource.Resource.AdminMenu_OfferList</a></li>
+                    }
+                    @if (Rolls.Contains("لیست تقاضا ها"))
+                    {
+                        <li class="@Url.MakeActiveActionWithType("ListItem", "Demand")"><a href="@Url.Action("ListItem", "Item", new { Type = "FanbazarDemand" })">@Resource.Resource.AdminMenu_DemandList</a></li>
+                    }
+                    @if (Rolls.Contains("لیست شرکت ها"))
+                    {
+                        <li class="@Url.MakeActiveActionWithType("ListItem", "Company")"><a href="@Url.Action("ListItem", "Item", new { Type = "FanbazarCompany" })">@Resource.Resource.AdminMenu_CompanyList</a></li>
+                    }
+                </ul>
+            </li>
+        }
+        @if (Rolls.Contains("لیست فرم ها") || Rolls.Contains("افزودن فرم"))
+        {
+            <li class="nav-parent @Url.MakeActive_AllController("FormBuilder")">
+                <a><i class="fa fa-toggle-on"></i><span>@Resource.Resource.Form_Creator</span> <span class="fa arrow"></span></a>
+                <ul class="children collapse">
+                    @if (Rolls.Contains("لیست فرم ها"))
+                    {
+                        <li class="@Url.MakeActiveAction("List")"><a href="@Url.Action("List", "FormBuilder", new { Type = "FormBuilder" })">@Resource.Resource.Form_List</a></li>
+                    }
+                    @if (Rolls.Contains("افزودن فرم"))
+                    {
+                        <li class="@Url.MakeActiveAction("Add")"><a href="@Url.Action("Add", "FormBuilder")">@Resource.Resource.Form_Addition</a></li>
+                    }
+                </ul>
+            </li>
+        }
+        @if (Rolls.Contains("مدیریت درخواست ها"))
+        {
+            <li class="nav-parent @Url.MakeActive_AllController("Ticket")">
+                <a><i class="fa fa-th fa-lg"></i><span>@Resource.Resource.Ticket_Management</span> <span class="fa arrow"></span></a>
+                <ul class="children collapse">
+                    @if (Rolls.Contains("مدیریت درخواست ها"))
+                    {
+                        <li class="@Url.MakeActiveAction("Index")"><a href="@Url.Action("Index", "Ticket")">@Resource.Resource.Ticket_ListTicket</a></li>
+                    }
+                    @*<li class="@Url.MakeActiveAction("Add")"><a href="@Url.Action("Add", "FormBuilder")">@Resource.Resource.Form_Addition</a></li>*@
+                </ul>
+            </li>
+        }
+        @if (Rolls.Contains("مدیریت سبد خرید"))
+        {
+            <li class="nav-parent @Url.MakeActive_AllController("ShoppingCart")">
+                <a><i class="fa fa-shopping-cart fa-lg"></i><span>@Resource.Resource.ShoppingCart_Management</span> <span class="fa arrow"></span></a>
+                <ul class="children collapse">
+                    @if (Rolls.Contains("مدیریت سبد خرید"))
+                    {
+                        <li class="@Url.MakeActiveAction("List")"><a href="@Url.Action("List", "ShoppingCart")">@Resource.Resource.ShoppingCart_ListShop</a></li>
+                    }
+                </ul>
+            </li>
+        }
+        @if (Rolls.Contains("مدیریت تلگرام"))
+        {
+            <li class="@Url.MakeActiveController("Telegram")"><a href="@Url.Action("TelegramManagementPannel", "Telegram")"><i class="fa fa-location-arrow"></i><span>@Resource.Resource.AdminMenu_TelegramManagementPannel</span></a></li>
+        }
+        @if (Rolls.Contains("مدیریت شکایات"))
+        {
+            <li class="nav-parent @Url.MakeActive_AllController("Shekayat")">
+                <a><i class="fa fa-legal fa-lg"></i><span>@Resource.Resource.Shekayat_Management</span> <span class="fa arrow"></span></a>
+                <ul class="children collapse">
+                    @if (Rolls.Contains("مدیریت شکایات"))
+                    {
+                        <li class="@Url.MakeActiveAction("Index")"><a href="@Url.Action("Index", "Shekayat")">@Resource.Resource.Shekayat_ListShekayat</a></li>
+                    }
+                </ul>
+            </li>
+        }
+        @if (Rolls.Contains("مدیریت پاپ آپ"))
+        {
+            <li class="@Url.MakeActiveController("PopUp")"><a href="@Url.Action("EditPopUp", "PopUp")"><i class="glyphicon glyphicon-exclamation-sign"></i><span>@Resource.Resource.EditPopUp_PopUp_Tittle_PageTittle</span></a></li>
+        }
+    </ul>
+    <!-- SIDEBAR WIDGET FOLDERS -->
+    @*<div class="sidebar-widgets">
+            <p class="menu-title widget-title">@Resource.Resource.Layout_Folders <span class="pull-right"><a href="#" class="new-folder"> <i class="icon-plus"></i></a></span></p>
+            <ul class="folders">
+                <li>
+                    <a href="#"><i class="icon-doc c-primary"></i>@Resource.Resource.Layout_Mydocuments</a>
+                </li>
+                <li>
+                    <a href="#"><i class="icon-picture"></i>@Resource.Resource.Layout_Myimages</a>
+                </li>
+                <li>
+                    <a href="#"><i class="icon-lock"></i>@Resource.Resource.Layout_Securedata</a>
+                </li>
+                <li class="add-folder">
+                    <input type="text" placeholder="@Resource.Resource.Layout_FoldersName" class="form-control input-sm">
+                </li>
+            </ul>
+        </div>*@
+    <div class="sidebar-footer clearfix">
+        @*<a class="pull-left footer-settings" href="#" data-rel="tooltip" data-placement="top" data-original-title="@Resource.Resource.Layout_Settings">
+                <i class="icon-settings"></i>
+            </a>*@
+        <a class="pull-left toggle_fullscreen" href="#" data-rel="tooltip" data-placement="top" data-original-title="@Resource.Resource.Layout_FullScreen">
+            <i class="icon-size-fullscreen"></i>
+        </a>
+        @*<a class="pull-left" href="user-lockscreen.html" data-rel="tooltip" data-placement="top" data-original-title="@Resource.Resource.Layout_LockScreen">
+                <i class="icon-lock"></i>
+            </a>*@
+        @*@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <a class="pull-left btn-effect" href="javascript:document.getElementById('logoutForm').submit()" data-rel="tooltip" data-placement="top" data-original-title="@Resource.Resource.Layout_LogOut">
+                    <i class="icon-power"></i>
+                </a>
+            }*@
+    </div>
+</div>

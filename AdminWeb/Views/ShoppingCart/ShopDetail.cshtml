@@ -1,0 +1,136 @@
+﻿@model AdminWeb.Models.DataModels.Shop
+@using AdminWeb.Models.BLL
+@using AdminWeb.Models.DataModels
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+    <h2 class="modal-title"><strong>جزئیات سفارش مورد نظر</strong></h2>
+</div>
+<div class="modal-body">
+    <div class="row">
+        @{ 
+            var Account = TempData["Account"] as UserInformationDataModel;
+        }
+        <div class="col-lg-6">
+            <fieldset>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        @Html.DisplayName("نام گیرنده"):
+                        @Html.Label(Account.FirstName+" "+Account.LastName)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        @Html.DisplayName("آدرس"):
+                        @Html.Label(Account.Address)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        @Html.DisplayName("شماره تماس"):
+                        @Html.Label(Account.Tell)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        @Html.DisplayName("شناسه"):
+                        @Html.DisplayFor(model => model.ID)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        @Html.DisplayName("نوع ارسال"):
+                        @Html.DisplayFor(model => model.DeliveryType)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        @Html.DisplayName("هزینه ارسال"):
+                        @Html.DisplayFor(model => model.DeliveryCost)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        @Html.DisplayName("تاریخ ارسال مرسولات به مشتری"):
+                        @Html.Label(AdminWeb.Models.BLL.Tools.GetDateTimeReturnJalaliDate(Model.DeliveryTime ?? default(DateTime)), new { style = "direction:ltr;" })
+                    </label>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-lg-6">
+            <fieldset>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        @Html.DisplayName("تاریخ ثبت سفارش"):
+                        @Html.Label(AdminWeb.Models.BLL.Tools.GetDateTimeReturnJalaliDate(Model.OrderedDate ?? default(DateTime)), new { style = "direction:ltr;" })
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        @Html.DisplayName("وضعیت"):
+                        @Html.Label(Model.State == "Ordered" ? "سفارش در صف بررسی" : Model.State == "Delivered" ? "سفارش برای مشتری ارسال شده" : Model.State == "Recieved" ? "سفارش تحویل مشتری داده شده" : Model.State == "Processing" ? "آماده سازی سفارش" : "نامعلوم")
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        @Html.DisplayName("مبلغ کل سفارش"):
+                        @Html.Label(Tools.PriceString(Model.TotalPrice) + " تومان ")
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        @Html.DisplayName("وضعیت پرداخت"):
+                        @{ 
+                            string PayState = Model.Payed == true ? "پرداخت موفق" : "پرداخت نشده";
+                        }
+                        @Html.Label(PayState)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        @Html.DisplayName("شیوه پرداخت"):
+                        @Html.DisplayFor(model => model.PayType)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        @Html.DisplayName("مبلغ کل سفارش"):
+                        @Html.Label(Tools.PriceString(Model.TotalPrice) + "تومان ")
+                    </label>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-lg-12">
+            <div class="panel-content pagination2 table-responsive">
+                <table class="table table-hover table-dynamic">
+                    <thead>
+                        <tr>
+                            <th class="text-center">تصویر</th>
+                            <th class="text-center">نام</th>
+                            <th class="text-center">تعداد</th>
+                            <th class="text-center">قیمت واحد</th>
+                            <th class="text-center">موجودی محصول در انبار</th>
+                            <th class="text-center">تاریخ افزودن به سبد خرید</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ShopItem)
+                        {
+                            <tr>
+                                <td class="text-center"><img class="img-responsive" style="height:100px;width:100px;" src="@ViewBag.PrePath@item.Item.Image" /></td>
+                                <td class="text-center">@item.Item.Name</td>
+                                <td class="text-center">@item.Count</td>
+                                <td class="text-center">@Tools.PriceString(item.Item.Price) تومان </td>
+                                <td class="text-center">@item.Item.Stock</td>
+                                <td class="text-center" style="direction:ltr;">@AdminWeb.Models.BLL.Tools.GetDateTimeReturnJalaliDate(item.CreatedDateOnUtc ?? default(DateTime))</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">بستن</button>
+</div>

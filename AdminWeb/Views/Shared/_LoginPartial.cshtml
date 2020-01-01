@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNet.Identity
+<a href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+    <img src="~/Content/DefaultContent/Imgs/User.png" alt="user image">
+    <span class="username">@ViewBag.UserName</span>
+</a>
+<ul class="dropdown-menu">
+    <li>
+        <a href="@Url.Action("ChangePassword","Manage")"><i style="margin-top: 5px;" class="icon-lock"></i><span style="font-size: 10px;">ویرایش رمز عبور</span></a>
+    </li>
+    <li>
+        <a href="@Url.Action("EditContact","Contact")"><i class="icon-settings"></i><span style="font-size: 10px;">تنظیمات حساب کاربری</span></a>
+    </li>
+    <li>
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()"><i class="icon-logout"></i><span style="font-size: 10px;">خروج از حساب کاربری</span></a>
+        }
+    </li>
+</ul>

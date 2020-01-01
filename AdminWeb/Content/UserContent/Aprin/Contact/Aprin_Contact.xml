@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?><ContactManagementModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><F_UserId xsi:nil="true" /><Email><string>ourstudio@somemail.com</string></Email><Address><string>ارومیه - خیابان شیخ تپه - طبقه فوقانی بانک صادرات
+</string><string>
+</string><string /></Address><Phone><string>+۹۸ ۴۴ ۳۳۳۶ ۰۷ ۰۷
+</string><string /></Phone><Fax><string>+۹۸ ۹۱۲ ۳۰۳ ۵۴ ۰۰</string></Fax></ContactManagementModel>

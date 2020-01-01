@@ -1,0 +1,299 @@
+﻿
+<!DOCTYPE html>
+<!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.PageTittle | پارک علم و فناوری آذربایجان غربی</title>
+    <meta name="keywords" content="پارک علم و فناوری,آذربایجان غربی" />
+    <meta name="description" content="وب سایت پارک علم و فناوری" />
+    <meta name="Author" content="شرکت توسعه تجارت الکترونیک هزاره سوم" />
+
+    <!-- mobile settings -->
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+    <!-- WEB FONTS : use %7C instead of | (pipe) -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700" rel="stylesheet" type="text/css" />
+
+    <!-- CORE CSS -->
+    <link href="~/Content/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- SLIDER -->
+    @RenderSection("SliderCSS", false)
+
+    <!-- THEME CSS -->
+    <link href="~/Content/assets/css/essentials.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/assets/css/layout.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/assets/css/thematics-education.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/assets/plugins/bootstrap/RTL/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/assets/plugins/bootstrap/RTL/bootstrap-flipped.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/assets/css/layout-RTL.css" rel="stylesheet" type="text/css" />
+
+
+    <!-- PAGE LEVEL SCRIPTS -->
+    <link href="~/Content/assets/css/header-1.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/assets/css/color_scheme/blue.css" rel="stylesheet" type="text/css" id="color_scheme" />
+
+    @RenderSection("CSSForThisPage", false)
+
+</head>
+
+<!--
+    AVAILABLE BODY CLASSES:
+
+    smoothscroll 			= create a browser smooth scroll
+    enable-animation		= enable WOW animations
+
+    bg-grey					= grey background
+    grain-grey				= grey grain background
+    grain-blue				= blue grain background
+    grain-green				= green grain background
+    grain-blue				= blue grain background
+    grain-orange			= orange grain background
+    grain-yellow			= yellow grain background
+
+    boxed 					= boxed layout
+    pattern1 ... patern11	= pattern background
+    menu-vertical-hide		= hidden, open on click
+
+    BACKGROUND IMAGE [together with .boxed class]
+    data-background="~/Content/assets/images/boxed_background/1.jpg"
+-->
+<body class="smoothscroll enable-animation">
+
+    <!-- SLIDE TOP -->
+    @*<div id="slidetop">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <h6><i class="icon-heart"></i> WHY SMARTY?</h6>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa. </p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h6><i class="icon-attachment"></i> RECENTLY VISITED</h6>
+                        <ul class="list-unstyled">
+                            <li><a href="#"><i class="fa fa-angle-right"></i> Consectetur adipiscing elit amet</a></li>
+                            <li><a href="#"><i class="fa fa-angle-right"></i> This is a very long text, very very very very very very very very very very very very </a></li>
+                            <li><a href="#"><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet</a></li>
+                            <li><a href="#"><i class="fa fa-angle-right"></i> Dolor sit amet,consectetur adipiscing elit amet</a></li>
+                            <li><a href="#"><i class="fa fa-angle-right"></i> Consectetur adipiscing elit amet,consectetur adipiscing elit</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h6><i class="icon-envelope"></i> CONTACT INFO</h6>
+                        <ul class="list-unstyled">
+                            <li><b>Address:</b> PO Box 21132, Here Weare St, <br /> Melbourne, Vivas 2355 Australia</li>
+                            <li><b>Phone:</b> 1-800-565-2390</li>
+                            <li><b>Email:</b> <a href="mailto:support@yourname.com">support@yourname.com</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <a class="slidetop-toggle" href="#"></a>
+
+        </div>*@
+    <!-- /SLIDE TOP -->
+    <!-- wrapper -->
+    <div id="wrapper">
+
+        <!-- Top Bar -->
+        <div id="topBar">
+            <div class="container">
+
+                <!-- right -->
+                <ul class="top-links list-inline pull-right">
+                    @*<li class="text-welcome">Welcome to Smarty, <strong>John Doe</strong></li>
+                        <li>
+
+                            <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#">MY ACCOUNT</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a tabindex="-1" href="#"><i class="fa fa-history"></i> ORDER HISTORY</a></li>
+                                <li class="divider"></li>
+                                <li><a tabindex="-1" href="#"><i class="fa fa-bookmark"></i> WISHLIST</a></li>
+                                <li><a tabindex="-1" href="#"><i class="fa fa-cog"></i> SETTINGS</a></li>
+                                <li class="divider"></li>
+                                <li><a tabindex="-1" href="#"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
+                            </ul>
+
+                        </li>*@
+                    <li><a target="_blank" href="@System.Configuration.ConfigurationManager.AppSettings["AdminAddress"]">پنل مدیریت</a></li>
+                    @*<li><a href="page-register-1.html">REGISTER</a></li>*@
+                </ul>
+
+                <!-- left -->
+                @Html.Action("LanguageList", "Utility")
+
+            </div>
+        </div>
+        <!-- /Top Bar -->
+        <!--
+            AVAILABLE HEADER CLASSES
+
+            Default nav height: 96px
+            .header-md 		= 70px nav height
+            .header-sm 		= 60px nav height
+
+            .noborder 		= remove bottom border (only with transparent use)
+            .transparent	= transparent header
+            .translucent	= translucent header
+            .sticky			= sticky header
+            .static			= static header
+            .dark			= dark header
+            .bottom			= header on bottom
+
+            shadow-before-1 = shadow 1 header top
+            shadow-after-1 	= shadow 1 header bottom
+            shadow-before-2 = shadow 2 header top
+            shadow-after-2 	= shadow 2 header bottom
+            shadow-before-3 = shadow 3 header top
+            shadow-after-3 	= shadow 3 header bottom
+
+            .clearfix		= required for mobile menu, do not remove!
+
+            Example Usage:  class="clearfix sticky header-sm transparent noborder"
+        -->
+        <div id="header" class="sticky clearfix">
+
+            <!-- SEARCH HEADER -->
+            <div class="search-box over-header">
+                <a id="closeSearch" href="#" class="glyphicon glyphicon-remove"></a>
+                <a id="closeSearch"  href="#" onclick="document.getElementById('pipoSearch').submit()" class="glyphicon glyphicon-search margin-left-30"></a>
+                @using (Html.BeginForm("Search", "Post", new
+                {
+                    Type = 2,
+                    profile = ViewBag.profile,
+                    lang = ViewBag.lang,
+                    id = ViewBag.id,
+
+                }, FormMethod.Get, new { @class = "widget_search",id="pipoSearch" }))
+                {
+                    <input type="text" class="form-control" placeholder="جستجو ..." />
+                }
+            </div>
+            <!-- /SEARCH HEADER -->
+            <!-- TOP NAV -->
+            <header id="topNav">
+                <div class="container">
+
+                    <!-- Mobile Menu Button -->
+                    <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- BUTTONS -->
+                    <ul class="pull-right nav nav-pills nav-second-main">
+
+                        <!-- SEARCH -->
+                        <li class="search">
+                            <a href="javascript:;">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                        <!-- /SEARCH -->
+                        <!-- QUICK SHOP CART -->
+                        @*<li class="quick-cart">
+                                <a href="#">
+                                    <span class="badge badge-aqua btn-xs badge-corner">2</span>
+                                    <i class="fa fa-shopping-cart"></i>
+                                </a>
+                                <div class="quick-cart-box">
+                                    <h4>Shop Cart</h4>
+
+                                    <div class="quick-cart-wrapper">
+
+                                        <a href="#">
+                                            <!-- cart item -->
+                                            <img src="~/Content/assets/images/demo/people/300x300/4-min.jpg" width="45" height="45" alt="" />
+                                            <h6><span>2x</span> RED BAG WITH HUGE POCKETS</h6>
+                                            <small>$37.21</small>
+                                        </a><!-- /cart item -->
+
+                                        <a href="#">
+                                            <!-- cart item -->
+                                            <img src="~/Content/assets/images/demo/people/300x300/5-min.jpg" width="45" height="45" alt="" />
+                                            <h6><span>2x</span> THIS IS A VERY LONG TEXT AND WILL BE TRUNCATED</h6>
+                                            <small>$17.18</small>
+                                        </a><!-- /cart item -->
+                                        <!-- cart no items example -->
+                                        <!--
+                                        <a class="text-center" href="#">
+                                            <h6>0 ITEMS ON YOUR CART</h6>
+                                        </a>
+                                        -->
+
+                                    </div>
+
+                                    <!-- quick cart footer -->
+                                    <div class="quick-cart-footer clearfix">
+                                        <a href="shop-cart.html" class="btn btn-primary btn-xs pull-right">VIEW CART</a>
+                                        <span class="pull-left"><strong>TOTAL:</strong> $54.39</span>
+                                    </div>
+                                    <!-- /quick cart footer -->
+
+                                </div>
+                            </li>*@
+                        <!-- /QUICK SHOP CART -->
+
+                    </ul>
+                    <!-- /BUTTONS -->
+                    <!-- Logo -->
+                    <a class="logo pull-left" href="@Url.Action("Index","Home",new {lang=ViewBag.Language })">
+                        <img src="~/Content/assets/images/logo_light.png" alt="" />
+                    </a>
+
+                    <!--
+                        Top Nav
+
+                        AVAILABLE CLASSES:
+                        submenu-dark = dark sub menu
+                    -->
+                    @Html.Action("MainMenu", "Utility", new { profile = TempData["UserName"] })
+
+                </div>
+            </header>
+            <!-- /Top Nav -->
+
+        </div>
+
+
+
+        @RenderBody()
+        <!-- FOOTER -->
+        @Html.Action("Footer", "Utility", new { profile = TempData["UserName"] })
+
+        <!-- /FOOTER -->
+
+    </div>
+    <!-- /wrapper -->
+    <!-- SCROLL TO TOP -->
+    <a href="#" id="toTop"></a>
+
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="inner">
+            <span class="loader"></span>
+        </div>
+    </div><!-- /PRELOADER -->
+    <!-- JAVASCRIPT FILES -->
+    <script type="text/javascript">var plugin_path = '../../../../../../Content/assets/plugins/';</script>
+    <script type="text/javascript" src="~/Content/assets/plugins/jquery/jquery-2.1.4.min.js"></script>
+
+    <script type="text/javascript" src="~/Content/assets/js/scripts.js"></script>
+
+
+    @RenderSection("jsForThisPage", false)
+
+</body>
+</html>

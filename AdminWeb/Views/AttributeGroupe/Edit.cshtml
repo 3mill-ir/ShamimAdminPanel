@@ -1,0 +1,110 @@
+﻿@model AdminWeb.Models.DataModels.AttributeGroupNew
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script src="~/Content/assets/global/plugins/bootstrap-loading/lada.min.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+            var $self = $("#PipoModalForm");
+            $self.attr('action', '/AttributeGroupe/DeleteAttributeGroupe?ID=' + '@Model.ID' + "&F_MenuID=" + '@Model.F_MenuID');
+        });
+    </script>
+}
+<div class="row">
+    @using (Html.BeginForm("Edit", "AttributeGroupe", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(model=>model.ID)
+        @Html.AntiForgeryToken()
+        <div class="col-md-8 col-md-push-2 portlets">
+            <div class="panel">
+                <div class="panel-header panel-controls">
+                </div>
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row margin-top-30">
+                                <div class="col-lg-12 col-md-12">
+                                    <fieldset>
+                                        <legend>
+                                            @Resource.Resource.View_AttributeGroupe<span class="symbol required"></span>
+                                        </legend>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">@Html.Label("نام گروه ویژگی")</label>
+                                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control form-white", @id = "exampleInputEmail1", @placeholder = "نام را وارد کنید", @type = "text", required = "" })
+                                            @Html.ValidationMessageFor(model => model.Name)
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">@Html.Label("وزن")</label>
+                                            @Html.TextBoxFor(model => model.Weight, new { @class = "form-control form-white", @id = "exampleInputEmail1", @placeholder = "وزن را وارد کنید", @type = "number", required = "" })
+                                            @Html.ValidationMessageFor(model => model.Weight)
+                                        </div>
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="fileinput-new thumbnail">
+                                                <img data-src="" src="@ViewBag.PrePath@Model.Image" style="height: 200px;width: 35%;" class="img-responsive" alt="gallery 3">
+                                            </div>
+                                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                            <div>
+                                                <span class="btn btn-default btn-file">
+                                                    <span class="fileinput-new">انتخاب تصویر ...</span><span class="fileinput-exists">ویرایش</span>
+                                                    <input type="file" name="MyFile">
+                                                </span>
+                                                <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">حذف</a>
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.Image)
+                                        </div>
+                                        @Html.HiddenFor(model=>model.F_AttributeGroupID)
+                                        @Html.HiddenFor(model => model.F_MenuID)
+                                        <div style="text-align:center">
+                                            <button type="submit" class="btn btn-success ladda-button" data-style="expand-right" style="width:100%;margin-top: 20px;">
+                                                <span class="ladda-label">@Resource.Resource.Edit</span>
+                                            </button>
+                                            <button type="button" onclick="CallDelete()" id="PipoModalLink_@Model.ID" class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#modal-basic">حذف</button>
+                                            <div class="center text-danger ">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<!-- BEGIN MODALS -->
+<div class="modal fade" id="modal-basic" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h2 class="modal-title"><strong>هشدار</strong></h2>
+            </div>
+            <div id="PipoModalBody" class="modal-body">
+                آیا از انجام عملیات مورد نظر اطمینان خاطر دارید ؟<br>
+            </div>
+            @using (Html.BeginForm("DeleteAttributeGroupe", "AttributeGroupe", new { ID = "", F_MenuID = "" }, FormMethod.Post, new { Id = "PipoModalForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">بستن</button>
+                    <button type="submit" class="btn btn-primary btn-embossed">بله</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- END MODALS -->

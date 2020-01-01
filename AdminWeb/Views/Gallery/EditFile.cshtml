@@ -1,0 +1,79 @@
+﻿@model AdminWeb.Models.DataModels.GalleryModelAdmin
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool ValidPage = false;
+    if (ViewBag.Types != null && (ViewBag.Types as List<SelectListItem>).Count() > 0)
+    {
+        ValidPage = true;
+    }
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script src="~/Content/assets/global/plugins/bootstrap-loading/lada.min.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        });
+    </script>
+}
+@if (ValidPage)
+{
+    <div class="row">
+        @using (Html.BeginForm("EditFile", "Gallery", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="col-md-8 col-md-push-2 portlets">
+                <div class="panel">
+                    <div class="panel-header panel-controls">
+                    </div>
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-7">
+                                <fieldset>
+                                    <legend>
+                                        @Resource.Resource.View_PhotoInformation <span class="symbol required"></span>
+                                    </legend>
+                                    <div class="form-group col-md-12">
+                                        <img src="@ViewBag.PhotoPath" style="width:600px;" class="img-responsive">
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        @Html.DropDownListFor(model => model.Type, ViewData["Types"] as List<SelectListItem>, new { @class = "cs-select cs-skin-elastic", id = "Type" })
+                                    </div>
+                                    @Html.HiddenFor(model => model.ID)
+                                    @Html.HiddenFor(model => model.Path)
+                                    <div class="form-group col-md-12">
+                                        <div class="form-group margin-top-15">
+                                            <h5 for="form-field-select-2">@Resource.Resource.View_ImageText</h5>
+                                            <div class="note-editor">
+                                                @Html.TextAreaFor(model => model.Text, new { @class = "form-control", })
+                                            </div>
+                                            <input hidden value="@Model.Type" name="BackupType" />
+                                        </div>
+                                    </div>
+                                    <div id="AjaxTicketNotificationBox" class="col-md-12 margin-top-20">
+                                        <button type="submit" class="btn btn-info ladda-button" data-style="expand-right" style="width:100%;">
+                                            <span class="ladda-label">@Resource.Resource.Edit</span>
+                                            <span class="ladda-spinner"></span>
+                                            <div class="ladda-progress" style="width: 0px;"></div>
+                                        </button>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

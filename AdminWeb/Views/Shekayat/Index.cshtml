@@ -1,0 +1,168 @@
+﻿@model IEnumerable<AdminWeb.Models.DataModels.Shekayat>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+    <link href="~/Content/assets/global/plugins/datatables/dataTables.min.css" rel="stylesheet">
+    <style>
+        .PipoShekayatListIcons {
+            margin-left: 10px;
+        }
+    </style>
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script src="~/Content/assets/global/plugins/datatables/jquery.dataTables.min.js"></script> <!-- Tables Filtering, Sorting & Editing -->
+    <script src="~/Content/assets/global/js/pages/table_dynamic.js"></script>
+    <script src="~/Content/assets/global/js/pages/form_icheck.js"></script>  <!-- Change Icheck Color - DEMO PURPOSE - OPTIONAL -->
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+            $(function () {
+                PipoOnShekayatListLoadingShow();
+                $.ajax({
+                    url: '@Url.Action("ShekayatList")',
+                    type: "POST",
+                    dataType: "html",
+                    success: function (data) {
+                        $('#PipoShekayatList').html(data);
+                        $("#PipoPagingDist").empty();
+                        $("#PipoToMovePaging").detach().appendTo('#PipoPagingDist');
+                        document.getElementById('ShekayatList_Loading1').style.display = 'none';
+                    } //<-- added close for anonymous function
+                }); //<--added close/semicolon for ajax function
+            });
+            $(function () {
+                document.getElementById('PipoShekayatAccessory_Loading').style.display = 'block';
+                $.ajax({
+                    url: '@Url.Action("ShekayatAccessory")',
+                    type: "Get",
+                    dataType: "html",
+                    success: function (data) {
+                        $('#PipoShekayatAccessory').html(data);
+                        document.getElementById('PipoShekayatAccessory_Loading').style.display = 'none';
+                    } //<-- added close for anonymous function
+                }); //<--added close/semicolon for ajax function
+            });
+            $('#ShekayatSearch').on('input propertychange paste', function () {
+                PipoOnShekayatListLoadingShow();
+                var searchText = $(this).val();
+                var PipoCurrentStatus = document.getElementById('PipoCurrentStatus').value;
+                var PipoUrl = "@Url.Action("ShekayatList")";
+                $.ajax({
+                    url: PipoUrl,
+                    type: "POST",
+                    data: { searchString: searchText, ShekayatStatus: PipoCurrentStatus },
+                    dataType: "html",
+                    success: function (data) {
+                        $('#PipoShekayatList').html(data);
+                        $("#PipoPagingDist").empty();
+                        $("#PipoToMovePaging").detach().appendTo('#PipoPagingDist');
+                        document.getElementById('ShekayatList_Loading1').style.display = 'none';
+                    } //<-- added close for anonymous function
+                }); //<--added close/semicolon for ajax function
+            });
+
+        })
+    </script>
+
+    <script type="text/javascript">
+        function PipoOnPageChange() {
+            $("#PipoPagingDist").empty();
+            $("#PipoToMovePaging").detach().appendTo('#PipoPagingDist');
+            document.getElementById('ShekayatSearch').value = "";
+            document.getElementById('ShekayatList_Loading1').style.display = 'none';
+        };
+        function CleanReaderBox() {
+            $("#TickerReader").empty();
+        };
+        function PipoOnShekayatListLoadingShow() {
+            $("#PipoPagingDist").empty();
+            document.getElementById('ShekayatList_Loading1').style.display = 'block';
+            $('#PipoPagingDist').append('<div id="ShekayatList_Loading2" style="text-align:center;padding-top:30px;display:block"><img src="../../Content/assets/global/images/ajax-load.gif" width="30"/></div>');
+        };
+
+        function PipoShekayatChangeStatusClose() {
+            $("#PipoShekayatChangeStatus").empty();
+        };
+        function PipoShekayatAccessoryClicked(ShekayatStatus) {
+            document.getElementById('ShekayatList_Loading1').style.display = 'block';
+            $.ajax({
+                url: '@Url.Action("ShekayatList")',
+                type: "POST",
+                data: { ShekayatStatus: ShekayatStatus },
+                dataType: "html",
+                success: function (data) {
+                    $('#PipoShekayatList').html(data);
+                    $("#PipoPagingDist").empty();
+                    $("#PipoToMovePaging").detach().appendTo('#PipoPagingDist');
+                    document.getElementById('ShekayatList_Loading1').style.display = 'none';
+                } //<-- added close for anonymous function
+            }); //<--added close/semicolon for ajax function
+        };
+    </script>
+}
+<div class="page-content page-app page-profil" style="margin-top:-20px;">
+    <div class="col-lg-12 col-md-12">
+        <div class="profil-content">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="item hover-effect">
+                        <div class="comment">
+                            <div id="PipoPagingDist" style="min-height:100px;border-bottom:5px solid #808080"></div>
+                            <div id="PipoShekayatAccessory_Loading" style="text-align:center;padding-top:100px;display:none">
+                                <img src="~/Content/assets/global/images/ajax-load.gif" />
+                            </div>
+                            <div id="PipoShekayatAccessory"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-6 col-xs-12">
+                            <div class="item item-comment">
+                                <div class="item-textarea">
+                                    <input id="ShekayatSearch" placeholder="جستجوی کد پیگیری ..." class="form-control form-white autosize" style="word-wrap: break-word; height: 50px;font-family: Vazir!important;">
+                                </div>
+                                <div id="ShekayatList_Loading1" style="text-align:center;padding-top:20px;display:none;">
+                                    <img src="~/Content/assets/global/images/ajax-load.gif" />
+                                </div>
+                                <div style="margin-top:10px;margin-bottom:30px;height:350px;overflow-y:scroll;" id="PipoShekayatList">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-responsive" aria-hidden="true" >
+    <div class="modal-dialog modal-lg modal-full" style="margin-top:80px;width:90%;">
+        <div class="modal-content">
+            <div class="modal-body bg-primary">
+                <div class="modal-body" id="ShekayatReader_Loading" style="margin-bottom: 15px;">
+                    <p style="float:right;">در حال بارگذاری ...</p>
+                    <div id="ShekayatReader_Loading" style="display: block;float: right;">
+                        <img src="~/Content/assets/global/images/ajax-load.gif" style="width: 30px;margin-top: -5px;margin-right: 15px;"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-content" id="ShekayatReader">
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>

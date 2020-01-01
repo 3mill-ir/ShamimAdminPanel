@@ -1,0 +1,56 @@
+﻿@model IEnumerable<AdminWeb.Models.DataModels.LinkModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        })
+    </script>
+}
+<div class="row">
+    <div class="col-md-8 col-md-push-2 portlets">
+        <div class="panel">
+            <div class="panel-header panel-controls">
+            </div>
+            <div class="panel-content">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            @{
+                                int i = 1;
+                            }
+                            <th class="text-center">@Resource.Resource.View_Row</th>
+                            <th class="text-center">@Resource.Resource.View_LinkText</th>
+                            <th class="text-center">@Resource.Resource.View_InternetAddress</th>
+                            <th class="text-center">@Resource.Resource.Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-center">@(i++)</td>
+                                <td class="text-center">@item.Text</td>
+                                <td class="text-center">@item.Link</td>
+                                <td class="text-center"><a href="@Url.Action("EditFooterLink", "Links", new { LinkID = item.ID })" class="btn btn-transparent btn-xs" data-placement="top" title="ویرایش"><i class="fa fa-pencil"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

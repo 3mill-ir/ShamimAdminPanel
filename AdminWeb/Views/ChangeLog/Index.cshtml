@@ -1,0 +1,425 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/metrojs/metrojs.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/maps-amcharts/ammap/ammap.min.css" rel="stylesheet">
+<link href="~/Content/assets/global/plugins/font-awesome-animation/font-awesome-animation.min.css" rel="stylesheet">
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/plugins/bootstrap-editable/js/bootstrap-editable.min.js"></script> <!-- Inline Edition X-editable -->
+    <script src="~/Content/assets/global/plugins/bootstrap-context-menu/bootstrap-contextmenu.min.js"></script> <!-- Context Menu -->
+    <script src="~/Content/assets/global/plugins/multidatepicker/multidatespicker.min.js"></script> <!-- Multi dates Picker -->
+    <script src="~/Content/assets/global/js/widgets/todo_list.js"></script>
+    <script src="~/Content/assets/global/plugins/metrojs/metrojs.min.js"></script> <!-- Flipping Panel -->
+    <script src="~/Content/assets/global/plugins/charts-chartjs/Chart.min.js"></script>  <!-- ChartJS Chart -->
+    <script src="~/Content/assets/global/plugins/skycons/skycons.min.js"></script> <!-- Animated Weather Icons -->
+    @*<script src="~/Content/assets/global/js/pages/dashboard.js"></script>*@
+<script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+<script src="~/Content/assets/global/js/pages/animations.js"></script>
+<script src="~/Content/assets/admin/layout1/js/layout.js"></script>
+
+}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="font-animation">
+                <p class="faa-flash animated">
+                    <span class="text-gray"> نسخه </span><span class="text-bold text-dark">2.1.0</span> <i class="glyphicon glyphicon-time"></i> 1 بهمن 1396
+                </p>
+            </div>
+            <ul>
+                <li>
+                    <span class="label label-success">جدید</span>
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; مدیریت محصولات</h4>
+                    <p>
+                        <i class="ti-check-box"></i>
+                        امکان ساخت دسته بندی ها و افزودن محصولات به هر دسته بندی در نسخه جدید انجام گرفته است   
+                           <br />
+                        <i class="ti-check-box"></i>
+امکان بارگزاری محصولات از سمت کاربران سایت افزوده شده است
+                    
+                    </p>
+                    <p>
+                        <a class="dropdown-off-sidebar ng-scope" href="#" target="_blank"><i class="fa fa-external-link"></i> مشاهده</a>
+                    </p>
+        
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; قالب جدید بخش کلاینت </h4>
+                    <p>
+                        <i class="ti-check-box"></i>
+                        قالب های متنوع تری برای بخش وب سایت طراحی شده است                 <br />
+                    <p>
+                        <a class="dropdown-off-sidebar ng-scope" href="#" target="_blank"><i class="fa fa-external-link"></i> مشاهده</a>
+                    </p>
+                </li>
+                <li>
+                    <span class="label label-warning">تصحیح</span>
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; رفع باگ های سیستم و افزایش کارایی</h4>
+                    <p>
+                        <i class="ti-check-box"></i>
+                        بهینه سازی عملیات داخلی وب سایت جهت بارگیری سریعتر
+                    </p>
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; چند زبانگی سیستم</h4>
+                    <p>
+                        <i class="ti-check-box"></i>
+                       تصحیح بخش چند زبانی سیستم جهت پشتیبانی از زبانهای متفاوت
+                    </p>
+                </li>
+                <li>
+                    <span class="label label-info">UPGRADE</span>
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; موبایل</h4>
+                    <p>
+امکان کش کردن محتوا در بخش موبایل جهت بهبود رابط کاربری و تسریع در عملیات دریافت اطلاعات از سرور                    </p>
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; محتوا</h4>
+                    <p>
+امکان استفاده از صفحات طراحی شده خاص ایستا                    </p>
+                </li>
+            </ul>
+            <hr />
+     
+                <p >
+                    <span class="text-gray"> نسخه </span><span class="text-bold text-dark">2.0.0</span> <i class="glyphicon glyphicon-time"></i> 1 دی 1396
+                </p>
+          
+            <ul>
+                <li>
+                    <span class="label label-success">جدید</span>
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; پنل مدیریت</h4>
+                    <p>
+                        <i class="ti-check-box"></i>
+                        قالب جدید پنل مدیریت بر اساس بازخورد نظرات استفاده کنندگان سامانه طراحی شده است تا تعاملی تر و حس کاربر پسندی بیشتری داشته باشد
+                        <br />
+                        <i class="ti-check-box"></i>
+                        در قالب جدید کاربران می توانند پوسته قالب را به دلخواه خود تغییر دهند
+                        <br />
+                        <i class="ti-check-box"></i>
+                        قالب جدید پنل مدیریت امکانات جدید گزارش گیری و داشبورد اختصاصی خود را دارد
+                    </p>
+                    <p>
+                        <a class="dropdown-off-sidebar ng-scope" href="#" target="_blank"><i class="fa fa-external-link"></i> مشاهده</a>
+                    </p>
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; مدیریت قالب و کامپوننت های اپلیکیش موبایل</h4>
+                    <p>
+                        <i class="ti-check-box"></i>
+                        در نسخه جدید کاربران می توانند بسته به دلخواه خود و با توجه به محتوای سایت خود قالب اپلیکیشن موبایل خود را آماده نمایند
+                        <br />
+                    <p>
+                        <a class="dropdown-off-sidebar ng-scope" href="#" target="_blank"><i class="fa fa-external-link"></i> مشاهده</a>
+                    </p>
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; قالب جدید بخش کلاینت </h4>
+                    <p>
+                        <i class="ti-check-box"></i>
+                        قالب های متنوع تری برای بخش وب سایت طراحی شده است                 <br />
+                    <p>
+                        <a class="dropdown-off-sidebar ng-scope" href="#" target="_blank"><i class="fa fa-external-link"></i> مشاهده</a>
+                    </p>
+                </li>
+                <li>
+                    <span class="label label-warning">تصحیح</span>
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; رفع باگ های سیستم و افزایش کارایی</h4>
+                    <p>
+                        <i class="ti-check-box"></i>
+                        بهینه سازی عملیات داخلی وب سایت جهت بارگیری سریعتر
+                    </p>
+                </li>
+                <li>
+                    <span class="label label-info">UPGRADE</span>
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; منو</h4>
+                    <p>
+امکان تعریف چندین سطح منو برای کاربران فراهم شده است                    </p>
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; محتوا</h4>
+                    <p>
+                       امکان تعریف محتوای به دو صورت سینگل پیج و داینامیک پیج
+                    </p>
+                </li>
+            </ul>
+            <hr />
+            <p>
+                <span class="text-gray"> نسخه </span><span class="text-bold text-dark">1.3.0</span> <i class="glyphicon glyphicon-time"></i> 1 اسفند 1395
+            </p>
+            <ul>
+                <li>
+                    <span class="label label-success">جدید</span>
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; شخصی سازی قالب اپلیکیشن موبایل</h4>
+                    <p>
+                        کاربران می توانند از بین قالب های طراحی شده برای اپلیکیشن موبایل به دلخواه خود قالب مورد نظر خود را انتخاب نمایند.
+                    </p>
+                    <p>
+                        <a class="dropdown-off-sidebar ng-scope" href="#" target="_blank"><i class="fa fa-external-link"></i> مشاهده</a>
+                    </p>
+                </li>
+                <li>
+                    <span class="label label-warning">تصحیح</span>
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; رفع باگ های سیستم و افزایش کارایی</h4>
+                    <p>
+                        <i class="ti-check-box"></i>
+                        شخصی سازی بخش درخواست ها
+                        <br />
+                        <i class="ti-check-box"></i>
+                        بهینه سازی بخش فایلینگ برای تسریع عملیات کاربران
+                    </p>
+                </li>
+                <li>
+                    <span class="label label-info">UPGRADE</span>
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; تفکیک فضای اختصاصی کاربران</h4>
+                    <p>
+                        در راستای شخصی سازی سامانه برای کاربران بخش مدیریت فایل های کاربران از هم تفکیک شده و هر کاربر فضای کاملاً ایزوله ایی برای آپلود فایل های شخصی خود دارد.
+                    </p>
+
+                </li>
+
+
+            </ul>
+            <hr />
+            <p>
+                <span class="text-gray"> نسخه </span><span class="text-bold text-dark">1.2.0</span> <i class="glyphicon glyphicon-time"></i> 15 بهمن 1395
+            </p>
+            <ul>
+                <li>
+                    <span class="label label-success">جدید</span>
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; بخش مدیریت گالری تصاویر</h4>
+                    <p>
+                        بخشی به عنوان مدیریت گالری تصاویر جهت نمایش آلبوم تصاویر و مدیریت آنها به سامانه افزوده شد.
+                    </p>
+                    <p>
+                        <a class="dropdown-off-sidebar ng-scope" href="#" target="_blank"><i class="fa fa-external-link"></i> مشاهده</a>
+                    </p>
+       
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; بخش مدیریت اسلایدر</h4>
+                    <p>
+                        بخش مجزایی جهت آبلود و مدیریت عکس های اسلایدر به سامانه افزوده شد.
+                    </p>
+                    <p>
+                        <a class="dropdown-off-sidebar ng-scope" href="#" target="_blank"><i class="fa fa-external-link"></i> مشاهده</a>
+                    </p>
+             
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; بخش مدیریت پیوندها</h4>
+                    <p>
+                        کاربران قادر خواهند بود برای فوتر و داخل صفحات خود لیست پیوند (لینکدونی) قرار دهند.
+                    </p>
+                    <p>
+                        <a class="dropdown-off-sidebar ng-scope" href="#" target="_blank"><i class="fa fa-external-link"></i> مشاهده</a>
+                    </p>
+           
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; بخش مدیریت اسکریپت ها</h4>
+                    <p>
+                        کاربران قادر به اجرا و نمایش اسکریپت های خود (با مضمون اوقات شرعی ، سخن روز ، تصویر روز و اطلاعات هواشناسی)در وب سایت خواهند بود.
+                    </p>
+                    <p>
+                        <a class="dropdown-off-sidebar ng-scope" href="#" target="_blank"><i class="fa fa-external-link"></i> مشاهده</a>
+                    </p>
+                </li>
+                <li>
+                    <span class="label label-info">UPGRADE</span>
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; بخش مدیریت ارتباط با ما</h4>
+                    <p>
+                        بخش مجزایی به عنوان ارتباط با ما جهت مدیریت اطلاعات تماس و راه های ارتباط با کاربر به سامانه افزوده شده است.
+                    </p>
+                    <p>
+                        <a class="dropdown-off-sidebar ng-scope" href="#" target="_blank"><i class="fa fa-external-link"></i> مشاهده</a>
+                    </p>
+            
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; شخصی سازی نمودار ها</h4>
+                    <p>
+                        جهت نمایش آمار نمودار میله ایی نیز در اختیار کاربران قرار گرفته و آنها می توانند بر اساس سلیقه خود نوع نمودار و نیز رنگ هر یک از گزینه ها را تغییر دهند.
+                    </p>
+                    <p>
+                        <a class="dropdown-off-sidebar ng-scope" href="#" target="_blank"><i class="fa fa-external-link"></i> مشاهده</a>
+                    </p>
+               
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; شخصی سازی قالب وب سایت</h4>
+                    <p>
+                        در جهت شخصی سازی بیشتر قالب وب سایت کاربران می توانند برای بخش های تعیین شده در قالب رنگ های مورد نظر خود را استفاده نمایند.
+                    </p>
+                    <p>
+                        <a class="dropdown-off-sidebar ng-scope" href="#" target="_blank"><i class="fa fa-external-link"></i> مشاهده</a>
+                    </p>
+                </li>
+
+            </ul>
+            <hr />
+            <p>
+                <span class="text-gray"> نسخه </span><span class="text-bold text-dark">1.1.1</span> <i class="glyphicon glyphicon-time"></i> 7 بهمن 1395
+            </p>
+            <ul>
+                <li>
+                    <span class="label label-warning">تصحیح</span>
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; رفع باگ های سیستم و افزایش کارایی</h4>
+                    <p>
+                        <i class="ti-check-box"></i>
+                        خطای بخش ارتباط با ما کاربران برطرف شد.
+                        <br />
+                        <i class="ti-check-box"></i>
+                        بخش جستجوی سایت تصحیح شد.
+                        <br />
+                        <i class="ti-check-box"></i>
+                        بهینه سازی در دیتابیس و استفاده از سیستم فایلینگ
+                    </p>
+                </li>
+
+            </ul>
+            <hr />
+            <p>
+                <span class="text-gray"> نسخه </span><span class="text-bold text-dark">1.1.0</span><i class="glyphicon glyphicon-time"></i> 30 دی 1395
+            </p>
+            <ul>
+                <li>
+                    <span class="label label-info">UPGRADE</span>
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; تغییر قالب وب سایت</h4>
+                    <p>
+                        چهره ایی جدید از سامانه با قالبی Responsive و کاربر پسند برای سامانه طراحی شد.
+                    </p>
+
+                    <h4 class="margin-top-10"><i class="fa fa-check-circle"></i> &nbsp; تغییر قالب اپلیکیشن</h4>
+                    <p>
+                        قالب اپلیکیشن از نظر طاهری تغییر یافت تا بتواند با کاربران تعامل بیشتری داشته باشد.
+                    </p>
+
+                </li>
+
+            </ul>
+
+            <hr />
+            <p>
+                <span class="text-gray"> نسخه </span><span class="text-bold text-dark">0.1.0</span> (پایه) <i class="glyphicon glyphicon-time"></i>1 دی 1395
+            </p>
+            <!-- start: UI BOOTSTRAP ACCORDION -->
+            <div class="container-fluid container-fullw">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4 class="over-title margin-bottom-15"><span class="text-bold"><i class="fa fa-check-circle"></i> &nbsp; امکانات اولیه سامانه</span></h4>
+                        <p>
+                            سامانه جامع اطلاع رسانی و ارتباطات آنلاین بر پایه امکانات اولیه زیر طراحی و پیاده سازی شده است.
+                        </p>
+                        <div class="panel-group accordion" id="accordion">
+                            <div class="panel panel-white">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
+                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                            <i class="icon-arrow"></i> پنل مدیریت محتوی یکپارچه برای تمام ابزارهای اطلاع رسانی ( سایت، اپلیکیشن، تلگرام و ...)، به صورت اختصاصی
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        مدیریت مطالب: قرار دادن مطالب جدید، ویرایش و حذف مطالب از قبیل
+
+                                        <ul>
+                                            <li>
+                                                اخبار
+                                            </li>
+                                            <li>
+                                                بلاگ
+                                            </li>
+
+                                        </ul>
+
+                                        مدیریت نظرات و پاسخ ها:
+                                        <ul>
+                                            <li>
+                                                مشاهده کامنت ها
+                                            </li>
+                                            <li>
+                                                نمایش و یا حذف آن ها
+                                            </li>
+
+                                        </ul>
+
+
+                                        مدیریت نظرسنجی:
+                                        <ul>
+                                            <li>
+                                                قرار دادن نظرسنجی جدید همراه با زمان شروع و پایان آن
+                                            </li>
+                                            <li>
+                                                حذف نظرسنجی
+                                            </li>
+
+                                        </ul>
+
+                                        مدیریت درخواست ها:
+                                        <ul>
+                                            <li>
+                                                مشاهده درخواست ها و پاسخ به آن ها
+                                            </li>
+                                            <li>
+                                                دسته بندی درخواست ها به سه گروه "در وضعیت انتظار، در حال بررسی و پاسخ داده شده"
+                                            </li>
+                                            <li>
+                                                نمایش آرشیو درخواست ها
+                                            </li>
+                                            <li>
+                                                جستجوی درخواست ها بر اساس شماره پیگیری
+                                            </li>
+
+                                        </ul>
+                                        مدیریت کانال تلگرام از طریق پنل مدیریت
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-white">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
+                                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                            <i class="icon-arrow"></i> نمایش موارد زیر در اپلیکیشن و وب سایت
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        درباره ما
+                                        <ul>
+                                            <li>
+
+                                                سوابق
+                                            </li>
+                                        </ul>
+                                        برنامه هفتگی
+                                        پیام و اطلاعیه
+                                        اخبار و رویدادها
+                                        <ul>
+                                            <li>
+                                                اخبار
+                                            </li>
+                                        </ul>
+                                        راه های ارتباط با کاندید (شامل آدرس دفتر، تلفن، آدرس تلگرام، وب سایت و ...)
+                                        گالری تصاویر
+                                        نظرسنجی
+                                        <ul>
+                                            <li>
+                                                ارسال نظر
+                                            </li>
+                                            <li>
+                                                نمایش نموداری گزارشات نظر سنجی
+                                            </li>
+                                        </ul>
+                                        ثبت و پیگیری درخواست
+                                        <ul>
+                                            <li>
+                                                ارسال درخواست
+                                            </li>
+                                            <li>
+                                                ارسال فایل های ضمیمه به صورت عکس صوت ، فیلم و فایل متنی
+                                            </li>
+                                            <li>
+                                                اختصاص کد پیگیری به درخواست
+                                            </li>
+                                            <li>
+                                                پیگیری درخواست های داده شده از طریق کد پیگیری و انجام مکاتبات بعدی
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end: UI BOOTSTRAP ACCORDION -->
+        </div>
+    </div>
+

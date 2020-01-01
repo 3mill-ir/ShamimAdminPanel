@@ -1,0 +1,144 @@
+﻿@model AdminWeb.Models.DataModels.ProfileRegisterDataModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script src="~/Content/assets/global/plugins/bootstrap-loading/lada.min.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+            var $self = $("#PipoModalForm");
+            $self.attr('action', '/Account/ChangePasswordUser');
+        });
+    </script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            //Dropdownlist Selectedchange event
+            $("#State").change(function () {
+                $("#City").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetCity", "Account")',
+                    dataType: 'json',
+                    data: { id: $("#State").val() },
+                    success: function (states) {
+                        $.each(states, function (i, state) {
+                            $("#City").append('<option value="' + state.Value + '">' + state.Text + '</option>');
+                        });
+                        $("#City").trigger('change');
+                    },
+                    error: function (ex) {
+                        alert('خطا در بارگذاری اطلاعات شهر' + ex);
+                    }
+                });
+                return false;
+            });
+        });
+</script>
+}
+<div class="row">
+    @using (Html.BeginForm("EditUser", "Account", FormMethod.Post, null))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-md-8 col-md-push-2 portlets">
+            <div class="panel">
+                <div class="panel-header panel-controls">
+                </div>
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row margin-top-30">
+                                <div class="col-lg-12 col-md-12">
+                                    <fieldset>
+                                        <legend>
+                                            @Resource.Resource.View_EditDetail<span class="symbol required"></span>
+                                        </legend>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.Profile.FirstName)</label>
+                                            @Html.TextBoxFor(model => model.Profile.FirstName, new { @class = "form-control form-white", @id = "exampleInputEmail1", @placeholder = "نام را وارد کنید", @type = "text" })
+                                            @Html.ValidationMessageFor(model => model.Profile.FirstName)
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.Profile.LastName)</label>
+                                            @Html.TextBoxFor(model => model.Profile.LastName, new { @class = "form-control form-white", @id = "exampleInputEmail1", @placeholder = "نام خانوادگی را وارد کنید", @type = "text" })
+                                            @Html.ValidationMessageFor(model => model.Profile.LastName)
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.Profile.NationalID)</label>
+                                            @Html.TextBoxFor(model => model.Profile.NationalID, new { @class = "form-control form-white", @id = "exampleInputEmail1", @placeholder = "کد ملی را وارد کنید", @type = "number"})
+                                            @Html.ValidationMessageFor(model => model.Profile.NationalID)
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.Profile.Province)</label>
+                                            @Html.DropDownListFor(model => model.Profile.Province, AdminWeb.Models.BLL.Tools.GetStates(), new { id = "State", @class = "form-control form-white" })
+                                            @Html.ValidationMessageFor(model => model.Profile.Province)
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.Profile.City)</label>
+                                            @Html.DropDownListFor(model => model.Profile.City, AdminWeb.Models.BLL.Tools.GetCity(), new { id = "City", @class = "form-control form-white" })
+                                            @Html.ValidationMessageFor(model => model.Profile.City)
+                                        </div>
+                                        @Html.HiddenFor(model => model.Profile.F_UserID)
+                                        @Html.HiddenFor(model => model.Profile.ID)
+                                        <div style="text-align:center">
+                                            <button type="submit" class="btn btn-success ladda-button" data-style="expand-right" style="width:100%;margin-top: 20px;">
+                                                <span class="ladda-label">ویرایش</span>
+                                            </button>
+                                            <button type="button" id="PipoModalLink_@Model.Profile.ID" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#modal-basic">ویرایش کلمه عبور</button>
+                                            <div class="center text-danger ">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<!-- BEGIN MODALS -->
+<div class="modal fade" id="modal-basic" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h2 class="modal-title"><strong>ویرایش کلمه عبور</strong></h2>
+            </div>
+            @using (Html.BeginForm("ChangePasswordUser", "Account", null, FormMethod.Post, new { Id = "PipoModalForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <div id="PipoModalBody" class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">@Html.Label("کلمه عبور فعلی")</label>
+                        @Html.TextBox("OldPassword",null, new { @class = "form-control form-white", @id = "exampleInputEmail1", @placeholder = "کلمه عبور فعلی خود را وارد کنید", @type = "password" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">@Html.Label("کلمه عبور جدید")</label>
+                        @Html.TextBox("NewPassword", null, new { @class = "form-control form-white", @id = "exampleInputEmail1", @placeholder = "کلمه عبور جدید خود را وارد کنید", @type = "password" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">@Html.Label("تکرار کلمه عبور")</label>
+                        @Html.TextBox("ConfirmPassword", null, new { @class = "form-control form-white", @id = "exampleInputEmail1", @placeholder = "کلمه عبور جدید خود را مجددا وارد کنید", @type = "password" })
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">بستن</button>
+                    <button type="submit" class="btn btn-primary btn-embossed">ویرایش</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- END MODALS -->

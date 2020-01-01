@@ -1,0 +1,100 @@
+﻿@model AdminWeb.Models.DataModels.AttributeDataModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script src="~/Content/assets/global/plugins/bootstrap-loading/lada.min.js"></script>
+    <script src="~/Scripts/jscolor.min.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        });
+    </script>
+}
+<div class="row">
+    @using (Html.BeginForm("Add", "Attribute", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-md-8 col-md-push-2 portlets">
+            <div class="panel">
+                <div class="panel-header panel-controls">
+                </div>
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row margin-top-30">
+                                <div class="col-lg-12 col-md-12">
+                                    <fieldset>
+                                        <legend>
+                                            @Resource.Resource.View_Attribute<span class="symbol required"></span>
+                                        </legend>
+                                        <div class="form-group" style="float:right;width:50%;">
+                                            <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.Name)</label>
+                                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control form-white", @id = "exampleInputEmail1", @placeholder = "نام را وارد کنید", @type = "text", required = "" })
+                                            @Html.ValidationMessageFor(model => model.Name)
+                                        </div>
+                                        <div class="form-group"  style="float:right;width:48%;margin-right:10px;">
+                                            <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.Weight)</label>
+                                            @Html.TextBoxFor(model => model.Weight, new { @class = "form-control form-white", @id = "exampleInputEmail1", @placeholder = "وزن را وارد کنید", @type = "number", required = "" })
+                                            @Html.ValidationMessageFor(model => model.Weight)
+                                        </div>
+                                        <div class="form-group" style="float:right;width:50%;">
+                                            <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.ComponentType)</label>
+                                            @Html.DropDownListFor(model => model.ComponentType, ViewBag.ComponentTypes as SelectList, new { @class = "form-control form-white", id = "Type" })
+                                            @Html.ValidationMessageFor(model => model.ComponentType)
+                                        </div>
+                                        <div class="form-group" style="float:right;width:48%;margin-right:10px;">
+                                            @Html.Label("رنگ متن")
+                                            @Html.TextBoxFor(m => m.TextColor, new { @class = "form-control form-white area-animated jscolor", placeholder = Resource.Resource.PollAnswer_ChooseColor })
+                                            @Html.ValidationMessageFor(model => model.TextColor)
+                                        </div>
+                                        <div class="form-group" style="float:right;width:48%;margin-right:10px;">
+                                            <label for="exampleInputEmail1">@Html.DisplayNameFor(model => model.Required)</label>
+                                            @Html.CheckBoxFor(m => m.Required, new { @class = "form-control form-white" })
+                                            @Html.ValidationMessageFor(model => model.Required)
+                                        </div>
+                                        <div class="fileinput fileinput-new" data-provides="fileinput" style="width: 50%;">
+                                            <div class="fileinput-new thumbnail">
+                                                <img data-src="" src="~/Content/assets/global/images/gallery/3.jpg" class="img-responsive" alt="gallery 3">
+                                            </div>
+                                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                            <div>
+                                                <span class="btn btn-default btn-file">
+                                                    <span class="fileinput-new">انتخاب آیکون ...</span><span class="fileinput-exists">ویرایش</span>
+                                                    <input type="file" name="MyFile">
+                                                </span>
+                                                <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">حذف</a>
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.Icon)
+                                        </div>
+                                        @Html.HiddenFor(model=>model.F_AttributeGroupID)
+
+                                        @Html.HiddenFor(model => model.F_AttributeItemID)
+                                        <div style="text-align:center">
+                                            <button type="submit" class="btn btn-success ladda-button" data-style="expand-right" style="width:100%;margin-top: 20px;">
+                                                <span class="ladda-label">@Resource.Resource.View_SubmitButton</span>
+                                            </button>
+                                            <div class="center text-danger ">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

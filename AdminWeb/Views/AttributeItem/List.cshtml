@@ -1,0 +1,76 @@
+﻿@model IEnumerable<AdminWeb.Models.DataModels.AttributeItemDataModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CSS_Requested{
+    <link href="~/Content/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/step-form-wizard/css/step-form-wizard.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/summernote/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/plugins/datatables/dataTables.min.css" rel="stylesheet">
+    <link href="~/Content/assets/global/css/PipoStyle.css" rel="stylesheet" />
+}
+
+@section js_Requested
+{
+    <script src="~/Content/assets/global/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+    <script src="~/Content/assets/global/js/pages/notifications.js"></script>
+    <script src="~/Content/assets/global/plugins/datatables/jquery.dataTables.min.js"></script> <!-- Tables Filtering, Sorting & Editing -->
+    <script src="~/Content/assets/global/js/pages/table_dynamic.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            generate('top', '.page-content', '', '@ViewBag.Notification', 'topbar');
+        });
+    </script>
+}
+<div class="row">
+    <div class="col-md-8 col-md-push-2">
+        @if (Model.Count() > 0)
+        {
+            <div class="panel">
+                <div class="panel-header panel-controls">
+                </div>
+                <div class="panel-content">
+                    <div class="nav-tabs2">
+                        <div class="tab-content" style="background-color:white">
+                            <div class="panel-content pagination2 table-responsive">
+                                <table class="table table-hover table-dynamic">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>نام</th>
+                                            <th class="text-center">عملیات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.ID</td>
+                                                <td>@item.Name</td>
+                                                <td class="text-center">
+                                                    <a class="edit btn btn-sm btn-default" href="@Url.Action("ListAttributeItemAttributes", "Attribute", new { ID = item.ID,F_AttributeGroupID= ViewBag.F_AttributeGroupID })"><i class="icon-list"></i></a>
+                                                    <a class="edit btn btn-sm btn-default" href="@Url.Action("Edit", "AttributeItem", new { ID = item.ID,F_AttributeGroupID=ViewBag.F_AttributeGroupID })"><i class="icon-note"></i></a>
+                                                    <a class="edit btn btn-sm btn-default" title="افزودن ویژگی" href="@Url.Action("Add", "Attribute", new {F_AttributeItemID=item.ID,ID=ViewBag.F_AttributeGroupID })"><i class="fa fa-plus-square-o"></i></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                                            }
+                                            else
+                                            {
+                                                <div class="panel">
+                                                    <div class="panel-content text-center">
+                                                        <span style="font-size: 20px;color: red;">تا کنون آیتم ویژگی توسط شما ایجاد نشده !</span>
+                                                    </div>
+                                                </div>
+                                            }
+    </div>
+</div>
